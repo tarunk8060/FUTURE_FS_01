@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarun's Portfolio</title>
+    <link rel="stylesheet" href="index.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="theme-fuchsia">
+    <nav class="bg-transparent">
+        <div class="logo" onclick="window.location.href='index.html'" style="cursor: pointer;">
+            <i data-lucide="terminal" size="24"></i>
+            Tarun<span>.K</span>
+        </div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="project.html">Projects</a></li>
+            <li><a href="restof.html">My Expertise</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Staggered Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="menu-layer"></div>
+        <div class="menu-layer"></div>
+        <div class="menu-layer"></div>
+        <div class="menu-content">
+            <nav
+                style="position: static; background: transparent; backdrop-filter: none; border: none; justify-content: center;">
+                <ul style="flex-direction: column; display: flex; align-items: center; gap: 2rem;">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="project.html">Projects</a></li>
+                    <li><a href="restof.html">My Expertise</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+
+    <main>
+        <!-- Services -->
+        <section id="services">
+            <div class="section-head reveal">
+                <h2>From Idea to Deployment</h2>
+                <p style="color: var(--text-secondary);">I build applications from idea to deployment, handling
+                    planning, development, testing, and making them live for real-world use.</p>
+            </div>
+
+            <div class="grid">
+                <div class="card reveal">
+                    <div class="card-icon1"><i data-lucide="layers"></i></div>
+                    <h3>Frontend Engineering</h3>
+                    <p style="color: var(--text-secondary); margin-top: 1rem;">Building responsive, intuitive interfaces
+                        using pure HTML5, Vanilla JavaScript, and high-precision CSS3.</p>
+                </div>
+                <div class="card reveal">
+                    <div class="card-icon1"><i data-lucide="database"></i></div>
+                    <h3>Backend Infrastructure</h3>
+                    <p style="color: var(--text-secondary); margin-top: 1rem;">Robust server-side logic, distributed
+                        databases, and high-performance API design.</p>
+                </div>
+                <div class="card reveal">
+                    <div class="card-icon1"><i data-lucide="line-chart"></i></div>
+                    <h3>Performance Opt</h3>
+                    <p style="color: var(--text-secondary); margin-top: 1rem;">Ensuring sub-second load times and
+                        efficient resource management across all devices.</p>
+                </div>
+            </div>
+
+            <script src="index.js"></script>
+</body>
+
+</html>

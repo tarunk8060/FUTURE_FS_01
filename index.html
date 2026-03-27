@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarun's Portfolio</title>
+    <link rel="stylesheet" href="index.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        #shapegrid-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: #050505;
+            /* Base dark background */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Intro Screen -->
+    <div class="intro-screen" id="introScreen">
+        <div class="intro-logo" id="introLogo"><i data-lucide="terminal" size="24"></i></div>
+        <h1 class="intro-text" id="introText" style="opacity: 0; display: none;">Welcome to Tarun's portfolio.</h1>
+    </div>
+
+    <!-- ShapeGrid Background -->
+    <canvas id="shapegrid-canvas"></canvas>
+
+    <!-- DarkVeil Background -->
+
+    <nav class="na-bg">
+        <div class="logo">
+            <i data-lucide="terminal" size="24"></i>
+            Tarun<span>.K</span>
+        </div>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="project.html">Projects</a></li>
+            <li><a href="restof.html">My Expertise</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <div class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Staggered Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="menu-layer"></div>
+        <div class="menu-layer"></div>
+        <div class="menu-layer"></div>
+        <div class="menu-content">
+            <nav
+                style="position: static; background: transparent; backdrop-filter: none; border: none; justify-content: center;">
+                <ul style="flex-direction: column; display: flex; align-items: center; gap: 2rem;">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="project.html">Projects</a></li>
+                    <li><a href="restof.html">My Expertise</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+
+    <main>
+        <!-- Hero -->
+        <section class="hero   mt-5">
+
+
+            <div class="hero-content">
+
+                <p class="badge">Hi, I'm Tarun 👋 Full-Stack Developer</p>
+                <h1>Turning Ideas Into <span>Scalable</span> Web Products.</h1>
+                <p class="hero-desc">I design and develop web applications built for performance, scale, and real-world
+                    use.</p>
+
+                <div style="display: flex; gap: 1.5rem; justify-content: center;">
+                    <a href="project.html" class="btn btn-primary">Explore Projects</a>
+                    <a href="Resuem (1).pdf" class="btn btn-outline">View Resume</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+
+        <script src="index.js"></script>
+        <script>
+            class ShapeGrid {
+                constructor(canvas, options = {}) {
+                    this.canvas = canvas;
+                    this.ctx = canvas.getContext('2d');
+                    this.options = {
+                        speed: 0.4,
+                        baseSquareSize: 80,
+                        borderColor: '#190a2b',
+                        ...options
+                    };
+
+                    this.gridOffset = 0;
+                    this.squareSize = this.options.baseSquareSize;
+                    this.dpr = window.devicePixelRatio || 1;
+
+                    this.init();
+                }
+
+                init() {
+                    window.addEventListener('resize', () => this.resize());
+                    this.resize();
+                    this.animate();
+                }
+
+                resize() {
+                    this.squareSize = window.innerWidth < 768 ? 50 : this.options.baseSquareSize;
+                    this.dpr = window.devicePixelRatio || 1;
+                    this.canvas.width = window.innerWidth * this.dpr;
+                    this.canvas.height = window.innerHeight * this.dpr;
+                    this.ctx.scale(this.dpr, this.dpr);
+                }
+
+                animate() {
+                    this.ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+                    this.gridOffset += this.options.speed;
+                    if (this.gridOffset >= this.squareSize) this.gridOffset = 0;
+
+                    const cols = Math.ceil(window.innerWidth / this.squareSize) + 2;
+                    const rows = Math.ceil(window.innerHeight / this.squareSize) + 2;
+
+                    this.ctx.globalAlpha = 0.4;
+                    this.ctx.strokeStyle = this.options.borderColor;
+                    this.ctx.lineWidth = 1;
+
+                    for (let i = -1; i < cols; i++) {
+                        for (let j = -1; j < rows; j++) {
+                            const x = i * this.squareSize + this.gridOffset;
+                            const y = j * this.squareSize;
+                            this.ctx.strokeRect(x, y, this.squareSize, this.squareSize);
+                        }
+                    }
+
+                    // Vignette
+                    const gradient = this.ctx.createRadialGradient(
+                        window.innerWidth / 2, window.innerHeight / 2, 0,
+                        window.innerWidth / 2, window.innerHeight / 2, Math.sqrt(window.innerWidth ** 2 + window.innerHeight ** 2) / 2
+                    );
+                    gradient.addColorStop(0, 'rgba(0, 0, 0, 0)');
+                    gradient.addColorStop(1, 'rgba(0, 0, 0, 0.2)');
+
+                    this.ctx.fillStyle = gradient;
+                    this.ctx.globalAlpha = 1;
+                    this.ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+
+                    requestAnimationFrame(() => this.animate());
+                }
+            }
+
+            window.addEventListener('DOMContentLoaded', () => {
+                const canvas = document.getElementById('shapegrid-canvas');
+                if (canvas) new ShapeGrid(canvas);
+            });
+        </script>
+</body>
+
+</html>

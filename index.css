@@ -636,7 +636,7 @@ section {
         white-space: normal;
         /* Handle giant text on narrow screens */
         font-size: clamp(2rem, 12vw, 3.5rem);
-        margin-top: 0.2rem; /* Reduced from 0.5rem */
+        margin-top: 1.5rem; /* Added margin back for better separation on mobile */
         line-height: 1.1;
         letter-spacing: -1px;
     }

@@ -225,7 +225,7 @@ nav {
 @media (max-width: 768px) {
     .hero {
         min-height: 85vh; /* Safe clearance for mobile browsers */
-        padding-top: 80px; /* Reduced to align with other sections and reduce gap */
+        padding-top: 60px; /* Further reduced from 80px */
     }
 }
 
@@ -283,7 +283,7 @@ nav {
     font-weight: 700;
     margin-bottom: 1.5rem;
     letter-spacing: -2px;
-    margin-top: 5rem;
+    margin-top: 1rem; /* Significantly reduced from 5rem to pull text closer to the badge */
     white-space: nowrap;
 }
 
@@ -492,7 +492,7 @@ section {
 
 @media (max-width: 768px) {
     section {
-        padding: 90px 5% 50px; /* Reduced mobile top padding for better vertical use */
+        padding: 70px 5% 40px; /* Significantly tighter mobile top padding */
     }
 }
 
@@ -624,7 +624,7 @@ section {
     }
 
     .hero {
-        padding: 85px 5% 40px; /* Reduced mobile top padding */
+        padding: 65px 5% 40px; /* Further reduced from 85px */
         height: auto;
         min-height: 100vh;
         display: flex;
@@ -636,13 +636,13 @@ section {
         white-space: normal;
         /* Handle giant text on narrow screens */
         font-size: clamp(2rem, 12vw, 3.5rem);
-        margin-top: 0.5rem; /* Reduced from 2rem to pull content closer to nav */
+        margin-top: 0.2rem; /* Reduced from 0.5rem */
         line-height: 1.1;
         letter-spacing: -1px;
     }
 
     .badge {
-        margin-top: 1rem; /* Reduced from 2rem to pull content closer to nav */
+        margin-top: 0; /* Fully removed to pull badge flush with navbar area */
     }
 
     .hero-content div {

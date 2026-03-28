@@ -225,7 +225,7 @@ nav {
 @media (max-width: 768px) {
     .hero {
         min-height: 85vh; /* Safe clearance for mobile browsers */
-        padding-top: 130px; /* Safely clears the mobile navbar with extra margin */
+        padding-top: 80px; /* Reduced to align with other sections and reduce gap */
     }
 }
 
@@ -492,7 +492,7 @@ section {
 
 @media (max-width: 768px) {
     section {
-        padding: 135px 5% 60px; /* Increased mobile top padding */
+        padding: 90px 5% 50px; /* Reduced mobile top padding for better vertical use */
     }
 }
 
@@ -624,8 +624,7 @@ section {
     }
 
     .hero {
-        padding: 100px 5% 40px;
-        /* More top padding to clear the fixed nav */
+        padding: 85px 5% 40px; /* Reduced mobile top padding */
         height: auto;
         min-height: 100vh;
         display: flex;
@@ -637,13 +636,13 @@ section {
         white-space: normal;
         /* Handle giant text on narrow screens */
         font-size: clamp(2rem, 12vw, 3.5rem);
-        margin-top: 2rem;
+        margin-top: 0.5rem; /* Reduced from 2rem to pull content closer to nav */
         line-height: 1.1;
         letter-spacing: -1px;
     }
 
     .badge {
-        margin-top: 2rem;
+        margin-top: 1rem; /* Reduced from 2rem to pull content closer to nav */
     }
 
     .hero-content div {
@@ -900,7 +899,7 @@ section {
 }
 
 .na-bg {
-    margin-bottom: 100px;
+    margin-bottom: 0; /* Removed excessive 100px margin */
 }
 
 .bg-transparent {

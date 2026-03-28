@@ -283,7 +283,7 @@ nav {
     font-weight: 700;
     margin-bottom: 1.5rem;
     letter-spacing: -2px;
-    margin-top: 1rem; /* Significantly reduced from 5rem to pull text closer to the badge */
+    margin-top: 0.5rem; /* Further reduced from 1rem to pull text flush with the badge */
     white-space: nowrap;
 }
 
@@ -606,7 +606,7 @@ section {
 /* Responsive */
 @media (max-width: 768px) {
     nav {
-        padding: 1rem 5%;
+        padding: 0.75rem 5%; /* Slightly slimmer navbar on mobile */
     }
 
     .logo {
@@ -624,7 +624,7 @@ section {
     }
 
     .hero {
-        padding: 65px 5% 40px; /* Further reduced from 85px */
+        padding: 40px 5% 40px; /* Aggressively reduced padding to pull content right below nav */
         height: auto;
         min-height: 100vh;
         display: flex;
@@ -658,7 +658,7 @@ section {
     }
 
     section {
-        padding: 80px 5%;
+        padding: 50px 5%; /* Tightened section spacing across all mobile pages */
     }
 
     .grid {

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tarun.K — Turning Ideas Into Scalable Web Products</title>
+  <meta name="description" content="Portfolio of Tarun.K — Full-Stack Developer building web applications built for performance, scale, and real-world use.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='4 17 10 11 4 5'></polyline><line x1='12' y1='19' x2='20' y2='19'></line></svg>">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/transitions.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/projects.css">
+  <link rel="stylesheet" href="css/expertise.css">
+  <link rel="stylesheet" href="css/contact.css">
+</head>
+<body class="page-home">
+  <!-- Accessible Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Cinematic Fullscreen Welcome Animation Screen -->
+  <div class="welcome-intro-screen" id="welcomeIntroScreen" role="dialog" aria-label="Introductory Animation">
+    <div class="intro-stage-container">
+      <!-- Stage 1: Exactly "Welcome to my portfolio." from reference -->
+      <div class="intro-stage-1">
+        <h2 class="intro-welcome-text">Welcome to my portfolio.</h2>
+      </div>
+
+      <!-- Stage 2 -->
+      <div class="intro-stage-2">
+        <h1 class="intro-brand-name">TARUN<span>.K</span></h1>
+        <p class="intro-tagline">Design. Develop. Deploy.</p>
+      </div>
+    </div>
+
+    <!-- Intro Timing Progress Bar -->
+    <div class="intro-progress-track">
+      <div class="intro-progress-bar" id="introProgressBar"></div>
+    </div>
+
+    <!-- Skip Button -->
+    <button type="button" class="intro-skip-btn" id="introSkipBtn" aria-label="Skip Introductory Animation">
+      Skip Intro [ESC]
+    </button>
+  </div>
+
+  <!-- Multi-Layer Cascading Top-Down Page Shift Transition (Gray -> White -> Black) -->
+  <div class="page-shift-wrapper" id="pageShiftWrapper" aria-hidden="true">
+    <div class="shift-layer shift-layer-gray"></div>
+    <div class="shift-layer shift-layer-white"></div>
+    <div class="shift-layer shift-layer-black"></div>
+  </div>
+
+  <!-- Shared Header Navigation (Becomes Crisp White on Mobile with Animated X Toggle) -->
+  <header>
+    <nav class="site-nav" id="siteNav" aria-label="Primary Navigation">
+      <div class="container nav-container">
+        <!-- Brand Wordmark -->
+        <a href="index.html" class="brand-logo" aria-label="Tarun.K Home">
+          <span class="brand-symbol" aria-hidden="true">&gt;_</span>
+          <span>Tarun.K</span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <ul class="nav-menu-desktop" role="menubar">
+          <li role="none"><a href="index.html" class="nav-link active" role="menuitem">Home</a></li>
+          <li role="none"><a href="project.html" class="nav-link" role="menuitem">Projects</a></li>
+          <li role="none"><a href="expertise.html" class="nav-link" role="menuitem">My Expertise</a></li>
+          <li role="none"><a href="contact.html" class="nav-link" role="menuitem">Contact</a></li>
+        </ul>
+
+        <!-- Mobile Menu Toggle (Animated to Turn into "X") -->
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobileNavOverlay">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Clean White Mobile Navigation Overlay Sheet -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay" aria-hidden="true">
+      <div class="mobile-nav-content">
+        <ul class="mobile-menu-links">
+          <li><a href="index.html" class="mobile-nav-item active"><span>Home</span> <span>→</span></a></li>
+          <li><a href="project.html" class="mobile-nav-item"><span>Projects</span> <span>→</span></a></li>
+          <li><a href="expertise.html" class="mobile-nav-item"><span>My Expertise</span> <span>→</span></a></li>
+          <li><a href="contact.html" class="mobile-nav-item"><span>Contact</span> <span>→</span></a></li>
+        </ul>
+        <div>
+          <p style="font-size: 0.85rem; color: #71717a; margin-bottom: 1rem;">
+            Full-Stack Engineering &amp; Architecture.
+          </p>
+          <a href="project.html" class="btn-solid-white" style="width: 100%; justify-content: center;">
+            Explore Projects
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div id="pageContent">
+    <!-- Animated ShapeGrid Canvas from Reference Website -->
+    <canvas id="shapegrid-canvas"></canvas>
+
+    <!-- Technical Engineering Blueprint Grid Overlay -->
+    <div class="home-blueprint-bg" aria-hidden="true">
+      <div class="home-grid-matrix"></div>
+      <div class="home-ambient-glow"></div>
+    </div>
+
+    <!-- Main Hero Section Inspired by Reference Website & Technical Display Canvas -->
+    <main id="main-content">
+    <section class="home-hero">
+      <div class="container home-hero-container">
+        
+        <!-- Metadata Header Bar -->
+        <div class="home-meta-header">
+          <div class="meta-item">
+            <span>Project</span>
+            <strong>Portfolio / 2026</strong>
+          </div>
+          <div class="meta-item">
+            <span>Discipline</span>
+            <strong>Full-Stack &amp; Cloud Engineering</strong>
+          </div>
+        </div>
+
+        <!-- Master Framed Technical Display Canvas -->
+        <div class="framed-device-canvas">
+          
+          <div class="canvas-main-grid">
+            <!-- Left Hero Content from Reference Website -->
+            <div class="canvas-hero-content">
+              <div class="pill-status-row">
+                <!-- Reference Badge Content -->
+                <span class="mono-tag-pill">Hi, I'm Tarun 👋 Full-Stack Developer</span>
+                <span class="mono-status-pill">
+                  <span class="status-dot-white"></span>
+                  <span>Available for Opportunities</span>
+                </span>
+              </div>
+
+              <!-- Reference Headline Content -->
+              <h1 class="home-headline">
+                Turning Ideas Into <span class="contrast-light">Scalable</span> Web Products.
+              </h1>
+
+              <!-- Reference Description Content -->
+              <p class="home-subtext">
+                I design and develop web applications built for performance, scale, and real-world use.
+              </p>
+
+              <!-- Action Buttons -->
+              <div class="home-actions">
+                <a href="project.html" class="btn-solid-white">
+                  <span>Explore Projects</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </a>
+
+                <a href="expertise.html" class="btn-ghost-white">
+                  <span>Discover My Expertise</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                  </svg>
+                </a>
+
+                <button type="button" class="btn-replay-pill" id="replayIntroBtn" aria-label="Replay Welcome Intro Animation" title="Replay Welcome Intro Animation">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="1 4 1 10 7 10"></polyline>
+                    <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+                  </svg>
+                  <span>Replay Intro</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Right Technical Workflow Diagram (Workflow Nodes from Reference Image) -->
+            <div class="workflow-diagram-wrap">
+              <div class="workflow-header">
+                <span>Production Architecture</span>
+                <span>Active</span>
+              </div>
+
+              <div class="workflow-nodes-list">
+                <div class="workflow-node-card">
+                  <div class="node-left">
+                    <span class="node-number">01</span>
+                    <span class="node-title">System Architecture</span>
+                  </div>
+                  <span class="node-badge">Spec</span>
+                </div>
+
+                <div class="workflow-node-card active-node">
+                  <div class="node-left">
+                    <span class="node-number">02</span>
+                    <span class="node-title">Vanilla JS Logic</span>
+                  </div>
+                  <span class="node-badge" style="background: #ffffff; color: #000; font-weight: 700;">Live</span>
+                </div>
+
+                <div class="workflow-node-card">
+                  <div class="node-left">
+                    <span class="node-number">03</span>
+                    <span class="node-title">Responsive UI &amp; Layouts</span>
+                  </div>
+                  <span class="node-badge">CSS Grid</span>
+                </div>
+
+                <div class="workflow-node-card">
+                  <div class="node-left">
+                    <span class="node-number">04</span>
+                    <span class="node-title">Cloud Deployment</span>
+                  </div>
+                  <span class="node-badge">AWS / Git</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Horizontal Capability Dock (Like the 6 icons at the bottom of the reference image) -->
+          <div class="canvas-bottom-dock">
+            <div class="dock-header">
+              <span>Technical Capabilities &amp; Specialties</span>
+              <span>6 Core Domains</span>
+            </div>
+
+            <div class="dock-cards-strip">
+              <div class="dock-item-card">
+                <div class="dock-icon-box" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="16 18 22 12 16 6"></polyline>
+                    <polyline points="8 6 2 12 8 18"></polyline>
+                  </svg>
+                </div>
+                <span class="dock-label">Web Apps</span>
+              </div>
+
+              <div class="dock-item-card">
+                <div class="dock-icon-box" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="3" y1="9" x2="21" y2="9"></line>
+                    <line x1="9" y1="21" x2="9" y2="9"></line>
+                  </svg>
+                </div>
+                <span class="dock-label">UI Systems</span>
+              </div>
+
+              <div class="dock-item-card">
+                <div class="dock-icon-box" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                  </svg>
+                </div>
+                <span class="dock-label">Telemetry UI</span>
+              </div>
+
+              <div class="dock-item-card">
+                <div class="dock-icon-box" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path>
+                  </svg>
+                </div>
+                <span class="dock-label">Cloud &amp; AWS</span>
+              </div>
+
+              <div class="dock-item-card">
+                <div class="dock-icon-box" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="4 17 10 11 4 5"></polyline>
+                    <line x1="12" y1="19" x2="20" y2="19"></line>
+                  </svg>
+                </div>
+                <span class="dock-label">Linux / Shell</span>
+              </div>
+
+              <div class="dock-item-card">
+                <div class="dock-icon-box" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 14 14"></polyline>
+                  </svg>
+                </div>
+                <span class="dock-label">Performance</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+  </div>
+
+  <script src="js/transitions.js"></script>
+  <script src="js/projects.js"></script>
+  <script src="js/contact.js"></script>
+</body>
+</html>

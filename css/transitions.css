@@ -1,0 +1,263 @@
+/* ==========================================================================
+   Tarun.K Portfolio - Welcome Intro & Multi-Layer Top-Down Staggered Page Shift
+   Layers: Gray -> White -> Black cascading from top
+   ========================================================================== */
+
+/* Fullscreen Welcome Intro Screen */
+.welcome-intro-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background-color: #05070a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  pointer-events: auto;
+  overflow: hidden;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), filter 0.75s ease, transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, filter, transform;
+}
+
+.intro-stage-container {
+  position: relative;
+  width: 100%;
+  max-width: 1050px;
+  padding: 0 2rem;
+  text-align: center;
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Stage 1: "WELCOME TO MY PORTFOLIO." */
+.intro-stage-1 {
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(18px);
+  letter-spacing: 0.08em;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), letter-spacing 0.8s ease;
+}
+
+.intro-welcome-text {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(2.4rem, 7vw, 5.4rem);
+  font-weight: 800;
+  letter-spacing: inherit;
+  text-transform: uppercase;
+  color: #ffffff;
+  display: inline-block;
+  line-height: 1.1;
+  text-shadow: 0 0 45px rgba(255, 255, 255, 0.7), 0 0 80px rgba(255, 255, 255, 0.3);
+}
+
+/* Stage 2: "TARUN.K" + "DESIGN. DEVELOP. DEPLOY." */
+.intro-stage-2 {
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+}
+
+.intro-brand-name {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(4.2rem, 13vw, 8.8rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  line-height: 1;
+  text-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
+}
+
+.intro-brand-name span {
+  font-weight: 300;
+  color: #a1a1aa;
+}
+
+.intro-tagline {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.95rem, 2vw, 1.35rem);
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: #e4e4e7;
+  font-weight: 500;
+}
+
+/* Progress Bar at the bottom */
+.intro-progress-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.intro-progress-bar {
+  width: 0%;
+  height: 100%;
+  background: #ffffff;
+  transition: width 4.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Skip Button */
+.intro-skip-btn {
+  position: absolute;
+  bottom: 2.25rem;
+  right: 2.25rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(12px);
+  color: #d4d4d8;
+  padding: 0.5rem 1.15rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.intro-skip-btn:hover {
+  color: #ffffff;
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+/* Step 1 Active */
+.intro-active-1 .intro-stage-1 {
+  opacity: 1;
+  transform: translateY(0);
+  letter-spacing: 0.28em;
+}
+
+/* Step 2 Active */
+.intro-active-2 .intro-stage-1 {
+  opacity: 0;
+  transform: translateY(-16px);
+}
+
+.intro-active-2 .intro-stage-2 {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.intro-fade-out {
+  opacity: 0 !important;
+  filter: blur(14px) !important;
+  transform: scale(1.04) !important;
+  pointer-events: none !important;
+}
+
+.welcome-intro-screen.hide-intro {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Multi-Layer Cascading Top-Down Page Shift Transition
+   Layers come from the top and shift the page:
+   Layer 1: Dark Charcoal / Slate Gray (#27272a)
+   Layer 2: Clean Brilliant White (#ffffff)
+   Layer 3: Deep Obsidian Black (#05070a)
+   ========================================================================== */
+.page-shift-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 99990;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.shift-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateY(-100%);
+  transition: transform 0.45s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+}
+
+/* Layer 1: Dark Charcoal / Slate Gray */
+.shift-layer-gray {
+  background-color: #27272a;
+  z-index: 1;
+}
+
+/* Layer 2: Clean Brilliant White */
+.shift-layer-white {
+  background-color: #ffffff;
+  z-index: 2;
+}
+
+/* Layer 3: Deep Obsidian Black */
+.shift-layer-black {
+  background-color: #05070a;
+  z-index: 3;
+}
+
+/* Entering / Triggering page shift: Layers cascade DOWN from top (Gray -> White -> Black) */
+.page-shift-wrapper.shifting-in {
+  pointer-events: auto;
+}
+
+.page-shift-wrapper.shifting-in .shift-layer-gray {
+  transform: translateY(0%);
+  transition-delay: 0s;
+}
+
+.page-shift-wrapper.shifting-in .shift-layer-white {
+  transform: translateY(0%);
+  transition-delay: 0.07s;
+}
+
+.page-shift-wrapper.shifting-in .shift-layer-black {
+  transform: translateY(0%);
+  transition-delay: 0.14s;
+}
+
+/* Revealing page: Layers cascade DOWN and OFF the screen (Black -> White -> Gray) */
+.page-shift-wrapper.shifting-out {
+  pointer-events: auto;
+}
+
+.page-shift-wrapper.shifting-out .shift-layer-black {
+  transform: translateY(100%);
+  transition-delay: 0s;
+}
+
+.page-shift-wrapper.shifting-out .shift-layer-white {
+  transform: translateY(100%);
+  transition-delay: 0.07s;
+}
+
+.page-shift-wrapper.shifting-out .shift-layer-gray {
+  transform: translateY(100%);
+  transition-delay: 0.14s;
+}
+
+/* Instant silent reset without reverse animation */
+.page-shift-wrapper.no-transition .shift-layer {
+  transition: none !important;
+  transform: translateY(-100%) !important;
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .welcome-intro-screen,
+  .page-shift-wrapper {
+    display: none !important;
+  }
+}

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — Tarun.K | Featured Engineering Work</title>
+  <meta name="description" content="Selected web development projects by Tarun.K — featuring Quantiva Dashboard UI and Fundora Startup Marketplace.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a855f7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polygon points='12 2 2 7 12 12 22 7 12 2'></polygon><polyline points='2 17 12 22 22 17'></polyline><polyline points='2 12 12 17 22 12'></polyline></svg>">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/transitions.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/projects.css">
+  <link rel="stylesheet" href="css/expertise.css">
+  <link rel="stylesheet" href="css/contact.css">
+</head>
+<body class="page-projects">
+  <!-- Accessible Skip Link -->
+  <a href="#projects-content" class="skip-link">Skip to projects gallery</a>
+
+  <!-- Multi-Layer Cascading Top-Down Page Shift Transition (Gray -> White -> Black) -->
+  <div class="page-shift-wrapper" id="pageShiftWrapper" aria-hidden="true">
+    <div class="shift-layer shift-layer-gray"></div>
+    <div class="shift-layer shift-layer-white"></div>
+    <div class="shift-layer shift-layer-black"></div>
+  </div>
+
+  <!-- Shared Header Navigation -->
+  <header>
+    <nav class="site-nav" id="siteNav" aria-label="Primary Navigation">
+      <div class="container nav-container">
+        <!-- Brand Wordmark -->
+        <a href="index.html" class="brand-logo" aria-label="Tarun.K Home">
+          <span class="brand-symbol" style="border-color: #a855f7; color: #e9d5ff;" aria-hidden="true">&gt;_</span>
+          <span>Tarun<span style="color: #a855f7;">.K</span></span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <ul class="nav-menu-desktop" role="menubar">
+          <li role="none"><a href="index.html" class="nav-link" role="menuitem">Home</a></li>
+          <li role="none"><a href="project.html" class="nav-link active" role="menuitem">Projects</a></li>
+          <li role="none"><a href="expertise.html" class="nav-link" role="menuitem">My Expertise</a></li>
+          <li role="none"><a href="contact.html" class="nav-link" role="menuitem">Contact</a></li>
+        </ul>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobileNavOverlay" style="color: #e9d5ff;">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Navigation Overlay -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay" aria-hidden="true">
+      <div class="mobile-nav-content">
+        <ul class="mobile-menu-links">
+          <li><a href="index.html" class="mobile-nav-item"><span>Home</span> <span>→</span></a></li>
+          <li><a href="project.html" class="mobile-nav-item active"><span>Projects</span> <span>→</span></a></li>
+          <li><a href="expertise.html" class="mobile-nav-item"><span>My Expertise</span> <span>→</span></a></li>
+          <li><a href="contact.html" class="mobile-nav-item"><span>Contact</span> <span>→</span></a></li>
+        </ul>
+        <div>
+          <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 1rem;">
+            Charcoal & Vivid Purple Project Showcase.
+          </p>
+          <a href="https://github.com/tarunk8060" target="_blank" rel="noopener noreferrer" class="btn-source-purple" style="width: 100%; justify-content: center;">
+            Explore GitHub Repos
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div id="pageContent">
+    <!-- Ambient Charcoal & Purple Atmospheric Glow -->
+    <div class="projects-ambient-glow" aria-hidden="true">
+      <div class="glow-purple-1"></div>
+      <div class="glow-purple-2"></div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main id="projects-content">
+    <!-- Projects Section Header -->
+    <section class="projects-header-section">
+      <div class="container projects-hero-inner">
+        <div class="pill-purple">
+          <span>Production Portfolio</span>
+        </div>
+        <h1 class="projects-title">
+          <span class="gradient-purple">Featured Work</span>
+        </h1>
+        <p class="projects-quote">
+          “Selected projects. Thoughtful design. Practical solutions.”
+        </p>
+        <p class="projects-lead">
+          A focused showcase of web applications engineered with precision. Built with clean, modern standards and zero framework bloat, these projects solve real problems for founders, startup leaders, and innovators.
+        </p>
+      </div>
+    </section>
+
+    <!-- Project Gallery & Filtering -->
+    <section class="projects-gallery">
+      <div class="container">
+        <!-- Filter Controls -->
+        <div class="projects-filter-bar">
+          <div class="filter-group" role="tablist" aria-label="Filter Projects">
+            <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All Projects</button>
+            <button class="filter-btn" data-filter="analytics" role="tab" aria-selected="false">Analytics & Dashboard</button>
+            <button class="filter-btn" data-filter="marketplace" role="tab" aria-selected="false">Marketplace & Launchpad</button>
+          </div>
+          <div class="filter-count" aria-live="polite">
+            Displaying <strong id="filterCount">2</strong> curated projects
+          </div>
+        </div>
+
+        <!-- Project Cards Grid -->
+        <div class="projects-grid">
+
+          <!-- PROJECT 1: Quantiva Dashboard UI -->
+          <article class="project-card" data-category="analytics">
+            <div class="card-media-wrap">
+              <img src="assets/images/quantiva-preview.jpg" alt="Quantiva Dashboard UI preview showing analytics graphs and statistics" class="card-media-img" loading="lazy">
+              <div class="media-badge-bar">
+                <span class="badge-category">Dashboard & Telemetry</span>
+                <span class="badge-live-dot">Live Prototype</span>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="tech-tags-row">
+                <span class="tech-tag">HTML5</span>
+                <span class="tech-tag">CSS3</span>
+                <span class="tech-tag">VANILLA JS</span>
+              </div>
+
+              <h2 class="card-title">Quantiva Dashboard UI</h2>
+              <p class="card-description">
+                A powerful analytics dashboard designed for startup CEOs to easily track post-launch metrics, product performance, and company statistics.
+              </p>
+
+              <ul class="card-spec-list">
+                <li class="card-spec-item">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span><strong>Founder Telemetry:</strong> Real-time MRR, customer acquisition, and conversion funnel analytics.</span>
+                </li>
+                <li class="card-spec-item">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span><strong>Zero Framework Overhead:</strong> Built exclusively with vanilla JavaScript and performant DOM updates.</span>
+                </li>
+              </ul>
+
+              <div class="card-actions-row">
+                <a href="https://github.com/tarunk8060/Project-CRM-protype-" target="_blank" rel="noopener noreferrer" class="btn-source-purple" aria-label="View source code for Quantiva Dashboard on GitHub">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  <span>View Source</span>
+                </a>
+
+                <button type="button" class="btn-details-ghost" data-modal="quantiva" aria-label="Open architecture specs for Quantiva">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                  <span>Architecture</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- PROJECT 2: Fundora Landing Page -->
+          <article class="project-card" data-category="marketplace">
+            <div class="card-media-wrap">
+              <img src="assets/images/fundora-preview.jpg" alt="Fundora Landing Page preview showing startup marketplace and product cards" class="card-media-img" loading="lazy">
+              <div class="media-badge-bar">
+                <span class="badge-category">Marketplace & Launchpad</span>
+                <span class="badge-live-dot">Live Prototype</span>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <div class="tech-tags-row">
+                <span class="tech-tag">Custom CSS</span>
+                <span class="tech-tag">JAVASCRIPT</span>
+              </div>
+
+              <h2 class="card-title">Fundora Landing Page</h2>
+              <p class="card-description">
+                A dedicated launchpad platform and marketplace where exciting new startup products are introduced to the world.
+              </p>
+
+              <ul class="card-spec-list">
+                <li class="card-spec-item">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span><strong>Launchpad Directory:</strong> Dynamic discovery gallery with voting stats and categorized tags.</span>
+                </li>
+                <li class="card-spec-item">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span><strong>Interactive Drawer:</strong> Smooth off-canvas drawer for cart items and responsive mobile navigation.</span>
+                </li>
+              </ul>
+
+              <div class="card-actions-row">
+                <a href="https://github.com/tarunk8060/project-d-start-Up-" target="_blank" rel="noopener noreferrer" class="btn-source-purple" aria-label="View source code for Fundora on GitHub">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                  </svg>
+                  <span>View Source</span>
+                </a>
+
+                <button type="button" class="btn-details-ghost" data-modal="fundora" aria-label="Open architecture specs for Fundora">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                  <span>Architecture</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Interactive Project Details Modal -->
+  <div class="proj-modal-overlay" id="projectModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="proj-modal-box">
+      <button type="button" class="proj-modal-close" id="modalCloseBtn" aria-label="Close modal window">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <img src="" alt="" id="modalImg" class="proj-modal-img">
+
+      <div class="proj-modal-content">
+        <div style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
+          <span class="badge-category" id="modalCategory">Category</span>
+          <span class="badge-live-dot" id="modalStatus">Status</span>
+        </div>
+
+        <h3 id="modalTitle" style="font-size: 1.85rem; color: #ffffff; margin-bottom: 0.75rem;">Project Title</h3>
+        <p id="modalDesc" style="color: var(--proj-text-secondary); line-height: 1.7; margin-bottom: 1.75rem;">Project description.</p>
+
+        <h4 style="font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--proj-lavender); margin-bottom: 0.75rem;">Technology Stack</h4>
+        <div class="tech-tags-row" id="modalTechStack" style="margin-bottom: 1.75rem;"></div>
+
+        <h4 style="font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--proj-lavender); margin-bottom: 0.75rem;">Architectural Highlights</h4>
+        <ul class="card-spec-list" id="modalHighlights"></ul>
+
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+          <a href="#" target="_blank" rel="noopener noreferrer" class="btn-source-purple" id="modalRepoBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            <span>View Source on GitHub</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="brand-logo" aria-label="Tarun.K Home">
+            <span class="brand-symbol" style="border-color: #a855f7; color: #e9d5ff;" aria-hidden="true">&gt;_</span>
+            <span>Tarun<span style="color: #a855f7;">.K</span></span>
+          </a>
+          <p class="footer-tagline">
+            Charcoal black & vivid purple showcase. Genuine projects, authentic codebases.
+          </p>
+        </div>
+
+        <div class="footer-nav-groups">
+          <div class="footer-group">
+            <h5>Navigation</h5>
+            <ul class="footer-links">
+              <li><a href="index.html" class="footer-link">Home</a></li>
+              <li><a href="project.html" class="footer-link">Projects</a></li>
+              <li><a href="expertise.html" class="footer-link">My Expertise</a></li>
+              <li><a href="contact.html" class="footer-link">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-group">
+            <h5>Source Repositories</h5>
+            <ul class="footer-links">
+              <li><a href="https://github.com/tarunk8060/Project-CRM-protype-" target="_blank" rel="noopener noreferrer" class="footer-link">Quantiva Dashboard UI</a></li>
+              <li><a href="https://github.com/tarunk8060/project-d-start-Up-" target="_blank" rel="noopener noreferrer" class="footer-link">Fundora Launchpad</a></li>
+              <li><a href="https://github.com/tarunk8060" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub Profile</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-group">
+            <h5>Connect</h5>
+            <ul class="footer-links">
+              <li><a href="contact.html" class="footer-link">Send a Message</a></li>
+              <li><a href="expertise.html" class="footer-link">View Tech Stack</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Tarun.K. Engineered with high-fidelity visual design and semantic code.</p>
+        <p>Charcoal & Vivid Purple Chapter</p>
+      </div>
+    </div>
+  </footer>
+  </div>
+
+  <script src="js/transitions.js"></script>
+  <script src="js/projects.js"></script>
+  <script src="js/contact.js"></script>
+</body>
+</html>

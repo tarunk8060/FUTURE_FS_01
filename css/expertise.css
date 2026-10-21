@@ -1,0 +1,337 @@
+/* ==========================================================================
+   Tarun.K Portfolio - PAGE 3: MY EXPERTISE
+   Deep Dark Obsidian Palette with Vibrant Orange (#ff6b2b / #ea580c) Accents
+   ========================================================================== */
+
+:root {
+  --exp-bg: #07090e;
+  --exp-surface: #0e121a;
+  --exp-surface-card: #131824;
+  --exp-surface-elevated: #1a2030;
+  
+  --exp-text-primary: #ffffff;
+  --exp-text-secondary: #cbd5e1;
+  --exp-text-muted: #94a3b8;
+  
+  --exp-orange: #ff6b2b;
+  --exp-orange-glow: rgba(255, 107, 43, 0.25);
+  --exp-orange-soft: rgba(255, 107, 43, 0.12);
+  --exp-orange-border: rgba(255, 107, 43, 0.35);
+  
+  --exp-border: rgba(255, 255, 255, 0.08);
+  --exp-border-strong: rgba(255, 255, 255, 0.16);
+  --exp-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  --exp-shadow-hover: 0 16px 36px rgba(0, 0, 0, 0.7), 0 0 24px var(--exp-orange-glow);
+}
+
+body.page-expertise {
+  background-color: var(--exp-bg);
+  color: var(--exp-text-primary);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Ambient Dark Glow with Subtle Orange Fog */
+.expertise-ambient-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.glow-orange-1 {
+  position: absolute;
+  top: -120px;
+  right: 15%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(255, 107, 43, 0.12) 0%, transparent 70%);
+  filter: blur(100px);
+}
+
+.glow-orange-2 {
+  position: absolute;
+  bottom: 100px;
+  left: 10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(234, 88, 12, 0.08) 0%, transparent 70%);
+  filter: blur(90px);
+}
+
+/* Navigation */
+body.page-expertise .site-nav {
+  color: var(--exp-text-primary);
+  border-bottom: 1px solid transparent;
+}
+
+body.page-expertise .site-nav.scrolled {
+  background: rgba(7, 9, 14, 0.88);
+  border-bottom-color: var(--exp-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+body.page-expertise .brand-logo {
+  color: var(--exp-text-primary);
+}
+
+body.page-expertise .brand-symbol {
+  border-color: var(--exp-orange);
+  color: var(--exp-orange);
+  background: var(--exp-orange-soft);
+}
+
+body.page-expertise .nav-menu-desktop {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--exp-border);
+  backdrop-filter: blur(16px);
+}
+
+body.page-expertise .nav-link {
+  color: var(--exp-text-muted);
+}
+
+body.page-expertise .nav-link:hover {
+  color: var(--exp-orange);
+  background: var(--exp-orange-soft);
+}
+
+body.page-expertise .nav-link.active {
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--exp-orange), #ea580c);
+  box-shadow: 0 4px 14px var(--exp-orange-glow);
+  font-weight: 600;
+}
+
+body.page-expertise .mobile-nav-overlay {
+  background: rgba(7, 9, 14, 0.95);
+  backdrop-filter: blur(24px);
+}
+
+body.page-expertise .mobile-nav-content {
+  background: var(--exp-surface);
+  border-left: 1px solid var(--exp-border);
+}
+
+body.page-expertise .mobile-nav-item {
+  color: var(--exp-text-secondary);
+}
+
+body.page-expertise .mobile-nav-item:hover,
+body.page-expertise .mobile-nav-item.active {
+  color: var(--exp-orange);
+  border-bottom-color: var(--exp-orange);
+}
+
+/* Hero Header */
+.expertise-header-section {
+  padding-top: 140px;
+  padding-bottom: 50px;
+  position: relative;
+  z-index: 1;
+}
+
+.expertise-hero-inner {
+  max-width: 920px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.pill-orange {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.1rem;
+  background: var(--exp-orange-soft);
+  border: 1px solid var(--exp-orange-border);
+  border-radius: 9999px;
+  color: var(--exp-orange);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 0 20px var(--exp-orange-glow);
+}
+
+.expertise-title {
+  font-size: clamp(2.6rem, 5.5vw, 4.2rem);
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  margin-bottom: 1.25rem;
+}
+
+.expertise-title span.highlight-orange {
+  color: var(--exp-orange);
+  background: linear-gradient(135deg, #ffffff 30%, var(--exp-orange) 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.expertise-intro {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--exp-text-secondary);
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* Technology Groups */
+.expertise-groups-section {
+  padding-bottom: 90px;
+  position: relative;
+  z-index: 1;
+}
+
+.tech-group-block {
+  margin-bottom: 3.5rem;
+}
+
+.tech-group-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--exp-border);
+  padding-bottom: 0.85rem;
+  margin-bottom: 1.75rem;
+}
+
+.tech-group-title {
+  font-size: 1.55rem;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.group-number {
+  font-size: 0.88rem;
+  font-family: 'Space Grotesk', sans-serif;
+  color: var(--exp-orange);
+  font-weight: 700;
+}
+
+.tech-group-desc {
+  font-size: 0.9rem;
+  color: var(--exp-text-muted);
+}
+
+/* Cards Grid */
+.tech-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.tech-card {
+  background: var(--exp-surface-card);
+  border: 1px solid var(--exp-border);
+  border-radius: 16px;
+  padding: 1.75rem;
+  box-shadow: var(--exp-shadow);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  position: relative;
+}
+
+.tech-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--exp-shadow-hover);
+  border-color: var(--exp-orange-border);
+  background: var(--exp-surface-elevated);
+}
+
+.tech-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--exp-orange-soft);
+  border: 1px solid var(--exp-orange-border);
+  color: var(--exp-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+.tech-name {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 0.45rem;
+}
+
+.tech-context {
+  font-size: 0.9rem;
+  color: var(--exp-text-secondary);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.tech-tag-pill {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.65rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--exp-text-muted);
+  border-radius: 6px;
+  border: 1px solid var(--exp-border);
+}
+
+/* Learning Callout */
+.learning-callout {
+  background: var(--exp-surface-card);
+  border: 1px solid var(--exp-orange-border);
+  border-left: 4px solid var(--exp-orange);
+  border-radius: 14px;
+  padding: 2rem 2.25rem;
+  margin-top: 2rem;
+  box-shadow: var(--exp-shadow);
+}
+
+.learning-callout h4 {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.learning-callout p {
+  color: var(--exp-text-secondary);
+  line-height: 1.7;
+  font-size: 0.98rem;
+}
+
+/* Footer */
+body.page-expertise .site-footer {
+  border-top: 1px solid var(--exp-border);
+  background: var(--exp-bg);
+  color: var(--exp-text-secondary);
+}
+
+body.page-expertise .footer-brand a {
+  color: #ffffff;
+}
+
+body.page-expertise .footer-group h5 {
+  color: var(--exp-orange);
+}
+
+body.page-expertise .footer-link {
+  color: var(--exp-text-muted);
+}
+
+body.page-expertise .footer-link:hover {
+  color: var(--exp-orange);
+}
+
+body.page-expertise .footer-bottom {
+  border-top-color: var(--exp-border);
+  color: var(--exp-text-muted);
+}

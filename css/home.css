@@ -625,7 +625,23 @@ body.page-home .nav-link.active {
     border-color: #0a0a0c !important;
   }
 
-  /* Canvas Responsiveness */
+  /* Responsive Home Canvas & Meta Header */
+  .home-hero {
+    padding-top: 100px;
+    padding-bottom: 45px;
+  }
+
+  .home-meta-header {
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+    padding: 0 0.25rem;
+  }
+
+  .meta-item {
+    gap: 0.35rem;
+  }
+
   .canvas-main-grid {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -642,24 +658,116 @@ body.page-home .nav-link.active {
 }
 
 @media (max-width: 600px) {
+  .home-hero {
+    padding-top: 85px;
+    padding-bottom: 30px;
+  }
+
+  /* Compact, beautifully proportioned mobile technical meta header */
   .home-meta-header {
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.35rem 0.75rem;
+    padding: 0.45rem 0.75rem;
+    margin-bottom: 0.85rem;
+    font-size: 0.63rem;
+    letter-spacing: 0.06em;
+    background: rgba(255, 255, 255, 0.035);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+  }
+
+  .meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .meta-item span {
+    font-size: 0.58rem;
+    color: var(--home-text-dim);
+    font-weight: 500;
+  }
+
+  .meta-item strong {
+    font-size: 0.63rem;
+    color: #f4f4f5;
+    font-weight: 600;
+  }
+
+  .framed-device-canvas {
+    padding: 1.5rem 1.15rem;
+    border-radius: 18px;
+  }
+
+  .home-headline {
+    font-size: clamp(1.75rem, 6.8vw, 2.35rem);
+    line-height: 1.14;
+    margin-bottom: 0.9rem;
+  }
+
+  .home-subtext {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    margin-bottom: 1.25rem;
+  }
+
+  .mono-tag-pill {
+    font-size: 0.68rem;
+    padding: 0.25rem 0.65rem;
+  }
+
+  .mono-status-pill {
+    font-size: 0.72rem;
   }
 
   .home-actions {
     flex-direction: column;
     width: 100%;
+    gap: 0.65rem;
   }
 
   .btn-solid-white,
   .btn-ghost-white {
     width: 100%;
     justify-content: center;
+    padding: 0.75rem 1.25rem;
+    font-size: 0.88rem;
   }
 
   .dock-cards-strip {
     grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+
+  .dock-item-card {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .dock-label {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .home-meta-header {
+    font-size: 0.58rem;
+    padding: 0.35rem 0.55rem;
+    gap: 0.25rem 0.45rem;
+  }
+
+  .meta-item {
+    font-size: 0.58rem;
+  }
+
+  .meta-item span {
+    font-size: 0.54rem;
+  }
+
+  .meta-item strong {
+    font-size: 0.58rem;
   }
 }

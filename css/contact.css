@@ -1,39 +1,42 @@
 /* ==========================================================================
    Tarun.K Portfolio - PAGE 4: CONTACT
-   Color Identity: Ultra-Deep Nocturnal Midnight Abyss Blue (#01030a / #04091a / #0e1e4a)
-   Even deeper, moodier, inky oceanic midnight blue aesthetic
+   Color Identity: MacBook Midnight Blue (#090c12 / #131924 / #192130 / #34465e)
+   Authentic Apple MacBook Air "Midnight" anodized dark navy-slate finish
+   Dark, sleek, executive stealth aluminum with subtle twilight metallic undertones
    Applied to the Classic 2-Column Direct Contact Architecture
    ========================================================================== */
 
 :root {
-  --cnt-bg: #01030a;               /* Ultra-Deep Inky Midnight Abyss */
-  --cnt-canvas-bg: #020512;        /* Darkest Nocturnal Navy Foundation */
-  --cnt-surface: #04091a;          /* Deep Oceanic Midnight Channel Card */
-  --cnt-surface-card: #050c22;     /* Inky Midnight Form Card */
-  --cnt-surface-input: #08132e;    /* Deep Inset Dark Blue Container */
+  --cnt-bg: #090c12;               /* MacBook Midnight Dark Chassis Base */
+  --cnt-canvas-bg: #0c1018;        /* Subtle Ambient Foundation */
+  --cnt-surface: #111722;          /* Anodized Midnight Channel Card */
+  --cnt-surface-card: #131924;     /* MacBook Midnight Aluminum Form Card */
+  --cnt-surface-input: #192130;    /* Inset Keyboard-Well Midnight Navy */
   
-  --cnt-blue-primary: #1e3a8a;     /* Deep Royal Sapphire */
-  --cnt-blue-light: #3b82f6;       /* Clean Legible Ice/Sapphire Accent */
-  --cnt-blue-vibrant: #172554;     /* Inky Navy Blue */
-  --cnt-blue-soft: rgba(30, 58, 138, 0.18);
-  --cnt-blue-glow: rgba(29, 78, 216, 0.18);
+  --cnt-midnight-accent: #4d74a8;  /* Anodized Midnight Slate Blue */
+  --cnt-midnight-sheen: #7fa8dc;   /* Metallic Edge Reflection */
+  --cnt-midnight-vibrant: #31517d; /* Deep Metallic Blue Core */
+  --cnt-midnight-soft: rgba(58, 86, 128, 0.2);
+  --cnt-midnight-glow: rgba(58, 86, 128, 0.24);
   
   --cnt-white: #ffffff;
-  --cnt-text-primary: #ffffff;
-  --cnt-text-secondary: #94a3b8;   /* Soft Slate Secondary */
+  --cnt-text-primary: #f8fafc;
+  --cnt-text-secondary: #94a3b8;   /* Soft Slate */
   --cnt-text-muted: #64748b;       /* Muted Steel Slate */
   
-  --cnt-border: rgba(30, 58, 138, 0.32);
-  --cnt-border-subtle: rgba(30, 58, 138, 0.16);
-  --cnt-border-focus: #2563eb;
-  --cnt-glow: rgba(15, 30, 75, 0.35);
+  --cnt-border: rgba(107, 147, 200, 0.22);
+  --cnt-border-subtle: rgba(255, 255, 255, 0.06);
+  --cnt-border-focus: #5580b8;
+  --cnt-glow: rgba(45, 68, 100, 0.32);
   
   /* Aliases for backwards compatibility */
-  --cnt-accent: var(--cnt-blue-light);
-  --cnt-rose: var(--cnt-blue-light);
-  --cnt-rose-light: var(--cnt-blue-light);
-  --cnt-gold: var(--cnt-blue-light);
-  --cnt-cyan: var(--cnt-blue-light);
+  --cnt-blue-primary: var(--cnt-midnight-accent);
+  --cnt-blue-light: var(--cnt-midnight-sheen);
+  --cnt-accent: var(--cnt-midnight-sheen);
+  --cnt-rose: var(--cnt-midnight-sheen);
+  --cnt-rose-light: var(--cnt-midnight-sheen);
+  --cnt-gold: var(--cnt-midnight-sheen);
+  --cnt-cyan: var(--cnt-midnight-sheen);
   --cnt-cream: #ffffff;
 }
 
@@ -46,7 +49,7 @@ body.page-contact {
 }
 
 /* ==========================================================================
-   Volumetric Overhead Ultra-Deep Midnight Spotlights & Mist
+   Volumetric Overhead MacBook Midnight Atmospheric Spotlight & Sheen
    ========================================================================== */
 .contact-ambient-glow {
   position: fixed;
@@ -56,7 +59,7 @@ body.page-contact {
   overflow: hidden;
 }
 
-/* Overhead Volumetric Spotlight Beam in Deep Dark Oceanic Sapphire */
+/* Overhead Volumetric Spotlight Beam in Apple Midnight Twilight */
 .contact-ambient-glow::before {
   content: '';
   position: absolute;
@@ -65,8 +68,8 @@ body.page-contact {
   transform: translateX(-50%);
   width: 950px;
   height: 650px;
-  background: radial-gradient(ellipse at 50% 0%, rgba(15, 30, 75, 0.42) 0%, rgba(3, 7, 18, 0.08) 55%, transparent 75%);
-  filter: blur(85px);
+  background: radial-gradient(ellipse at 50% 0%, rgba(58, 86, 128, 0.22) 0%, rgba(13, 17, 25, 0.05) 55%, transparent 75%);
+  filter: blur(90px);
 }
 
 .glow-spotlight-1,
@@ -77,7 +80,7 @@ body.page-contact {
   left: 15%;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(18, 38, 95, 0.22) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(45, 68, 100, 0.16) 0%, transparent 70%);
   filter: blur(105px);
 }
 
@@ -89,12 +92,12 @@ body.page-contact {
   right: 15%;
   width: 550px;
   height: 550px;
-  background: radial-gradient(circle, rgba(15, 30, 75, 0.18) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(35, 54, 82, 0.14) 0%, transparent 70%);
   filter: blur(100px);
 }
 
 /* ==========================================================================
-   Navigation on Contact Page (Ultra-Deep Midnight Theme)
+   Navigation on Contact Page (MacBook Midnight Theme)
    ========================================================================== */
 body.page-contact .site-nav {
   color: var(--cnt-white);
@@ -102,7 +105,7 @@ body.page-contact .site-nav {
 }
 
 body.page-contact .site-nav.scrolled {
-  background: rgba(1, 3, 10, 0.96);
+  background: rgba(9, 12, 18, 0.95);
   border-bottom-color: var(--cnt-border);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -113,13 +116,13 @@ body.page-contact .brand-logo {
 }
 
 body.page-contact .brand-symbol {
-  border-color: var(--cnt-blue-primary);
-  color: var(--cnt-blue-light);
-  background: var(--cnt-blue-soft);
+  border-color: var(--cnt-midnight-accent);
+  color: var(--cnt-midnight-sheen);
+  background: var(--cnt-midnight-soft);
 }
 
 body.page-contact .nav-menu-desktop {
-  background: rgba(4, 9, 26, 0.75);
+  background: rgba(19, 25, 36, 0.7);
   border: 1px solid var(--cnt-border);
 }
 
@@ -128,20 +131,20 @@ body.page-contact .nav-link {
 }
 
 body.page-contact .nav-link:hover {
-  color: var(--cnt-blue-light);
-  background: var(--cnt-blue-soft);
+  color: var(--cnt-midnight-sheen);
+  background: var(--cnt-midnight-soft);
 }
 
 body.page-contact .nav-link.active {
   color: #ffffff;
-  background: linear-gradient(135deg, #0e1e4a 0%, #060e26 100%);
-  border: 1px solid rgba(59, 130, 246, 0.3);
+  background: linear-gradient(135deg, #1d2636 0%, #121824 100%);
+  border: 1px solid rgba(107, 147, 200, 0.35);
   font-weight: 700;
-  box-shadow: 0 4px 18px var(--cnt-blue-glow);
+  box-shadow: 0 4px 16px rgba(7, 10, 16, 0.7), 0 0 12px var(--cnt-midnight-glow);
 }
 
 body.page-contact .mobile-nav-overlay {
-  background: rgba(1, 3, 10, 0.98);
+  background: rgba(9, 12, 18, 0.98);
   backdrop-filter: blur(24px);
 }
 
@@ -156,8 +159,8 @@ body.page-contact .mobile-nav-item {
 
 body.page-contact .mobile-nav-item:hover,
 body.page-contact .mobile-nav-item.active {
-  color: var(--cnt-blue-light);
-  border-bottom-color: var(--cnt-blue-primary);
+  color: var(--cnt-midnight-sheen);
+  border-bottom-color: var(--cnt-midnight-accent);
 }
 
 /* ==========================================================================
@@ -189,10 +192,10 @@ body.page-contact .mobile-nav-item.active {
   align-items: center;
   gap: 0.5rem;
   padding: 0.38rem 1rem;
-  background: var(--cnt-blue-soft);
+  background: var(--cnt-midnight-soft);
   border: 1px solid var(--cnt-border);
   border-radius: 9999px;
-  color: var(--cnt-blue-light);
+  color: var(--cnt-midnight-sheen);
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -215,8 +218,8 @@ body.page-contact .mobile-nav-item.active {
 .contact-title span.blue-accent,
 .contact-title span.monochrome-accent,
 .contact-title span.rose-accent {
-  color: var(--cnt-blue-light);
-  text-shadow: 0 0 28px var(--cnt-blue-glow);
+  color: var(--cnt-midnight-sheen);
+  text-shadow: 0 0 24px rgba(70, 103, 149, 0.4);
 }
 
 .contact-statement {
@@ -241,23 +244,23 @@ body.page-contact .mobile-nav-item.active {
   background: var(--cnt-surface);
   border: 1px solid var(--cnt-border);
   border-radius: 16px;
-  box-shadow: 0 10px 24px rgba(0, 1, 5, 0.6);
+  box-shadow: 0 10px 24px rgba(5, 7, 12, 0.5);
   transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
 }
 
 .channel-card:hover {
   transform: translateY(-2px);
-  border-color: var(--cnt-blue-light);
-  box-shadow: 0 14px 34px rgba(0, 1, 5, 0.85), 0 0 25px var(--cnt-blue-glow);
+  border-color: var(--cnt-midnight-sheen);
+  box-shadow: 0 14px 34px rgba(5, 7, 12, 0.75), 0 0 20px var(--cnt-midnight-glow);
 }
 
 .channel-icon {
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: var(--cnt-blue-soft);
+  background: var(--cnt-midnight-soft);
   border: 1px solid var(--cnt-border-subtle);
-  color: var(--cnt-blue-light);
+  color: var(--cnt-midnight-sheen);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -280,19 +283,19 @@ body.page-contact .mobile-nav-item.active {
 }
 
 /* ==========================================================================
-   Right Column: Ultra-Deep Midnight Blue Form Card
+   Right Column: MacBook Midnight Form Card
    ========================================================================== */
 .contact-form-box {
   background: var(--cnt-surface-card);
   border: 1px solid var(--cnt-border);
   border-radius: 24px;
   padding: 2.75rem 2.35rem 2.5rem;
-  box-shadow: 0 35px 80px rgba(0, 1, 5, 0.98), 0 0 35px rgba(15, 30, 75, 0.28);
+  box-shadow: 0 35px 80px rgba(5, 7, 12, 0.95), 0 0 30px rgba(45, 68, 100, 0.2);
   position: relative;
   overflow: hidden;
 }
 
-/* Subtle top internal highlight in dark sapphire */
+/* Subtle top internal highlight in metallic midnight sheen */
 .contact-form-box::before {
   content: '';
   position: absolute;
@@ -300,7 +303,7 @@ body.page-contact .mobile-nav-item.active {
   left: 15%;
   right: 15%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.45), transparent);
+  background: linear-gradient(90deg, transparent, rgba(107, 147, 200, 0.45), transparent);
 }
 
 .form-header {
@@ -337,7 +340,7 @@ body.page-contact .mobile-nav-item.active {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #93c5fd;
+  color: #8caad4;
   margin-bottom: 0.5rem;
 }
 
@@ -362,8 +365,8 @@ body.page-contact .mobile-nav-item.active {
 .input-field:focus,
 .textarea-field:focus {
   outline: none;
-  border-color: #2563eb;
-  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.35);
+  border-color: var(--cnt-border-focus);
+  box-shadow: 0 0 0 3px rgba(58, 86, 128, 0.28);
 }
 
 .textarea-field {
@@ -371,14 +374,14 @@ body.page-contact .mobile-nav-item.active {
   resize: vertical;
 }
 
-/* Full-Width Ultra-Deep Inky Midnight Capsule Button */
+/* Full-Width Anodized MacBook Midnight Capsule Button */
 .btn-send-midnight,
 .btn-send-waveform,
 .btn-send-rose,
 .btn-send-gold,
 .btn-send-cyan {
   width: 100%;
-  background: linear-gradient(135deg, #0e1e4a 0%, #060e26 100%);
+  background: linear-gradient(135deg, #1d2636 0%, #121824 100%);
   color: #ffffff;
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: 1rem;
@@ -386,13 +389,13 @@ body.page-contact .mobile-nav-item.active {
   letter-spacing: -0.01em;
   padding: 0.95rem 2rem;
   border-radius: 9999px;
-  border: 1px solid rgba(59, 130, 246, 0.32);
+  border: 1px solid rgba(107, 147, 200, 0.35);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.65rem;
-  box-shadow: 0 6px 24px rgba(0, 1, 5, 0.8), 0 0 16px rgba(15, 30, 75, 0.35);
+  box-shadow: 0 6px 20px rgba(5, 7, 12, 0.8), 0 0 14px rgba(45, 68, 100, 0.25);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   margin-top: 0.5rem;
 }
@@ -402,10 +405,10 @@ body.page-contact .mobile-nav-item.active {
 .btn-send-rose:hover,
 .btn-send-gold:hover,
 .btn-send-cyan:hover {
-  background: linear-gradient(135deg, #172e6b 0%, #0e1e4a 100%);
-  border-color: rgba(96, 165, 250, 0.45);
+  background: linear-gradient(135deg, #27344a 0%, #18202e 100%);
+  border-color: rgba(127, 168, 220, 0.55);
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0, 1, 5, 0.9), 0 0 22px rgba(30, 58, 138, 0.45);
+  box-shadow: 0 10px 28px rgba(5, 7, 12, 0.9), 0 0 20px rgba(58, 86, 128, 0.38);
 }
 
 .btn-send-midnight:active,
@@ -435,10 +438,10 @@ body.page-contact .mobile-nav-item.active {
 }
 
 .form-status-box.success {
-  background: rgba(15, 30, 75, 0.32);
+  background: rgba(45, 68, 100, 0.25);
   border: 1px solid var(--cnt-border);
   color: #ffffff;
-  box-shadow: 0 0 24px var(--cnt-blue-glow);
+  box-shadow: 0 0 22px var(--cnt-midnight-glow);
 }
 
 .form-status-box.error {
@@ -448,16 +451,16 @@ body.page-contact .mobile-nav-item.active {
 }
 
 /* ==========================================================================
-   Shared Minimal Footer (Ultra-Deep Midnight Blue Theme)
+   Shared Minimal Footer (MacBook Midnight Blue Theme)
    ========================================================================== */
 body.page-contact .site-footer {
   border-top: 1px solid var(--cnt-border-subtle);
-  background: #010206;
+  background: #07090f;
   color: var(--cnt-white);
 }
 
 body.page-contact .footer-group h5 {
-  color: var(--cnt-blue-light);
+  color: var(--cnt-midnight-sheen);
   font-weight: 700;
 }
 

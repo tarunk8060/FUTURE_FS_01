@@ -27,52 +27,84 @@
     <div class="shift-layer shift-layer-black"></div>
   </div>
 
-  <!-- Shared Header Navigation -->
-  <header>
-    <nav class="site-nav" id="siteNav" aria-label="Primary Navigation">
-      <div class="container nav-container">
-        <!-- Brand Wordmark -->
-        <a href="index.html" class="brand-logo" aria-label="Tarun.K Home">
-          <span class="brand-symbol" aria-hidden="true">&gt;_</span>
-          <span>Tarun<span style="color: var(--exp-orange);">.K</span></span>
-        </a>
+  <!-- React Bits: Pill Nav Component (https://reactbits.dev/components/pill-nav) -->
+  <header class="pill-nav-header">
+    <nav class="pill-nav" id="pillNav" aria-label="Primary Navigation">
+      <!-- Standalone Brand Logo Pill -->
+      <a href="index.html" class="pill-nav__logo" aria-label="Tarun.K Home">
+        <span>&gt;_</span>
+      </a>
 
-        <!-- Desktop Navigation Links -->
-        <ul class="nav-menu-desktop" role="menubar">
-          <li role="none"><a href="index.html" class="nav-link" role="menuitem">Home</a></li>
-          <li role="none"><a href="project.html" class="nav-link" role="menuitem">Projects</a></li>
-          <li role="none"><a href="expertise.html" class="nav-link active" role="menuitem">My Expertise</a></li>
-          <li role="none"><a href="contact.html" class="nav-link" role="menuitem">Contact</a></li>
+      <!-- Desktop Links with Label Roll & Rising Fill -->
+      <ul class="pill-nav__list" role="menubar">
+        <li class="pill-nav__slot" role="none">
+          <a href="index.html" class="pill-nav__item" role="menuitem">
+            <span class="pill-nav__fill" aria-hidden="true"></span>
+            <span class="pill-nav__face">Home</span>
+            <span class="pill-nav__face-alt" aria-hidden="true">Home</span>
+          </a>
+        </li>
+        <li class="pill-nav__slot" role="none">
+          <a href="project.html" class="pill-nav__item" role="menuitem">
+            <span class="pill-nav__fill" aria-hidden="true"></span>
+            <span class="pill-nav__face">Projects</span>
+            <span class="pill-nav__face-alt" aria-hidden="true">Projects</span>
+          </a>
+        </li>
+        <li class="pill-nav__slot" role="none">
+          <a href="expertise.html" class="pill-nav__item active" role="menuitem" aria-current="page">
+            <span class="pill-nav__fill" aria-hidden="true"></span>
+            <span class="pill-nav__face">My Expertise</span>
+            <span class="pill-nav__face-alt" aria-hidden="true">My Expertise</span>
+          </a>
+        </li>
+        <li class="pill-nav__slot" role="none">
+          <a href="contact.html" class="pill-nav__item" role="menuitem">
+            <span class="pill-nav__fill" aria-hidden="true"></span>
+            <span class="pill-nav__face">Contact</span>
+            <span class="pill-nav__face-alt" aria-hidden="true">Contact</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Mobile Animated 2-Line Toggle Burger -->
+      <button type="button" class="pill-nav__toggle" id="pillNavToggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="pillNavPanel">
+        <span class="pill-nav__burger" aria-hidden="true">
+          <span class="pill-nav__line pill-nav__line--top"></span>
+          <span class="pill-nav__line pill-nav__line--bottom"></span>
+        </span>
+      </button>
+
+      <!-- Mobile Dropdown Panel -->
+      <div class="pill-nav__panel" id="pillNavPanel" aria-hidden="true">
+        <ul class="pill-nav__menu">
+          <li>
+            <a href="index.html" class="pill-nav__row">
+              <span>Home</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a href="project.html" class="pill-nav__row">
+              <span>Projects</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a href="expertise.html" class="pill-nav__row active">
+              <span>My Expertise</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a href="contact.html" class="pill-nav__row">
+              <span>Contact</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
         </ul>
-
-        <!-- Mobile Menu Toggle -->
-        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobileNavOverlay" style="color: var(--exp-orange);">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
       </div>
     </nav>
-
-    <!-- Mobile Navigation Overlay -->
-    <div class="mobile-nav-overlay" id="mobileNavOverlay" aria-hidden="true">
-      <div class="mobile-nav-content">
-        <ul class="mobile-menu-links">
-          <li><a href="index.html" class="mobile-nav-item"><span>Home</span> <span>→</span></a></li>
-          <li><a href="project.html" class="mobile-nav-item"><span>Projects</span> <span>→</span></a></li>
-          <li><a href="expertise.html" class="mobile-nav-item active"><span>My Expertise</span> <span>→</span></a></li>
-          <li><a href="contact.html" class="mobile-nav-item"><span>Contact</span> <span>→</span></a></li>
-        </ul>
-        <div>
-          <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 1rem;">
-            Dark Obsidian &amp; Vibrant Orange Technical Editorial.
-          </p>
-          <a href="contact.html" class="nav-link" style="background: var(--exp-orange); color: #fff; width: 100%; justify-content: center; text-align: center;">
-            Discuss a Project
-          </a>
-        </div>
-      </div>
-    </div>
   </header>
 
   <div id="pageContent">
@@ -264,19 +296,10 @@
           </div>
 
           <div class="footer-group">
-            <h5>Selected Work</h5>
-            <ul class="footer-links">
-              <li><a href="project.html" class="footer-link">Quantiva Dashboard UI</a></li>
-              <li><a href="project.html" class="footer-link">Fundora Landing Page</a></li>
-              <li><a href="https://github.com/tarunk8060" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub Repositories</a></li>
-            </ul>
-          </div>
-
-          <div class="footer-group">
             <h5>Connect</h5>
             <ul class="footer-links">
               <li><a href="contact.html" class="footer-link">Get In Touch</a></li>
-              <li><a href="mailto:kstarun8246@gmail.com?subject=Project%20Inquiry%20%E2%80%94%20Tarun.K" class="footer-link">Email Direct</a></li>
+              <li><a href="mailto:drstrangedc7@gmail.com?subject=Project%20Inquiry%20%E2%80%94%20Tarun.K" class="footer-link">Email Direct</a></li>
             </ul>
           </div>
         </div>

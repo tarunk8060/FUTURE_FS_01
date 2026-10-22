@@ -81,46 +81,6 @@ function initContactBehaviors() {
     statusBox.className = `form-status-box active ${type}`;
     statusBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
-
-  // Direct Email Inquiry: Copy to clipboard handler
-  const copyEmailBtn = document.getElementById('copyEmailBtn');
-  if (copyEmailBtn) {
-    copyEmailBtn.addEventListener('click', async (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-
-      const emailAddress = copyEmailBtn.getAttribute('data-email') || 'kstarun8246@gmail.com';
-      const actionText = copyEmailBtn.querySelector('.action-text');
-
-      try {
-        if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(emailAddress);
-        } else {
-          // Universal fallback
-          const textArea = document.createElement('textarea');
-          textArea.value = emailAddress;
-          textArea.style.position = 'fixed';
-          textArea.style.left = '-999999px';
-          textArea.style.top = '-999999px';
-          document.body.appendChild(textArea);
-          textArea.focus();
-          textArea.select();
-          document.execCommand('copy');
-          textArea.remove();
-        }
-
-        copyEmailBtn.classList.add('copied');
-        if (actionText) actionText.textContent = 'Copied!';
-
-        setTimeout(() => {
-          copyEmailBtn.classList.remove('copied');
-          if (actionText) actionText.textContent = 'Copy';
-        }, 2200);
-      } catch (err) {
-        console.error('Failed to copy email:', err);
-      }
-    });
-  }
 }
 
 window.initContactBehaviors = initContactBehaviors;

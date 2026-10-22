@@ -53,52 +53,84 @@
     <div class="shift-layer shift-layer-black"></div>
   </div>
 
-  <!-- Shared Header Navigation (Becomes Crisp White on Mobile with Animated X Toggle) -->
-  <header>
-    <nav class="site-nav" id="siteNav" aria-label="Primary Navigation">
-      <div class="container nav-container">
-        <!-- Brand Wordmark -->
-        <a href="index.html" class="brand-logo" aria-label="Tarun.K Home">
-          <span class="brand-symbol" aria-hidden="true">&gt;_</span>
-          <span>Tarun.K</span>
-        </a>
+  <!-- React Bits: Pill Nav Component (https://reactbits.dev/components/pill-nav) -->
+  <header class="pill-nav-header">
+    <nav class="pill-nav" id="pillNav" aria-label="Primary Navigation">
+      <!-- Standalone Brand Logo Pill -->
+      <a href="index.html" class="pill-nav__logo" aria-label="Tarun.K Home">
+        <span>&gt;_</span>
+      </a>
 
-        <!-- Desktop Navigation Links -->
-        <ul class="nav-menu-desktop" role="menubar">
-          <li role="none"><a href="index.html" class="nav-link active" role="menuitem">Home</a></li>
-          <li role="none"><a href="project.html" class="nav-link" role="menuitem">Projects</a></li>
-          <li role="none"><a href="expertise.html" class="nav-link" role="menuitem">My Expertise</a></li>
-          <li role="none"><a href="contact.html" class="nav-link" role="menuitem">Contact</a></li>
+      <!-- Desktop Links with Label Roll & Rising Fill -->
+      <ul class="pill-nav__list" role="menubar">
+        <li class="pill-nav__slot" role="none">
+          <a href="index.html" class="pill-nav__item active" role="menuitem" aria-current="page">
+            <span class="pill-nav__fill" aria-hidden="true"></span>
+            <span class="pill-nav__face">Home</span>
+            <span class="pill-nav__face-alt" aria-hidden="true">Home</span>
+          </a>
+        </li>
+        <li class="pill-nav__slot" role="none">
+          <a href="project.html" class="pill-nav__item" role="menuitem">
+            <span class="pill-nav__fill" aria-hidden="true"></span>
+            <span class="pill-nav__face">Projects</span>
+            <span class="pill-nav__face-alt" aria-hidden="true">Projects</span>
+          </a>
+        </li>
+        <li class="pill-nav__slot" role="none">
+          <a href="expertise.html" class="pill-nav__item" role="menuitem">
+            <span class="pill-nav__fill" aria-hidden="true"></span>
+            <span class="pill-nav__face">My Expertise</span>
+            <span class="pill-nav__face-alt" aria-hidden="true">My Expertise</span>
+          </a>
+        </li>
+        <li class="pill-nav__slot" role="none">
+          <a href="contact.html" class="pill-nav__item" role="menuitem">
+            <span class="pill-nav__fill" aria-hidden="true"></span>
+            <span class="pill-nav__face">Contact</span>
+            <span class="pill-nav__face-alt" aria-hidden="true">Contact</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Mobile Animated 2-Line Toggle Burger -->
+      <button type="button" class="pill-nav__toggle" id="pillNavToggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="pillNavPanel">
+        <span class="pill-nav__burger" aria-hidden="true">
+          <span class="pill-nav__line pill-nav__line--top"></span>
+          <span class="pill-nav__line pill-nav__line--bottom"></span>
+        </span>
+      </button>
+
+      <!-- Mobile Dropdown Panel -->
+      <div class="pill-nav__panel" id="pillNavPanel" aria-hidden="true">
+        <ul class="pill-nav__menu">
+          <li>
+            <a href="index.html" class="pill-nav__row active">
+              <span>Home</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a href="project.html" class="pill-nav__row">
+              <span>Projects</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a href="expertise.html" class="pill-nav__row">
+              <span>My Expertise</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a href="contact.html" class="pill-nav__row">
+              <span>Contact</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
         </ul>
-
-        <!-- Mobile Menu Toggle (Animated to Turn into "X") -->
-        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobileNavOverlay">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
       </div>
     </nav>
-
-    <!-- Clean White Mobile Navigation Overlay Sheet -->
-    <div class="mobile-nav-overlay" id="mobileNavOverlay" aria-hidden="true">
-      <div class="mobile-nav-content">
-        <ul class="mobile-menu-links">
-          <li><a href="index.html" class="mobile-nav-item active"><span>Home</span> <span>→</span></a></li>
-          <li><a href="project.html" class="mobile-nav-item"><span>Projects</span> <span>→</span></a></li>
-          <li><a href="expertise.html" class="mobile-nav-item"><span>My Expertise</span> <span>→</span></a></li>
-          <li><a href="contact.html" class="mobile-nav-item"><span>Contact</span> <span>→</span></a></li>
-        </ul>
-        <div>
-          <p style="font-size: 0.85rem; color: #71717a; margin-bottom: 1rem;">
-            Full-Stack Engineering &amp; Architecture.
-          </p>
-          <a href="project.html" class="btn-solid-white" style="width: 100%; justify-content: center;">
-            Explore Projects
-          </a>
-        </div>
-      </div>
-    </div>
   </header>
 
   <div id="pageContent">
@@ -172,46 +204,35 @@
               </div>
             </div>
 
-            <!-- Right Technical Workflow Diagram (Workflow Nodes from Reference Image) -->
-            <div class="workflow-diagram-wrap">
-              <div class="workflow-header">
-                <span>Production Architecture</span>
-                <span>Active</span>
+            <!-- Right Column: Resume Preview Card with View Button -->
+            <div class="resume-preview-card">
+              <div class="resume-card-header">
+                <div class="resume-header-title">
+                  <span class="resume-dot-pulse" aria-hidden="true"></span>
+                  <span>Resume Preview</span>
+                </div>
+                <a href="assets/Tarun_K_Resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-resume-view" aria-label="View Resume PDF in new tab">
+                  <span>View</span>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <line x1="10" y1="14" x2="21" y2="3"></line>
+                  </svg>
+                </a>
               </div>
 
-              <div class="workflow-nodes-list">
-                <div class="workflow-node-card">
-                  <div class="node-left">
-                    <span class="node-number">01</span>
-                    <span class="node-title">System Architecture</span>
-                  </div>
-                  <span class="node-badge">Spec</span>
+              <a href="assets/Tarun_K_Resume.pdf" target="_blank" rel="noopener noreferrer" class="resume-document-viewport" aria-label="Open Tarun K Resume in full size">
+                <img src="assets/resume_preview.png" alt="Tarun K — Computer Science Student Resume Preview" class="resume-img-preview" loading="lazy" />
+                <div class="resume-overlay-scrim">
+                  <span class="btn-resume-float-view">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                      <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                    <span>View Resume</span>
+                  </span>
                 </div>
-
-                <div class="workflow-node-card active-node">
-                  <div class="node-left">
-                    <span class="node-number">02</span>
-                    <span class="node-title">Vanilla JS Logic</span>
-                  </div>
-                  <span class="node-badge" style="background: #ffffff; color: #000; font-weight: 700;">Live</span>
-                </div>
-
-                <div class="workflow-node-card">
-                  <div class="node-left">
-                    <span class="node-number">03</span>
-                    <span class="node-title">Responsive UI &amp; Layouts</span>
-                  </div>
-                  <span class="node-badge">CSS Grid</span>
-                </div>
-
-                <div class="workflow-node-card">
-                  <div class="node-left">
-                    <span class="node-number">04</span>
-                    <span class="node-title">Cloud Deployment</span>
-                  </div>
-                  <span class="node-badge">AWS / Git</span>
-                </div>
-              </div>
+              </a>
             </div>
           </div>
 

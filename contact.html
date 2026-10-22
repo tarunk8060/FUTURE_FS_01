@@ -27,52 +27,84 @@
     <div class="shift-layer shift-layer-black"></div>
   </div>
 
-  <!-- Shared Header Navigation (MacBook Midnight Blue Theme) -->
-  <header>
-    <nav class="site-nav" id="siteNav" aria-label="Primary Navigation">
-      <div class="container nav-container">
-        <!-- Brand Wordmark -->
-        <a href="index.html" class="brand-logo" aria-label="Tarun.K Home">
-          <span class="brand-symbol" aria-hidden="true">&gt;_</span>
-          <span>Tarun<span style="color: var(--cnt-midnight-sheen);">.K</span></span>
-        </a>
+  <!-- React Bits: Pill Nav Component (https://reactbits.dev/components/pill-nav) -->
+  <header class="pill-nav-header">
+    <nav class="pill-nav" id="pillNav" aria-label="Primary Navigation">
+      <!-- Standalone Brand Logo Pill -->
+      <a href="index.html" class="pill-nav__logo" aria-label="Tarun.K Home">
+        <span>&gt;_</span>
+      </a>
 
-        <!-- Desktop Navigation Links -->
-        <ul class="nav-menu-desktop" role="menubar">
-          <li role="none"><a href="index.html" class="nav-link" role="menuitem">Home</a></li>
-          <li role="none"><a href="project.html" class="nav-link" role="menuitem">Projects</a></li>
-          <li role="none"><a href="expertise.html" class="nav-link" role="menuitem">My Expertise</a></li>
-          <li role="none"><a href="contact.html" class="nav-link active" role="menuitem">Contact</a></li>
+      <!-- Desktop Links with Label Roll & Rising Fill -->
+      <ul class="pill-nav__list" role="menubar">
+        <li class="pill-nav__slot" role="none">
+          <a href="index.html" class="pill-nav__item" role="menuitem">
+            <span class="pill-nav__fill" aria-hidden="true"></span>
+            <span class="pill-nav__face">Home</span>
+            <span class="pill-nav__face-alt" aria-hidden="true">Home</span>
+          </a>
+        </li>
+        <li class="pill-nav__slot" role="none">
+          <a href="project.html" class="pill-nav__item" role="menuitem">
+            <span class="pill-nav__fill" aria-hidden="true"></span>
+            <span class="pill-nav__face">Projects</span>
+            <span class="pill-nav__face-alt" aria-hidden="true">Projects</span>
+          </a>
+        </li>
+        <li class="pill-nav__slot" role="none">
+          <a href="expertise.html" class="pill-nav__item" role="menuitem">
+            <span class="pill-nav__fill" aria-hidden="true"></span>
+            <span class="pill-nav__face">My Expertise</span>
+            <span class="pill-nav__face-alt" aria-hidden="true">My Expertise</span>
+          </a>
+        </li>
+        <li class="pill-nav__slot" role="none">
+          <a href="contact.html" class="pill-nav__item active" role="menuitem" aria-current="page">
+            <span class="pill-nav__fill" aria-hidden="true"></span>
+            <span class="pill-nav__face">Contact</span>
+            <span class="pill-nav__face-alt" aria-hidden="true">Contact</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Mobile Animated 2-Line Toggle Burger -->
+      <button type="button" class="pill-nav__toggle" id="pillNavToggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="pillNavPanel">
+        <span class="pill-nav__burger" aria-hidden="true">
+          <span class="pill-nav__line pill-nav__line--top"></span>
+          <span class="pill-nav__line pill-nav__line--bottom"></span>
+        </span>
+      </button>
+
+      <!-- Mobile Dropdown Panel -->
+      <div class="pill-nav__panel" id="pillNavPanel" aria-hidden="true">
+        <ul class="pill-nav__menu">
+          <li>
+            <a href="index.html" class="pill-nav__row">
+              <span>Home</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a href="project.html" class="pill-nav__row">
+              <span>Projects</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a href="expertise.html" class="pill-nav__row">
+              <span>My Expertise</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a href="contact.html" class="pill-nav__row active">
+              <span>Contact</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
         </ul>
-
-        <!-- Mobile Menu Toggle -->
-        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobileNavOverlay">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
       </div>
     </nav>
-
-    <!-- Mobile Navigation Overlay (Clean Single Drawer, No Duplicate Close) -->
-    <div class="mobile-nav-overlay" id="mobileNavOverlay" aria-hidden="true">
-      <div class="mobile-nav-content">
-        <ul class="mobile-menu-links">
-          <li><a href="index.html" class="mobile-nav-item"><span>Home</span> <span>→</span></a></li>
-          <li><a href="project.html" class="mobile-nav-item"><span>Projects</span> <span>→</span></a></li>
-          <li><a href="expertise.html" class="mobile-nav-item"><span>My Expertise</span> <span>→</span></a></li>
-          <li><a href="contact.html" class="mobile-nav-item active"><span>Contact</span> <span>→</span></a></li>
-        </ul>
-        <div>
-          <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 1rem;">
-            MacBook Midnight Blue Contact Experience.
-          </p>
-          <a href="index.html" class="nav-link" style="background: linear-gradient(135deg, #1d2636, #121824); border: 1px solid rgba(107, 147, 200, 0.4); color: #ffffff; width: 100%; justify-content: center; font-weight: 700;">
-            Return to Homepage
-          </a>
-        </div>
-      </div>
-    </div>
   </header>
 
   <div id="pageContent">
@@ -101,36 +133,18 @@
               </p>
 
               <div class="contact-channels">
-                <div class="channel-card email-channel-card">
-                  <a href="mailto:kstarun8246@gmail.com?subject=Project%20Inquiry%20%E2%80%94%20Tarun.K&amp;body=Hi%20Tarun%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20discuss..." class="channel-card-main" aria-label="Send direct email inquiry to Tarun">
-                    <div class="channel-icon" aria-hidden="true">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                        <polyline points="22,6 12,13 2,6"></polyline>
-                      </svg>
-                    </div>
-                    <div class="channel-info">
-                      <div class="channel-label">Direct Email Inquiry</div>
-                      <div class="channel-val">kstarun8246@gmail.com</div>
-                    </div>
-                  </a>
-
-                  <div class="channel-actions">
-                    <button type="button" class="channel-action-btn" id="copyEmailBtn" data-email="kstarun8246@gmail.com" title="Copy email address to clipboard" aria-label="Copy email address">
-                      <svg class="action-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                      </svg>
-                      <span class="action-text">Copy</span>
-                    </button>
-                    <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=kstarun8246@gmail.com&amp;su=Project%20Inquiry%20%E2%80%94%20Tarun.K" target="_blank" rel="noopener noreferrer" class="channel-action-btn gmail-action" title="Open in Gmail" aria-label="Open in Gmail">
-                      <svg class="action-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                        <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.272H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
-                      </svg>
-                      <span>Gmail</span>
-                    </a>
+                <a href="mailto:drstrangedc7@gmail.com?subject=Project%20Inquiry%20%E2%80%94%20Tarun.K" class="channel-card" aria-label="Send direct email inquiry to Tarun">
+                  <div class="channel-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                      <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
                   </div>
-                </div>
+                  <div class="channel-info">
+                    <div class="channel-label">Direct Email Inquiry</div>
+                    <div class="channel-val">drstrangedc7@gmail.com</div>
+                  </div>
+                </a>
 
                 <a href="https://github.com/tarunk8060" target="_blank" rel="noopener noreferrer" class="channel-card" aria-label="View Tarun's GitHub Profile">
                   <div class="channel-icon" aria-hidden="true">
@@ -228,7 +242,7 @@
               <h5>Direct Links</h5>
               <ul class="footer-links">
                 <li><a href="https://github.com/tarunk8060" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub Profile</a></li>
-                <li><a href="mailto:kstarun8246@gmail.com?subject=Project%20Inquiry%20%E2%80%94%20Tarun.K" class="footer-link">Email Inquiries</a></li>
+                <li><a href="mailto:drstrangedc7@gmail.com?subject=Project%20Inquiry%20%E2%80%94%20Tarun.K" class="footer-link">Email Inquiries</a></li>
               </ul>
             </div>
 

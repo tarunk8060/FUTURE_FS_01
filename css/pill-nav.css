@@ -1,0 +1,324 @@
+/* ==========================================================================
+   React Bits: Pill Nav Component (reactbits.dev/components/pill-nav)
+   Clean, floating pill-shaped navigation with label roll & rising fill microinteractions
+   ========================================================================== */
+
+.pill-nav-header {
+  position: fixed;
+  top: 1.25rem;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 1500;
+  pointer-events: none;
+}
+
+.pill-nav {
+  --pn-h: 46px;
+  --pn-pad: 4px;
+  --pn-inner: 38px;
+  --pn-x: 16px;
+  --pn-font: 13.5px;
+  --pn-gap: 6px;
+  --pn-roll: 26px;
+  
+  pointer-events: auto;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pn-gap);
+  padding: var(--pn-pad);
+  border-radius: 999px;
+  background: rgba(16, 14, 22, 0.78);
+  backdrop-filter: blur(24px) saturate(1.7);
+  -webkit-backdrop-filter: blur(24px) saturate(1.7);
+  box-shadow: 
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 22px 44px -18px rgba(0, 0, 0, 0.85),
+    0 6px 16px -6px rgba(0, 0, 0, 0.5);
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: var(--pn-font);
+  line-height: 1;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Standalone brand circle */
+.pill-nav__logo {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--pn-inner);
+  height: var(--pn-inner);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  text-decoration: none;
+  font-family: 'Space Grotesk', 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: -0.02em;
+  transition: background 0.25s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pill-nav__logo:hover {
+  background: rgba(255, 255, 255, 0.18);
+  transform: rotate(360deg);
+}
+
+/* Links List */
+.pill-nav__list {
+  display: flex;
+  align-items: stretch;
+  gap: 3px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: var(--pn-inner);
+}
+
+.pill-nav__slot {
+  display: flex;
+}
+
+/* Pill Item */
+.pill-nav__item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 0 var(--pn-x);
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: rgba(244, 244, 245, 0.68);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color 0.25s ease;
+}
+
+.pill-nav__item:hover {
+  color: #ffffff;
+}
+
+/* Rising Fill Bubble */
+.pill-nav__fill {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: -1;
+  width: 220%;
+  height: 220%;
+  margin: -110% 0 0 -110%;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #ffffff 0%, #ebebf0 100%);
+  transform: scale(0);
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.pill-nav__item:hover .pill-nav__fill,
+.pill-nav__item.active .pill-nav__fill {
+  transform: scale(1);
+}
+
+/* Rolling Text Faces */
+.pill-nav__face {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pill-nav__face-alt {
+  position: absolute;
+  inset: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45em;
+  color: #121016;
+  font-weight: 600;
+  transform: translateY(var(--pn-roll));
+  transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pill-nav__item:hover .pill-nav__face {
+  transform: translateY(calc(var(--pn-roll) * -1));
+}
+
+.pill-nav__item:hover .pill-nav__face-alt {
+  transform: translateY(0);
+}
+
+/* Active Page State */
+.pill-nav__item.active {
+  color: #121016;
+  font-weight: 600;
+}
+
+.pill-nav__item.active .pill-nav__fill {
+  transform: scale(1);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 4px 14px -4px rgba(0, 0, 0, 0.5);
+}
+
+.pill-nav__item.active .pill-nav__face {
+  color: #121016;
+  font-weight: 600;
+  transform: translateY(0) !important;
+}
+
+.pill-nav__item.active .pill-nav__face-alt {
+  display: none;
+}
+
+/* Mobile Toggle Hamburger */
+.pill-nav__toggle {
+  display: none;
+  position: relative;
+  z-index: 3;
+  place-items: center;
+  width: var(--pn-inner);
+  height: var(--pn-inner);
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  cursor: pointer;
+  outline: none;
+  transition: background 0.2s ease;
+}
+
+.pill-nav__toggle:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.pill-nav__burger {
+  position: relative;
+  width: 16px;
+  height: 10px;
+}
+
+.pill-nav__line {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  border-radius: 2px;
+  background: #ffffff;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), top 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pill-nav__line--top {
+  top: 1.5px;
+}
+
+.pill-nav__line--bottom {
+  top: 7px;
+}
+
+.pill-nav[data-open] .pill-nav__line--top {
+  top: 4.25px;
+  transform: rotate(45deg);
+}
+
+.pill-nav[data-open] .pill-nav__line--bottom {
+  top: 4.25px;
+  transform: rotate(-45deg);
+}
+
+/* Mobile Dropdown Panel */
+.pill-nav__panel {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  padding: calc(var(--pn-h) + 8px) 6px 6px;
+  border-radius: 24px;
+  background: rgba(18, 16, 25, 0.95);
+  backdrop-filter: blur(28px) saturate(1.8);
+  -webkit-backdrop-filter: blur(28px) saturate(1.8);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.pill-nav[data-open] .pill-nav__panel {
+  display: block;
+  animation: pillPanelEnter 0.32s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes pillPanelEnter {
+  from { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.pill-nav__menu {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pill-nav__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 44px;
+  padding: 0 16px;
+  border-radius: 18px;
+  background: none;
+  color: #f4f4f5;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.pill-nav__row:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.pill-nav__row.active {
+  background: linear-gradient(180deg, #ffffff 0%, #ebebf0 100%);
+  color: #121016;
+  font-weight: 700;
+  box-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.4);
+}
+
+/* Mobile Media Query */
+@media (max-width: 820px) {
+  .pill-nav {
+    width: calc(100% - 2rem);
+    max-width: 440px;
+    justify-content: space-between;
+  }
+  .pill-nav__list {
+    display: none;
+  }
+  .pill-nav__toggle {
+    display: inline-grid;
+  }
+}

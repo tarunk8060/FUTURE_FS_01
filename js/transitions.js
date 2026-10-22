@@ -212,6 +212,9 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
 
     // Close mobile menu if open
+    const pillNav = document.getElementById('pillNav');
+    if (pillNav) pillNav.removeAttribute('data-open');
+
     const mobileNav = document.getElementById('mobileNavOverlay');
     const mobileToggle = document.getElementById('mobileToggle');
     if (mobileNav && mobileNav.classList.contains('active')) {
@@ -231,20 +234,49 @@ document.addEventListener('DOMContentLoaded', () => {
     performSmoothPageShift(targetUrl);
   });
 
-  // --- 4. Mobile Menu Navigation & "Turns into X" Animation ---
+  // --- 4. PillNav Menu Navigation (React Bits PillNav) ---
   function bindMobileMenu() {
-    const mobToggle = document.getElementById('mobileToggle');
-    const mobNav = document.getElementById('mobileNavOverlay');
+    const pillNav = document.getElementById('pillNav');
+    const pillToggle = document.getElementById('pillNavToggle');
 
-    function closeMenu() {
-      if (mobNav) mobNav.classList.remove('active');
-      if (mobToggle) {
-        mobToggle.classList.remove('active');
-        mobToggle.setAttribute('aria-expanded', 'false');
+    function closePillMenu() {
+      if (pillNav) {
+        pillNav.removeAttribute('data-open');
       }
-      document.body.style.overflow = '';
+      if (pillToggle) {
+        pillToggle.setAttribute('aria-expanded', 'false');
+      }
     }
 
+    if (pillToggle && pillNav) {
+      pillToggle.onclick = (e) => {
+        e.stopPropagation();
+        const isOpen = pillNav.hasAttribute('data-open');
+        if (isOpen) {
+          pillNav.removeAttribute('data-open');
+          pillToggle.setAttribute('aria-expanded', 'false');
+        } else {
+          pillNav.setAttribute('data-open', '');
+          pillToggle.setAttribute('aria-expanded', 'true');
+        }
+      };
+
+      document.addEventListener('click', (e) => {
+        if (!pillNav.contains(e.target)) {
+          closePillMenu();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closePillMenu();
+        }
+      });
+    }
+
+    // Support legacy toggle if present
+    const mobToggle = document.getElementById('mobileToggle');
+    const mobNav = document.getElementById('mobileNavOverlay');
     if (mobToggle && mobNav) {
       mobToggle.onclick = (e) => {
         e.stopPropagation();
@@ -252,12 +284,6 @@ document.addEventListener('DOMContentLoaded', () => {
         mobToggle.classList.toggle('active');
         mobToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         document.body.style.overflow = isOpen ? 'hidden' : '';
-      };
-
-      mobNav.onclick = (e) => {
-        if (e.target === mobNav) {
-          closeMenu();
-        }
       };
     }
   }

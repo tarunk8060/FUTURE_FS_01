@@ -27,52 +27,84 @@
     <div class="shift-layer shift-layer-black"></div>
   </div>
 
-  <!-- Shared Header Navigation -->
-  <header>
-    <nav class="site-nav" id="siteNav" aria-label="Primary Navigation">
-      <div class="container nav-container">
-        <!-- Brand Wordmark -->
-        <a href="index.html" class="brand-logo" aria-label="Tarun.K Home">
-          <span class="brand-symbol" style="border-color: #a855f7; color: #e9d5ff;" aria-hidden="true">&gt;_</span>
-          <span>Tarun<span style="color: #a855f7;">.K</span></span>
-        </a>
+  <!-- React Bits: Pill Nav Component (https://reactbits.dev/components/pill-nav) -->
+  <header class="pill-nav-header">
+    <nav class="pill-nav" id="pillNav" aria-label="Primary Navigation">
+      <!-- Standalone Brand Logo Pill -->
+      <a href="index.html" class="pill-nav__logo" aria-label="Tarun.K Home">
+        <span>&gt;_</span>
+      </a>
 
-        <!-- Desktop Navigation Links -->
-        <ul class="nav-menu-desktop" role="menubar">
-          <li role="none"><a href="index.html" class="nav-link" role="menuitem">Home</a></li>
-          <li role="none"><a href="project.html" class="nav-link active" role="menuitem">Projects</a></li>
-          <li role="none"><a href="expertise.html" class="nav-link" role="menuitem">My Expertise</a></li>
-          <li role="none"><a href="contact.html" class="nav-link" role="menuitem">Contact</a></li>
+      <!-- Desktop Links with Label Roll & Rising Fill -->
+      <ul class="pill-nav__list" role="menubar">
+        <li class="pill-nav__slot" role="none">
+          <a href="index.html" class="pill-nav__item" role="menuitem">
+            <span class="pill-nav__fill" aria-hidden="true"></span>
+            <span class="pill-nav__face">Home</span>
+            <span class="pill-nav__face-alt" aria-hidden="true">Home</span>
+          </a>
+        </li>
+        <li class="pill-nav__slot" role="none">
+          <a href="project.html" class="pill-nav__item active" role="menuitem" aria-current="page">
+            <span class="pill-nav__fill" aria-hidden="true"></span>
+            <span class="pill-nav__face">Projects</span>
+            <span class="pill-nav__face-alt" aria-hidden="true">Projects</span>
+          </a>
+        </li>
+        <li class="pill-nav__slot" role="none">
+          <a href="expertise.html" class="pill-nav__item" role="menuitem">
+            <span class="pill-nav__fill" aria-hidden="true"></span>
+            <span class="pill-nav__face">My Expertise</span>
+            <span class="pill-nav__face-alt" aria-hidden="true">My Expertise</span>
+          </a>
+        </li>
+        <li class="pill-nav__slot" role="none">
+          <a href="contact.html" class="pill-nav__item" role="menuitem">
+            <span class="pill-nav__fill" aria-hidden="true"></span>
+            <span class="pill-nav__face">Contact</span>
+            <span class="pill-nav__face-alt" aria-hidden="true">Contact</span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Mobile Animated 2-Line Toggle Burger -->
+      <button type="button" class="pill-nav__toggle" id="pillNavToggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="pillNavPanel">
+        <span class="pill-nav__burger" aria-hidden="true">
+          <span class="pill-nav__line pill-nav__line--top"></span>
+          <span class="pill-nav__line pill-nav__line--bottom"></span>
+        </span>
+      </button>
+
+      <!-- Mobile Dropdown Panel -->
+      <div class="pill-nav__panel" id="pillNavPanel" aria-hidden="true">
+        <ul class="pill-nav__menu">
+          <li>
+            <a href="index.html" class="pill-nav__row">
+              <span>Home</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a href="project.html" class="pill-nav__row active">
+              <span>Projects</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a href="expertise.html" class="pill-nav__row">
+              <span>My Expertise</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li>
+            <a href="contact.html" class="pill-nav__row">
+              <span>Contact</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </li>
         </ul>
-
-        <!-- Mobile Menu Toggle -->
-        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobileNavOverlay" style="color: #e9d5ff;">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
       </div>
     </nav>
-
-    <!-- Mobile Navigation Overlay -->
-    <div class="mobile-nav-overlay" id="mobileNavOverlay" aria-hidden="true">
-      <div class="mobile-nav-content">
-        <ul class="mobile-menu-links">
-          <li><a href="index.html" class="mobile-nav-item"><span>Home</span> <span>→</span></a></li>
-          <li><a href="project.html" class="mobile-nav-item active"><span>Projects</span> <span>→</span></a></li>
-          <li><a href="expertise.html" class="mobile-nav-item"><span>My Expertise</span> <span>→</span></a></li>
-          <li><a href="contact.html" class="mobile-nav-item"><span>Contact</span> <span>→</span></a></li>
-        </ul>
-        <div>
-          <p style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 1rem;">
-            Charcoal & Vivid Purple Project Showcase.
-          </p>
-          <a href="https://github.com/tarunk8060" target="_blank" rel="noopener noreferrer" class="btn-source-purple" style="width: 100%; justify-content: center;">
-            Explore GitHub Repos
-          </a>
-        </div>
-      </div>
-    </div>
   </header>
 
   <div id="pageContent">

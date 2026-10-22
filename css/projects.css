@@ -31,6 +31,7 @@ body.page-projects {
   font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 /* Ambient Charcoal & Deep Purple Atmospheric Glow */

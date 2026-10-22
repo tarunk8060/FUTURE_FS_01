@@ -113,6 +113,7 @@ body.page-home .nav-link.active {
    ========================================================================== */
 .home-hero {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -621,8 +622,10 @@ body.page-home .nav-link.active {
 
   /* Responsive Home Canvas & Meta Header */
   .home-hero {
-    padding-top: 100px;
-    padding-bottom: 45px;
+    min-height: auto;
+    justify-content: flex-start;
+    padding-top: 95px;
+    padding-bottom: 3.5rem;
   }
 
   .home-meta-header {
@@ -653,8 +656,10 @@ body.page-home .nav-link.active {
 
 @media (max-width: 600px) {
   .home-hero {
+    min-height: auto;
+    justify-content: flex-start;
     padding-top: 85px;
-    padding-bottom: 30px;
+    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 24px));
   }
 
   /* Compact, beautifully proportioned mobile technical meta header */
@@ -764,4 +769,33 @@ body.page-home .nav-link.active {
   .meta-item strong {
     font-size: 0.58rem;
   }
+}
+
+/* ==========================================================================
+   Shared Footer (Monochrome Aesthetic)
+   ========================================================================== */
+body.page-home .site-footer {
+  border-top: 1px solid var(--home-border-subtle);
+  background: #030407;
+  color: var(--home-text-primary);
+  position: relative;
+  z-index: 10;
+}
+
+body.page-home .footer-group h5 {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+body.page-home .footer-link {
+  color: var(--home-text-muted);
+}
+
+body.page-home .footer-link:hover {
+  color: #ffffff;
+}
+
+body.page-home .footer-bottom {
+  border-top-color: var(--home-border-subtle);
+  color: var(--home-text-dim);
 }

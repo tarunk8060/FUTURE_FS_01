@@ -259,28 +259,15 @@ body.page-projects .mobile-nav-item.active {
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.85rem;
   align-items: stretch;
-}
-
-/* Featured Flagship Card (APEX Cinemas) */
-.project-card.featured-card {
-  grid-column: 1 / -1;
-  background: #171725;
-  border: 1px solid rgba(168, 85, 247, 0.35);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 35px rgba(168, 85, 247, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-}
-
-.project-card.featured-card .card-media-wrap {
-  aspect-ratio: 2.1 / 1;
-  max-height: 420px;
 }
 
 .project-card {
   background: #171725;
   border: 1px solid var(--proj-border);
-  border-radius: 24px;
+  border-radius: 20px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -320,9 +307,9 @@ body.page-projects .mobile-nav-item.active {
 
 .media-badge-bar {
   position: absolute;
-  top: 1rem;
-  left: 1rem;
-  right: 1rem;
+  top: 0.85rem;
+  left: 0.85rem;
+  right: 0.85rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -336,9 +323,9 @@ body.page-projects .mobile-nav-item.active {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   color: var(--proj-lavender);
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 600;
-  padding: 0.35rem 0.9rem;
+  padding: 0.28rem 0.75rem;
   border-radius: 9999px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   letter-spacing: 0.02em;
@@ -350,20 +337,20 @@ body.page-projects .mobile-nav-item.active {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   color: #34d399;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  padding: 0.35rem 0.85rem;
+  padding: 0.28rem 0.75rem;
   border-radius: 9999px;
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.4rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
 }
 
 .badge-live-dot::before {
   content: '';
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: #10b981;
   box-shadow: 0 0 8px #10b981;
@@ -371,7 +358,7 @@ body.page-projects .mobile-nav-item.active {
 
 /* Card Content Details */
 .card-body {
-  padding: 2.25rem;
+  padding: 1.6rem 1.6rem 1.75rem;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -380,17 +367,17 @@ body.page-projects .mobile-nav-item.active {
 .tech-tags-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.55rem;
-  margin-bottom: 1.15rem;
+  gap: 0.45rem;
+  margin-bottom: 0.95rem;
 }
 
 .tech-tag {
   background: rgba(168, 85, 247, 0.08);
   border: 1px solid rgba(168, 85, 247, 0.32);
   color: var(--proj-lavender);
-  padding: 0.32rem 0.85rem;
+  padding: 0.26rem 0.72rem;
   border-radius: 9999px;
-  font-size: 0.78rem;
+  font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   transition: all 0.2s ease;
@@ -406,57 +393,45 @@ body.page-projects .mobile-nav-item.active {
 }
 
 .card-title {
-  font-size: clamp(1.45rem, 2.2vw, 1.85rem);
-  font-weight: 800;
+  font-size: 1.35rem;
+  font-weight: 700;
   color: #ffffff;
-  margin-bottom: 0.85rem;
-  line-height: 1.25;
-  letter-spacing: -0.025em;
+  margin-bottom: 0.65rem;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
   font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .card-description {
-  font-size: 0.98rem;
-  line-height: 1.68;
+  font-size: 0.88rem;
+  line-height: 1.58;
   color: #cbd5e1;
-  margin-bottom: 1.45rem;
+  margin-bottom: 1.15rem;
+  min-height: 2.8em;
 }
 
 /* Rounded, Bordered Highlights Panel with Purple Checkmarks */
 .card-highlights-panel {
   background: rgba(168, 85, 247, 0.05);
   border: 1px solid rgba(168, 85, 247, 0.24);
-  border-radius: 16px;
-  padding: 1.25rem 1.4rem;
-  margin-bottom: 1.75rem;
+  border-radius: 14px;
+  padding: 0.95rem 1.1rem;
+  margin-bottom: 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.75rem;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-}
-
-.project-card.featured-card .card-highlights-panel {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-}
-
-@media (max-width: 900px) {
-  .project-card.featured-card .card-highlights-panel {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
 }
 
 .highlight-item {
   display: flex;
   align-items: flex-start;
-  gap: 0.85rem;
+  gap: 0.65rem;
 }
 
 .highlight-icon {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: rgba(168, 85, 247, 0.2);
   border: 1px solid rgba(168, 85, 247, 0.45);
@@ -466,7 +441,7 @@ body.page-projects .mobile-nav-item.active {
   justify-content: center;
   flex-shrink: 0;
   margin-top: 2px;
-  box-shadow: 0 0 10px rgba(168, 85, 247, 0.25);
+  box-shadow: 0 0 8px rgba(168, 85, 247, 0.25);
 }
 
 .highlight-icon svg {
@@ -474,8 +449,8 @@ body.page-projects .mobile-nav-item.active {
 }
 
 .highlight-text {
-  font-size: 0.9rem;
-  line-height: 1.6;
+  font-size: 0.82rem;
+  line-height: 1.5;
   color: #cbd5e1;
 }
 
@@ -488,17 +463,16 @@ body.page-projects .mobile-nav-item.active {
 .card-actions-row {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding-top: 1.35rem;
+  gap: 0.65rem;
+  padding-top: 1.15rem;
   border-top: 1px solid rgba(255, 255, 255, 0.09);
   margin-top: auto;
-  flex-wrap: wrap;
 }
 
 .card-actions-row .btn-source-purple,
 .card-actions-row .btn-demo-outline {
   flex: 1;
-  min-width: 140px;
+  min-width: 0;
   justify-content: center;
   text-align: center;
 }
@@ -506,24 +480,25 @@ body.page-projects .mobile-nav-item.active {
 .btn-source-purple {
   background: linear-gradient(135deg, #9333ea 0%, #6b21a8 100%);
   color: #ffffff;
-  padding: 0.75rem 1.45rem;
+  padding: 0.65rem 0.95rem;
   border-radius: 9999px;
-  font-size: 0.92rem;
+  font-size: 0.85rem;
   font-weight: 700;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
-  box-shadow: 0 4px 18px rgba(168, 85, 247, 0.35);
+  gap: 0.45rem;
+  box-shadow: 0 4px 16px rgba(168, 85, 247, 0.35);
   transition: all 0.25s ease;
   border: 1px solid rgba(255, 255, 255, 0.18);
   text-decoration: none;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .btn-source-purple:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 26px rgba(168, 85, 247, 0.55);
+  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.55);
   background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
   color: #ffffff;
 }
@@ -532,17 +507,26 @@ body.page-projects .mobile-nav-item.active {
   background: transparent;
   border: 1px solid rgba(168, 85, 247, 0.55);
   color: #ffffff;
-  padding: 0.75rem 1.45rem;
+  padding: 0.65rem 0.95rem;
   border-radius: 9999px;
-  font-size: 0.92rem;
+  font-size: 0.85rem;
   font-weight: 700;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.55rem;
+  gap: 0.45rem;
   transition: all 0.25s ease;
   text-decoration: none;
   cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-demo-outline:hover {
+  background: rgba(168, 85, 247, 0.16);
+  border-color: #c084fc;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 18px rgba(168, 85, 247, 0.3);
 }
 
 .btn-demo-outline:hover {
@@ -660,17 +644,19 @@ body.page-projects .footer-bottom {
 /* ==========================================================================
    Responsive Queries
    ========================================================================== */
-@media (max-width: 900px) {
+@media (max-width: 1050px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
+  }
+}
+
+@media (max-width: 720px) {
   .projects-grid {
     grid-template-columns: 1fr;
-    gap: 2.25rem;
+    gap: 1.75rem;
   }
   
-  .project-card.featured-card .card-media-wrap {
-    aspect-ratio: 16 / 9;
-    max-height: none;
-  }
-
   .projects-filter-bar {
     border-radius: 20px;
     padding: 1rem;
@@ -684,7 +670,7 @@ body.page-projects .footer-bottom {
     padding-top: 110px;
   }
   .card-body {
-    padding: 1.5rem;
+    padding: 1.35rem;
   }
   .proj-modal-content {
     padding: 1.5rem;

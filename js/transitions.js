@@ -274,10 +274,17 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // Support legacy toggle if present
+    // Mobile Toggle and Overlay Sheet
     const mobToggle = document.getElementById('mobileToggle');
     const mobNav = document.getElementById('mobileNavOverlay');
     if (mobToggle && mobNav) {
+      function closeMobileNav() {
+        mobNav.classList.remove('active');
+        mobToggle.classList.remove('active');
+        mobToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      }
+
       mobToggle.onclick = (e) => {
         e.stopPropagation();
         const isOpen = mobNav.classList.toggle('active');
@@ -285,6 +292,18 @@ document.addEventListener('DOMContentLoaded', () => {
         mobToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         document.body.style.overflow = isOpen ? 'hidden' : '';
       };
+
+      mobNav.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', closeMobileNav);
+      });
+
+      mobNav.onclick = (e) => {
+        if (e.target === mobNav) closeMobileNav();
+      };
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMobileNav();
+      });
     }
   }
 

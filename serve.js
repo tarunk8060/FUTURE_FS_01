@@ -12,7 +12,8 @@ const MIME_TYPES = {
   '.png': 'image/png',
   '.svg': 'image/svg+xml',
   '.json': 'application/json',
-  '.ico': 'image/x-icon'
+  '.ico': 'image/x-icon',
+  '.pdf': 'application/pdf'
 };
 
 const server = http.createServer((req, res) => {
@@ -33,10 +34,14 @@ const server = http.createServer((req, res) => {
 
     const ext = path.extname(filePath).toLowerCase();
     const contentType = MIME_TYPES[ext] || 'application/octet-stream';
-    res.writeHead(200, {
+    const headers = {
       'Content-Type': contentType,
       'Cache-Control': 'no-cache, must-revalidate'
-    });
+    };
+    if (ext === '.pdf') {
+      headers['Content-Disposition'] = 'inline; filename="Tarun_K_Resume.pdf"';
+    }
+    res.writeHead(200, headers);
     fs.createReadStream(filePath).pipe(res);
   });
 });

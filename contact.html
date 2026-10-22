@@ -27,96 +27,52 @@
     <div class="shift-layer shift-layer-black"></div>
   </div>
 
-  <!-- React Bits: Pill Nav Component (https://reactbits.dev/components/pill-nav) -->
-  <header class="pill-nav-header">
-    <nav class="pill-nav" id="pillNav" aria-label="Primary Navigation">
-      <!-- Brand Logo with Tarun.K on the left -->
-      <a href="index.html" class="pill-nav__logo" aria-label="Tarun.K Home">
-        <span class="pill-nav__mark">&gt;_</span>
-        <span class="pill-nav__brand-name">Tarun<span>.K</span></span>
-      </a>
+  <!-- Shared Header Navigation -->
+  <header>
+    <nav class="site-nav" id="siteNav" aria-label="Primary Navigation">
+      <div class="container nav-container">
+        <!-- Brand Wordmark on Left -->
+        <a href="index.html" class="brand-logo" aria-label="Tarun.K Home">
+          <span class="brand-symbol" aria-hidden="true">&gt;_</span>
+          <span>Tarun<span style="color: var(--cnt-midnight-sheen);">.K</span></span>
+        </a>
 
-      <!-- Desktop Links -->
-      <ul class="pill-nav__list" role="menubar">
-        <li class="pill-nav__slot" role="none">
-          <a href="index.html" class="pill-nav__item" role="menuitem">
-            <span>Home</span>
-          </a>
-        </li>
-        <li class="pill-nav__slot" role="none">
-          <a href="project.html" class="pill-nav__item" role="menuitem">
-            <span>Projects</span>
-          </a>
-        </li>
-        <li class="pill-nav__slot" role="none">
-          <a href="expertise.html" class="pill-nav__item" role="menuitem">
-            <span>My Expertise</span>
-          </a>
-        </li>
-        <li class="pill-nav__slot" role="none">
-          <a href="contact.html" class="pill-nav__item active" role="menuitem" aria-current="page">
-            <span>Contact</span>
-          </a>
-        </li>
-        <li class="pill-nav__slot" role="none">
-          <a href="https://www.linkedin.com/in/tarunkuppusamy/" target="_blank" rel="noopener noreferrer" class="pill-nav__item pill-nav__social-link" role="menuitem" aria-label="LinkedIn Profile">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-            </svg>
-            <span>LinkedIn</span>
-          </a>
-        </li>
-      </ul>
-
-      <!-- Mobile Animated 2-Line Toggle Burger -->
-      <button type="button" class="pill-nav__toggle" id="pillNavToggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="pillNavPanel">
-        <span class="pill-nav__burger" aria-hidden="true">
-          <span class="pill-nav__line pill-nav__line--top"></span>
-          <span class="pill-nav__line pill-nav__line--bottom"></span>
-        </span>
-      </button>
-
-      <!-- Mobile Dropdown Panel -->
-      <div class="pill-nav__panel" id="pillNavPanel" aria-hidden="true">
-        <ul class="pill-nav__menu">
-          <li>
-            <a href="index.html" class="pill-nav__row">
-              <span>Home</span>
-              <span aria-hidden="true">→</span>
-            </a>
-          </li>
-          <li>
-            <a href="project.html" class="pill-nav__row">
-              <span>Projects</span>
-              <span aria-hidden="true">→</span>
-            </a>
-          </li>
-          <li>
-            <a href="expertise.html" class="pill-nav__row">
-              <span>My Expertise</span>
-              <span aria-hidden="true">→</span>
-            </a>
-          </li>
-          <li>
-            <a href="contact.html" class="pill-nav__row active">
-              <span>Contact</span>
-              <span aria-hidden="true">→</span>
-            </a>
-          </li>
-          <li>
-            <a href="https://www.linkedin.com/in/tarunkuppusamy/" target="_blank" rel="noopener noreferrer" class="pill-nav__row pill-nav__social-row">
-              <span style="display: inline-flex; align-items: center; gap: 0.5rem;">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                </svg>
-                LinkedIn Profile
-              </span>
-              <span aria-hidden="true">↗</span>
-            </a>
-          </li>
+        <!-- Desktop Navigation Links on Right -->
+        <ul class="nav-menu-desktop" role="menubar">
+          <li role="none"><a href="index.html" class="nav-link" role="menuitem">Home</a></li>
+          <li role="none"><a href="project.html" class="nav-link" role="menuitem">Projects</a></li>
+          <li role="none"><a href="expertise.html" class="nav-link" role="menuitem">My Expertise</a></li>
+          <li role="none"><a href="contact.html" class="nav-link active" role="menuitem" aria-current="page">Contact</a></li>
         </ul>
+
+        <!-- Mobile Menu Toggle -->
+        <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation Menu" aria-expanded="false" aria-controls="mobileNavOverlay">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </nav>
+
+    <!-- Mobile Navigation Overlay (Clean Single Drawer, No Duplicate Close) -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay" aria-hidden="true">
+      <div class="mobile-nav-content">
+        <ul class="mobile-menu-links">
+          <li><a href="index.html" class="mobile-nav-item"><span>Home</span> <span>→</span></a></li>
+          <li><a href="project.html" class="mobile-nav-item"><span>Projects</span> <span>→</span></a></li>
+          <li><a href="expertise.html" class="mobile-nav-item"><span>My Expertise</span> <span>→</span></a></li>
+          <li><a href="contact.html" class="mobile-nav-item active"><span>Contact</span> <span>→</span></a></li>
+        </ul>
+        <div>
+          <p style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 1rem;">
+            MacBook Midnight Blue Contact Experience.
+          </p>
+          <a href="index.html" class="nav-link" style="background: linear-gradient(135deg, #1d2636, #121824); border: 1px solid rgba(107, 147, 200, 0.4); color: #ffffff; width: 100%; justify-content: center; font-weight: 700;">
+            Return to Homepage
+          </a>
+        </div>
+      </div>
+    </div>
   </header>
 
   <div id="pageContent">
@@ -141,25 +97,11 @@
                 Let's Build Something <span class="blue-accent">Meaningful.</span>
               </h1>
               <p class="contact-statement">
-                I am always eager to discuss engineering opportunities, frontend architecture, startup products, or creative technical challenges. Drop a note below or reach out directly through email, GitHub, or LinkedIn.
+                I am always eager to discuss engineering opportunities, frontend architecture, startup products, or creative technical challenges. Drop a note below or reach out directly through GitHub or LinkedIn.
               </p>
 
               <div class="contact-channels">
-                <!-- 1. Direct Email Inquiry: 100% Guaranteed Launch via Universal Handler -->
-                <a href="mailto:drstrangedc7@gmail.com?subject=Project%20Inquiry%20%E2%80%94%20Tarun.K" onclick="handleDirectEmail(event)" class="channel-card email-trigger-card" aria-label="Send direct email inquiry to Tarun">
-                  <div class="channel-icon" aria-hidden="true">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                      <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
-                  </div>
-                  <div class="channel-info">
-                    <div class="channel-label">Direct Email Inquiry</div>
-                    <div class="channel-val">drstrangedc7@gmail.com</div>
-                  </div>
-                </a>
-
-                <!-- 2. GitHub Repositories -->
+                <!-- 1. GitHub Repositories -->
                 <a href="https://github.com/tarunk8060" target="_blank" rel="noopener noreferrer" class="channel-card" aria-label="View Tarun's GitHub Profile">
                   <div class="channel-icon" aria-hidden="true">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -172,7 +114,7 @@
                   </div>
                 </a>
 
-                <!-- 3. LinkedIn Professional Network -->
+                <!-- 2. LinkedIn Professional Network -->
                 <a href="https://www.linkedin.com/in/tarunkuppusamy/" target="_blank" rel="noopener noreferrer" class="channel-card" aria-label="Connect with Tarun on LinkedIn">
                   <div class="channel-icon" aria-hidden="true" style="color: #0a66c2;">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -270,7 +212,6 @@
               <ul class="footer-links">
                 <li><a href="https://github.com/tarunk8060" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub Profile</a></li>
                 <li><a href="https://www.linkedin.com/in/tarunkuppusamy/" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn Profile</a></li>
-                <li><a href="mailto:drstrangedc7@gmail.com?subject=Project%20Inquiry%20%E2%80%94%20Tarun.K" class="footer-link">Email Inquiries</a></li>
               </ul>
             </div>
 

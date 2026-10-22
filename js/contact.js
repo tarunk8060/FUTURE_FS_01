@@ -81,8 +81,39 @@ function initContactBehaviors() {
     statusBox.className = `form-status-box active ${type}`;
     statusBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
+
+  // Bind direct email trigger
+  const emailCards = document.querySelectorAll('.email-trigger-card');
+  emailCards.forEach(card => {
+    card.addEventListener('click', handleDirectEmail);
+  });
 }
 
+function handleDirectEmail(e) {
+  if (e && typeof e.preventDefault === 'function') {
+    e.preventDefault();
+  }
+  const email = 'drstrangedc7@gmail.com';
+  const subject = encodeURIComponent('Project Inquiry — Tarun.K');
+  const body = encodeURIComponent('Hi Tarun,\n\nI came across your portfolio and would like to connect.');
+
+  const mailtoUri = `mailto:${email}?subject=${subject}&body=${body}`;
+  const gmailUri = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
+
+  // 1. Open Gmail web compose directly in new tab (guaranteed to work across all platforms)
+  window.open(gmailUri, '_blank');
+
+  // 2. Trigger native mail client via iframe fallback
+  try {
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = mailtoUri;
+    document.body.appendChild(iframe);
+    setTimeout(() => iframe.remove(), 2000);
+  } catch (err) {}
+}
+
+window.handleDirectEmail = handleDirectEmail;
 window.initContactBehaviors = initContactBehaviors;
 document.addEventListener('DOMContentLoaded', initContactBehaviors);
 

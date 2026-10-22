@@ -5,6 +5,20 @@
 
 function initProjectBehaviors() {
   const projectsData = {
+    apex: {
+      title: 'APEX Cinemas — Movie Ticket Booking System',
+      category: 'Full-Stack Platform',
+      status: 'Live Demo',
+      tech: ['HTML5', 'CSS3', 'JavaScript', 'Python', 'FastAPI', 'PostgreSQL', 'REST API'],
+      description: 'A full-stack movie ticket booking platform that enables users to explore movies, book seats through an interactive seating interface, manage their bookings, and cancel individual seats within an existing booking.',
+      image: 'assets/images/apex-cinemas-preview.png',
+      repoUrl: 'https://github.com/tarunk8060/APEX-cinemas',
+      demoUrl: 'https://apex-cinemas.vercel.app/',
+      highlights: [
+        'No Third-Party App Dependency: A self-developed booking platform with its own frontend, backend API, and database integration, without requiring users to rely on a third-party booking application.',
+        'Interactive User Portal & Selective Seat Cancellation: Provides an interactive booking experience and allows users to cancel a specific seat without cancelling the entire booking.'
+      ]
+    },
     quantiva: {
       title: 'Quantiva Dashboard UI',
       category: 'Analytics & Dashboards',
@@ -81,6 +95,7 @@ function initProjectBehaviors() {
   const modalTech = document.getElementById('modalTechStack');
   const modalHighlights = document.getElementById('modalHighlights');
   const modalRepoBtn = document.getElementById('modalRepoBtn');
+  const modalDemoBtn = document.getElementById('modalDemoBtn');
 
   let previousActive = null;
 
@@ -97,6 +112,15 @@ function initProjectBehaviors() {
     modalCategory.textContent = data.category;
     modalStatus.textContent = data.status;
     modalRepoBtn.href = data.repoUrl;
+
+    if (modalDemoBtn) {
+      if (data.demoUrl) {
+        modalDemoBtn.href = data.demoUrl;
+        modalDemoBtn.style.display = 'inline-flex';
+      } else {
+        modalDemoBtn.style.display = 'none';
+      }
+    }
 
     modalTech.innerHTML = '';
     data.tech.forEach(t => {

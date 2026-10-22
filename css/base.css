@@ -4,6 +4,7 @@
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+@import "pill-nav.css";
 
 *, *::before, *::after {
   margin: 0;
@@ -357,15 +358,49 @@ a {
 }
 
 /* Responsive */
-@media (max-width: 860px) {
+/* Tablet Optimization (681px to 1024px) */
+@media (min-width: 681px) and (max-width: 1024px) {
   .site-nav {
-    height: 70px;
+    height: 72px;
+  }
+  .nav-container {
+    padding: 0 1.25rem;
+  }
+  .brand-logo {
+    font-size: 1.25rem;
+  }
+  .brand-symbol {
+    width: 28px;
+    height: 28px;
+    font-size: 0.85rem;
   }
   .nav-menu-desktop {
-    display: none;
+    display: flex !important;
+    gap: 0.25rem;
+    padding: 0.3rem 0.45rem;
+  }
+  .nav-link {
+    font-size: 0.86rem;
+    padding: 0.45rem 1rem;
   }
   .mobile-toggle {
-    display: flex;
+    display: none !important;
+  }
+  .mobile-nav-overlay {
+    display: none !important;
+  }
+}
+
+/* Mobile View (<= 680px): Switch to React Bits Pill Nav */
+@media (max-width: 680px) {
+  .site-nav {
+    display: none !important;
+  }
+  .mobile-toggle {
+    display: none !important;
+  }
+  .mobile-nav-overlay {
+    display: none !important;
   }
   .footer-inner {
     flex-direction: column;

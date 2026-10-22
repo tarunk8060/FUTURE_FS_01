@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Update active navigation state
       const targetPath = targetUrl.split('/').pop() || 'index.html';
-      document.querySelectorAll('.nav-link, .mobile-nav-item').forEach(link => {
+      document.querySelectorAll('.nav-link, .mobile-nav-item, .pill-nav__row').forEach(link => {
         const href = link.getAttribute('href');
         if (href === targetPath || (targetPath === '' && href === 'index.html')) {
           link.classList.add('active');
@@ -260,6 +260,10 @@ document.addEventListener('DOMContentLoaded', () => {
           pillToggle.setAttribute('aria-expanded', 'true');
         }
       };
+
+      pillNav.querySelectorAll('.pill-nav__row').forEach(row => {
+        row.addEventListener('click', closePillMenu);
+      });
 
       document.addEventListener('click', (e) => {
         if (!pillNav.contains(e.target)) {

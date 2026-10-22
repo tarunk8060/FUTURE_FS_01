@@ -566,64 +566,58 @@ body.page-home .nav-link.active {
 }
 
 /* ==========================================================================
-   MOBILE VIEW REQUIREMENTS (As explicitly specified by the user)
-   1. Nav is WHITE in mobile view
-   2. Hamburger turns into an "X" with smooth animation
+   TABLET & MOBILE VIEW REQUIREMENTS
+   Tablet (681px to 1024px): Seamless dark obsidian canvas with balanced 2-column grid
+   Mobile (<= 680px): Compact telemetry chips & React Bits Pill Nav
    ========================================================================== */
+@media (min-width: 681px) and (max-width: 1024px) {
+  .home-hero {
+    padding-top: 100px;
+    padding-bottom: 50px;
+  }
+
+  .home-meta-header {
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.15rem;
+    padding: 0 0.5rem;
+  }
+
+  .framed-device-canvas {
+    padding: 2.5rem 2rem;
+    border-radius: 24px;
+  }
+
+  .canvas-main-grid {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+
+  .home-headline {
+    font-size: clamp(2.2rem, 4.2vw, 3rem);
+    line-height: 1.12;
+  }
+
+  .home-subtext {
+    font-size: 0.96rem;
+    line-height: 1.6;
+  }
+
+  .dock-cards-strip {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+
+  .dock-item-card {
+    padding: 0.85rem 0.65rem;
+  }
+
+  .dock-label {
+    font-size: 0.78rem;
+  }
+}
+
 @media (max-width: 860px) {
-  /* White Mobile Nav Bar */
-  body.page-home .site-nav {
-    background: #ffffff !important;
-    border-bottom: 1px solid #e4e4e7 !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  }
-
-  body.page-home .brand-logo {
-    color: #0a0a0c !important;
-  }
-
-  body.page-home .brand-symbol {
-    border-color: #0a0a0c !important;
-    color: #0a0a0c !important;
-    background: #f4f4f5 !important;
-  }
-
-
-
-  /* Clean White Mobile Navigation Overlay Sheet */
-  body.page-home .mobile-nav-overlay {
-    background: rgba(0, 0, 0, 0.65);
-    backdrop-filter: blur(16px);
-  }
-
-  body.page-home .mobile-nav-content {
-    background: #ffffff !important;
-    border-left: 1px solid #e4e4e7 !important;
-    color: #0a0a0c !important;
-    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.3);
-  }
-
-  body.page-home .mobile-nav-item {
-    color: #27272a !important;
-    border-bottom: 1px solid #f4f4f5 !important;
-  }
-
-  body.page-home .mobile-nav-item:hover,
-  body.page-home .mobile-nav-item.active {
-    color: #000000 !important;
-    border-bottom-color: #000000 !important;
-    font-weight: 700;
-  }
-
-  body.page-home .mobile-nav-content p {
-    color: #71717a !important;
-  }
-
-  body.page-home .mobile-nav-content a.btn-solid-white {
-    background: #0a0a0c !important;
-    color: #ffffff !important;
-    border-color: #0a0a0c !important;
-  }
 
   /* Responsive Home Canvas & Meta Header */
   .home-hero {

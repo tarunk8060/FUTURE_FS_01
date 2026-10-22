@@ -47,6 +47,6 @@ server.listen(PORT, '127.0.0.1', () => {
   console.log(`   Page 1 (Home - Monochrome):       http://localhost:${PORT}/index.html`);
   console.log(`   Page 2 (Projects - Purple):      http://localhost:${PORT}/project.html`);
   console.log(`   Page 3 (Expertise - Orange):     http://localhost:${PORT}/expertise.html`);
-  console.log(`   Page 4 (Contact - Electric Cyan): http://localhost:${PORT}/contact.html`);
+  console.log(`   Page 4 (Contact - Midnight Blue): http://localhost:${PORT}/contact.html`);
   console.log(`=======================================================`);
 });

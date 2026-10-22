@@ -101,18 +101,36 @@
               </p>
 
               <div class="contact-channels">
-                <a href="mailto:drstrangedc7@gmail.com" class="channel-card" aria-label="Send email directly">
-                  <div class="channel-icon" aria-hidden="true">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                      <polyline points="22,6 12,13 2,6"></polyline>
-                    </svg>
+                <div class="channel-card email-channel-card">
+                  <a href="mailto:kstarun8246@gmail.com?subject=Project%20Inquiry%20%E2%80%94%20Tarun.K&amp;body=Hi%20Tarun%2C%0A%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20discuss..." class="channel-card-main" aria-label="Send direct email inquiry to Tarun">
+                    <div class="channel-icon" aria-hidden="true">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                      </svg>
+                    </div>
+                    <div class="channel-info">
+                      <div class="channel-label">Direct Email Inquiry</div>
+                      <div class="channel-val">kstarun8246@gmail.com</div>
+                    </div>
+                  </a>
+
+                  <div class="channel-actions">
+                    <button type="button" class="channel-action-btn" id="copyEmailBtn" data-email="kstarun8246@gmail.com" title="Copy email address to clipboard" aria-label="Copy email address">
+                      <svg class="action-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                      </svg>
+                      <span class="action-text">Copy</span>
+                    </button>
+                    <a href="https://mail.google.com/mail/?view=cm&amp;fs=1&amp;to=kstarun8246@gmail.com&amp;su=Project%20Inquiry%20%E2%80%94%20Tarun.K" target="_blank" rel="noopener noreferrer" class="channel-action-btn gmail-action" title="Open in Gmail" aria-label="Open in Gmail">
+                      <svg class="action-icon" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.272H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                      </svg>
+                      <span>Gmail</span>
+                    </a>
                   </div>
-                  <div>
-                    <div class="channel-label">Email Direct</div>
-                    <div class="channel-val">drstrangedc7@gmail.com</div>
-                  </div>
-                </a>
+                </div>
 
                 <a href="https://github.com/tarunk8060" target="_blank" rel="noopener noreferrer" class="channel-card" aria-label="View Tarun's GitHub Profile">
                   <div class="channel-icon" aria-hidden="true">
@@ -120,7 +138,7 @@
                       <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                     </svg>
                   </div>
-                  <div>
+                  <div class="channel-info">
                     <div class="channel-label">Open Source Repos</div>
                     <div class="channel-val">github.com/tarunk8060</div>
                   </div>
@@ -210,7 +228,7 @@
               <h5>Direct Links</h5>
               <ul class="footer-links">
                 <li><a href="https://github.com/tarunk8060" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub Profile</a></li>
-                <li><a href="mailto:drstrangedc7@gmail.com" class="footer-link">Email Inquiries</a></li>
+                <li><a href="mailto:kstarun8246@gmail.com?subject=Project%20Inquiry%20%E2%80%94%20Tarun.K" class="footer-link">Email Inquiries</a></li>
               </ul>
             </div>
 

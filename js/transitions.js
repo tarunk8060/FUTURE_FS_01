@@ -213,18 +213,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isNavigating) {
           overlay.classList.add('heading-visible');
         }
-      }, 160);
+      }, 140);
 
-      // 4. Wait for overlay to completely cover screen (540ms) and for HTML fetch to complete
+      // 4. Wait for white overlay to completely cover screen (460ms) and for HTML fetch to complete
       const [htmlText] = await Promise.all([
         fetchPromise,
-        new Promise(r => setTimeout(r, 540))
+        new Promise(r => setTimeout(r, 460))
       ]);
 
       const parser = new DOMParser();
       const newDoc = parser.parseFromString(htmlText, 'text/html');
 
-      // 5. Swap DOM behind the light-grey curtain
+      // 5. Swap DOM behind the white curtain
       const currentPageContent = document.getElementById('pageContent');
       const newPageContent = newDoc.getElementById('pageContent');
       if (currentPageContent && newPageContent) {
@@ -265,10 +265,10 @@ document.addEventListener('DOMContentLoaded', () => {
       // Re-initialize dynamic page behaviors
       initializePageBehaviors();
 
-      // 6. Calm hold while destination heading is prominently admired (~380ms)
-      await new Promise(r => setTimeout(r, 380));
+      // 6. Hold while destination heading is prominently displayed (~320ms)
+      await new Promise(r => setTimeout(r, 320));
 
-      // 7. Animate heading out and animate overlay UPWARD to reveal destination page (~540ms)
+      // 7. Animate heading out and animate white overlay UPWARD to reveal destination page (~460ms)
       overlay.classList.add('heading-exit');
       overlay.classList.remove('slide-down');
       overlay.classList.add('slide-up');
@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         overlay.classList.remove('is-active', 'slide-up', 'heading-visible', 'heading-exit');
         isNavigating = false;
-      }, 540);
+      }, 460);
 
     } catch (err) {
       console.warn('Navigation fallback due to fetch error:', err);
@@ -309,8 +309,11 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
 
     // Hide desktop hover pill on click
+    if (typeof window.__resetDesktopPill === 'function') {
+      window.__resetDesktopPill();
+    }
     const desktopPill = document.querySelector('.nav-hover-pill');
-    if (desktopPill) desktopPill.classList.remove('is-visible');
+    if (desktopPill) desktopPill.style.opacity = '0';
 
     // Close PillNav if open
     const pillNav = document.getElementById('pillNav');
@@ -420,8 +423,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   bindMobileMenu();
 
-  // --- 5. React Bits–Inspired Shared Animated Hover Pill Navigation ---
+  // --- 5. React Bits Pill Nav: Continuous Dual-Spring Hover Pill Navigation ---
+  let desktopPillCleanup = null;
+
   function initDesktopHoverPill() {
+    if (desktopPillCleanup) {
+      desktopPillCleanup();
+      desktopPillCleanup = null;
+    }
+
     const navMenu = document.querySelector('.nav-menu-desktop');
     if (!navMenu) return;
 
@@ -430,88 +440,282 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!pill) {
       pill = document.createElement('div');
       pill.className = 'nav-hover-pill';
+      pill.id = 'navHoverPill';
       pill.setAttribute('aria-hidden', 'true');
       navMenu.prepend(pill);
     }
 
-    const links = navMenu.querySelectorAll('.nav-link');
+    const links = Array.from(navMenu.querySelectorAll('.nav-link'));
     if (!links.length) return;
 
-    let activeHoveredLink = null;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const clamp = (val, min, max) => Math.min(max, Math.max(min, val));
 
-    function movePillTo(link, immediate = false) {
-      if (!pill || !navMenu) return;
+    // Physics parameters from React Bits PillNav
+    const bounce = 0.25;
+    const stretch = 0.45;
+    const zeta = 1 - 0.55 * bounce;
+    const base = 520;
 
-      const linkRect = link.getBoundingClientRect();
+    const state = {
+      x0: 0,
+      x1: 0,
+      v0: 0,
+      v1: 0,
+      alpha: 0,
+      pop: 1,
+      press: 1,
+      pressVelocity: 0,
+      hover: -1,
+      focus: false,
+      sliding: false,
+      pressing: false
+    };
+
+    let rects = [];
+    let lastTop = 0;
+    let lastHeight = 0;
+    let raf = 0;
+    let last = 0;
+
+    const measure = () => {
+      if (!navMenu) return;
       const menuRect = navMenu.getBoundingClientRect();
+      rects = links.map(link => {
+        const linkRect = link.getBoundingClientRect();
+        return {
+          left: linkRect.left - menuRect.left,
+          top: linkRect.top - menuRect.top,
+          width: linkRect.width,
+          height: linkRect.height
+        };
+      });
+    };
 
-      const left = linkRect.left - menuRect.left;
-      const top = linkRect.top - menuRect.top;
-      const width = linkRect.width;
-      const height = linkRect.height;
+    const sync = () => {
+      links.forEach((link, idx) => {
+        const hovered = state.hover === idx;
+        link.toggleAttribute('data-lit', hovered);
+      });
+      navMenu.toggleAttribute('data-focus', state.focus && state.hover >= 0);
+    };
 
-      const wasVisible = pill.classList.contains('is-visible');
-
-      if (!wasVisible || immediate) {
-        // First entry or re-entry after leave: snap position silently, then fade in
-        pill.style.transition = 'opacity 0.2s ease';
-        pill.style.transform = `translate3d(${left}px, ${top}px, 0)`;
-        pill.style.width = `${width}px`;
-        pill.style.height = `${height}px`;
-        void pill.offsetHeight; // force reflow
-        pill.style.transition = '';
-      } else {
-        // Smoothly glide and resize between navigation headings
-        pill.style.transform = `translate3d(${left}px, ${top}px, 0)`;
-        pill.style.width = `${width}px`;
-        pill.style.height = `${height}px`;
-      }
-
-      pill.classList.add('is-visible');
-      activeHoveredLink = link;
-    }
-
-    function hidePill() {
+    const render = () => {
       if (!pill) return;
-      pill.classList.remove('is-visible');
-      activeHoveredLink = null;
-    }
+      const width = Math.max(0, state.x1 - state.x0);
+      const scale = state.press * state.pop;
+      const target = state.hover >= 0 ? rects[state.hover] : null;
+      if (target) {
+        lastTop = target.top;
+        lastHeight = target.height;
+      }
+      const squash = target ? 1 - clamp((width / Math.max(target.width, 1) - 1) * 0.3, 0, 0.14) : 1;
 
-    // Bind pointer events on each link
-    links.forEach(link => {
-      // Ignore touch events to prevent stuck pills on touch screens
-      link.onpointerenter = (e) => {
-        if (e.pointerType === 'touch') return;
-        const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-        if (!hasFinePointer && e.pointerType !== 'mouse') return;
-        movePillTo(link);
-      };
-
-      // Keyboard focus support
-      link.onfocus = () => {
-        movePillTo(link);
-      };
-    });
-
-    // Fade out when leaving the navbar container
-    navMenu.onpointerleave = (e) => {
-      if (e.pointerType === 'touch') return;
-      hidePill();
+      pill.style.width = `${width}px`;
+      pill.style.height = `${lastHeight}px`;
+      pill.style.transform = `translate3d(${state.x0}px, ${lastTop}px, 0) scale(${scale}, ${scale * squash})`;
+      pill.style.opacity = `${state.alpha}`;
     };
 
-    // Keyboard focusout support
-    navMenu.onfocusout = (e) => {
+    const tick = (now) => {
+      raf = 0;
+      const dt = last ? Math.min(0.05, (now - last) / 1000) : 1 / 60;
+      last = now;
+
+      const target = state.hover >= 0 ? rects[state.hover] : null;
+      let busy = false;
+
+      if (target) {
+        const t0 = target.left;
+        const t1 = target.left + target.width;
+
+        if (state.alpha < 0.02 && !state.sliding) {
+          // Entering or re-entering: snap start coordinates directly under target heading
+          state.x0 = t0;
+          state.x1 = t1;
+          state.v0 = 0;
+          state.v1 = 0;
+          state.pop = 0.9;
+          lastTop = target.top;
+          lastHeight = target.height;
+        }
+
+        if (reduce) {
+          state.x0 = t0;
+          state.x1 = t1;
+          state.v0 = 0;
+          state.v1 = 0;
+        } else {
+          // React Bits dual-spring differential simulation
+          const direction = Math.sign((t0 + t1) / 2 - (state.x0 + state.x1) / 2);
+          const lead = base * (1 + 0.9 * stretch);
+          const trail = base * (1 - 0.5 * stretch);
+          const k0 = direction < 0 ? lead : direction > 0 ? trail : base;
+          const k1 = direction > 0 ? lead : direction < 0 ? trail : base;
+          const steps = Math.ceil(dt / (1 / 240));
+          const h = dt / steps;
+          for (let i = 0; i < steps; i++) {
+            state.v0 += (-k0 * (state.x0 - t0) - 2 * zeta * Math.sqrt(k0) * state.v0) * h;
+            state.x0 += state.v0 * h;
+            state.v1 += (-k1 * (state.x1 - t1) - 2 * zeta * Math.sqrt(k1) * state.v1) * h;
+            state.x1 += state.v1 * h;
+          }
+        }
+
+        state.alpha += (1 - state.alpha) * (reduce ? 1 : 1 - Math.exp(-dt / 0.06));
+        busy =
+          Math.abs(state.x0 - t0) > 0.05 ||
+          Math.abs(state.x1 - t1) > 0.05 ||
+          Math.abs(state.v0) > 0.5 ||
+          Math.abs(state.v1) > 0.5 ||
+          state.alpha < 0.999;
+        if (!busy) state.sliding = false;
+      } else {
+        // Pointer left navbar: smoothly fade out pill opacity without persistent background
+        state.alpha += (0 - state.alpha) * (reduce ? 1 : 1 - Math.exp(-dt / 0.07));
+        if (state.alpha > 0.002) {
+          busy = true;
+        } else {
+          state.alpha = 0;
+        }
+      }
+
+      state.pop += (1 - state.pop) * (reduce ? 1 : 1 - Math.exp(-dt / 0.09));
+      if (Math.abs(1 - state.pop) > 0.001) busy = true;
+
+      const pressTarget = state.pressing ? 0.95 : 1;
+      if (reduce) {
+        state.press = pressTarget;
+        state.pressVelocity = 0;
+      } else {
+        state.pressVelocity += (-700 * (state.press - pressTarget) - 30 * state.pressVelocity) * dt;
+        state.press += state.pressVelocity * dt;
+      }
+      if (Math.abs(state.press - pressTarget) > 0.0005 || Math.abs(state.pressVelocity) > 0.01) busy = true;
+
+      render();
+      if (busy) raf = requestAnimationFrame(tick);
+    };
+
+    const wake = () => {
+      if (!raf) {
+        last = 0;
+        raf = requestAnimationFrame(tick);
+      }
+    };
+
+    const enter = (index, event) => {
+      if (event?.pointerType === 'touch') return;
+      const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (!hasFinePointer && event?.pointerType !== 'mouse') return;
+
+      if (state.hover >= 0 && state.hover !== index) {
+        state.sliding = true;
+      }
+      state.hover = index;
+      state.focus = false;
+      sync();
+      wake();
+    };
+
+    const leave = (event) => {
+      if (event?.pointerType === 'touch') return;
+      if (state.focus) return;
+      state.hover = -1;
+      sync();
+      wake();
+    };
+
+    const focus = (index, event) => {
+      const target = event?.target;
+      const visible = target instanceof Element && target.matches(':focus-visible');
+      state.focus = visible;
+      state.hover = visible ? index : state.hover;
+      sync();
+      wake();
+    };
+
+    const blur = () => {
+      if (!state.focus) return;
+      state.focus = false;
+      state.hover = -1;
+      sync();
+      wake();
+    };
+
+    const press = (event) => {
+      if (event && event.button > 0) return;
+      if (event?.pointerType === 'touch') return;
+      state.pressing = true;
+      wake();
+    };
+
+    const release = () => {
+      if (!state.pressing) return;
+      state.pressing = false;
+      wake();
+    };
+
+    // Attach listeners to navigation links
+    links.forEach((link, idx) => {
+      link.addEventListener('pointerenter', (e) => enter(idx, e));
+      link.addEventListener('pointerdown', press);
+      link.addEventListener('focus', (e) => focus(idx, e));
+      link.addEventListener('blur', blur);
+    });
+
+    navMenu.addEventListener('pointerleave', leave);
+    const onFocusOut = (e) => {
       if (!navMenu.contains(e.relatedTarget)) {
-        hidePill();
+        leave(e);
       }
     };
+    navMenu.addEventListener('focusout', onFocusOut);
 
-    // Keep pill aligned if window resizes while hovering
-    window.addEventListener('resize', () => {
-      if (activeHoveredLink && pill.classList.contains('is-visible')) {
-        movePillTo(activeHoveredLink, true);
-      }
+    window.addEventListener('pointerup', release);
+    window.addEventListener('pointercancel', release);
+
+    const onResize = () => {
+      measure();
+      render();
+      wake();
+    };
+    window.addEventListener('resize', onResize);
+
+    const ro = new ResizeObserver(() => {
+      measure();
+      render();
+      wake();
     });
+    ro.observe(navMenu);
+
+    document.fonts?.ready?.then(() => {
+      measure();
+      render();
+      wake();
+    }).catch(() => {});
+
+    // Initial measurement & render
+    measure();
+    sync();
+    render();
+
+    // Global reset method for clean transitions
+    window.__resetDesktopPill = () => {
+      state.hover = -1;
+      state.alpha = 0;
+      sync();
+      render();
+    };
+
+    desktopPillCleanup = () => {
+      if (raf) cancelAnimationFrame(raf);
+      ro.disconnect();
+      window.removeEventListener('pointerup', release);
+      window.removeEventListener('pointercancel', release);
+      window.removeEventListener('resize', onResize);
+      navMenu.removeEventListener('focusout', onFocusOut);
+    };
   }
 
   initDesktopHoverPill();

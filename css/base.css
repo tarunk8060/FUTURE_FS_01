@@ -167,7 +167,7 @@ a {
   isolation: isolate;
 }
 
-/* Shared Animated Purple Hover Pill */
+/* Shared Animated Purple Hover Pill (React Bits Pill Nav — Borderless, No Outline, Ring or Shadow) */
 .nav-hover-pill {
   position: absolute;
   top: 0;
@@ -176,15 +176,14 @@ a {
   height: 0;
   border-radius: 9999px;
   background: linear-gradient(135deg, #A445F5 0%, #8B20D9 100%);
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
   pointer-events: none;
   opacity: 0;
   z-index: 1;
-  transition: transform 0.28s cubic-bezier(0.25, 1, 0.5, 1),
-              width 0.28s cubic-bezier(0.25, 1, 0.5, 1),
-              height 0.28s cubic-bezier(0.25, 1, 0.5, 1),
-              opacity 0.2s ease;
+  transform-origin: 50% 50%;
   will-change: transform, width, opacity;
-  box-shadow: 0 3px 14px rgba(139, 32, 217, 0.4);
 }
 
 .nav-hover-pill.is-visible {
@@ -211,7 +210,8 @@ a {
 }
 
 .nav-link:hover,
-.nav-link:focus-visible {
+.nav-link:focus-visible,
+.nav-link[data-lit] {
   color: #FFFFFF !important;
   background: transparent !important;
   box-shadow: none !important;

@@ -198,39 +198,38 @@
   background-color: #ffffff;
   z-index: 1;
   transform: translateY(-100%);
-  transition: transform 0.52s cubic-bezier(0.76, 0, 0.24, 1);
+  transition: transform 0.46s cubic-bezier(0.76, 0, 0.24, 1);
   will-change: transform;
 }
 
-/* Layer 2: Soft Luminous Porcelain Canvas with Centered Heading */
+/* Layer 2: Pure White Canvas with Centered Heading */
 .transition-layer-main {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(180deg, #ffffff 0%, #f6f6f8 50%, #ededf0 100%);
+  background-color: #ffffff;
   z-index: 2;
   display: flex;
   align-items: center;
   justify-content: center;
   transform: translateY(-100%);
-  transition: transform 0.52s cubic-bezier(0.76, 0, 0.24, 1);
+  transition: transform 0.46s cubic-bezier(0.76, 0, 0.24, 1);
   will-change: transform;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
 }
 
 /* Direct container slide down (Fallback if single container without inner layers) */
 .page-transition-overlay.slide-down {
   transform: translateY(0%);
-  background: linear-gradient(180deg, #ffffff 0%, #f6f6f8 50%, #ededf0 100%);
+  background-color: #ffffff;
 }
 
 .page-transition-overlay.slide-up {
   transform: translateY(-100%);
 }
 
-/* 1. Cascading Slide DOWN from top (Pure White leads first, Porcelain follows) */
+/* 1. Cascading Slide DOWN from top (Pure White leads first, Main follows) */
 .page-transition-overlay.slide-down .transition-layer-white {
   transform: translateY(0%);
   transition-delay: 0s;
@@ -238,10 +237,10 @@
 
 .page-transition-overlay.slide-down .transition-layer-main {
   transform: translateY(0%);
-  transition-delay: 0.08s;
+  transition-delay: 0.05s;
 }
 
-/* 2. Animate UPWARD to reveal destination page (Porcelain lifts first, Pure White follows) */
+/* 2. Animate UPWARD to reveal destination page (Main lifts first, White follows) */
 .page-transition-overlay.slide-up .transition-layer-main {
   transform: translateY(-100%);
   transition-delay: 0s;
@@ -249,7 +248,7 @@
 
 .page-transition-overlay.slide-up .transition-layer-white {
   transform: translateY(-100%);
-  transition-delay: 0.08s;
+  transition-delay: 0.05s;
 }
 
 /* Instant reset without animation */

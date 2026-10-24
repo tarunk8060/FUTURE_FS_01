@@ -177,7 +177,7 @@ body.page-contact .mobile-nav-item.active {
 }
 
 .contact-channels-line {
-  font-size: 1.05rem;
+  font-size: 1.18rem;
   font-weight: 600;
   color: var(--cnt-white);
   margin-bottom: 1.15rem;
@@ -195,28 +195,28 @@ body.page-contact .mobile-nav-item.active {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.38rem 1rem;
+  padding: 0.45rem 1.15rem;
   background: var(--cnt-midnight-soft);
   border: 1px solid var(--cnt-border);
   border-radius: 9999px;
   color: var(--cnt-midnight-sheen);
-  font-size: 0.78rem;
+  font-size: 0.88rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.35rem;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
 }
 
 .contact-title {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+  font-size: clamp(2.75rem, 5.2vw, 4.3rem);
   font-weight: 800;
   letter-spacing: -0.035em;
   color: #ffffff;
   line-height: 1.1;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.35rem;
 }
 
 .contact-title span.blue-accent,
@@ -227,10 +227,10 @@ body.page-contact .mobile-nav-item.active {
 }
 
 .contact-statement {
-  font-size: 1.05rem;
-  line-height: 1.7;
+  font-size: 1.2rem;
+  line-height: 1.75;
   color: var(--cnt-text-secondary);
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.65rem;
 }
 
 .contact-channels {
@@ -288,16 +288,16 @@ body.page-contact .mobile-nav-item.active {
 }
 
 .channel-label {
-  font-size: 0.74rem;
+  font-size: 0.82rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--cnt-text-muted);
-  margin-bottom: 0.15rem;
+  margin-bottom: 0.2rem;
 }
 
 .channel-val {
   font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
-  font-size: 0.98rem;
+  font-size: 1.08rem;
   font-weight: 600;
   color: #ffffff;
   white-space: nowrap;
@@ -340,15 +340,15 @@ body.page-contact .mobile-nav-item.active {
 
 .form-header h3 {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.85rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: #ffffff;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.45rem;
 }
 
 .form-header p {
-  font-size: 0.94rem;
+  font-size: 1.05rem;
   color: var(--cnt-text-secondary);
 }
 
@@ -364,12 +364,12 @@ body.page-contact .mobile-nav-item.active {
 
 .field-label {
   display: block;
-  font-size: 0.82rem;
+  font-size: 0.92rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: #8caad4;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.55rem;
 }
 
 .input-field,
@@ -378,9 +378,9 @@ body.page-contact .mobile-nav-item.active {
   background: var(--cnt-surface-input);
   border: 1px solid var(--cnt-border-subtle);
   border-radius: 12px;
-  padding: 0.9rem 1.15rem;
+  padding: 0.95rem 1.25rem;
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   color: #ffffff;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
@@ -412,10 +412,10 @@ body.page-contact .mobile-nav-item.active {
   background: linear-gradient(135deg, #1d2636 0%, #121824 100%);
   color: #ffffff;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 1rem;
+  font-size: 1.12rem;
   font-weight: 700;
   letter-spacing: -0.01em;
-  padding: 0.95rem 2rem;
+  padding: 1.05rem 2.2rem;
   border-radius: 9999px;
   border: 1px solid rgba(107, 147, 200, 0.35);
   cursor: pointer;
@@ -527,22 +527,24 @@ body.page-contact .footer-bottom {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 0.85rem;
+    font-size: 0.84rem;
   }
 
   .contact-title {
+    font-size: clamp(2.4rem, 6vw, 3.2rem);
     text-align: center;
     margin-bottom: 0.75rem;
   }
 
   .contact-statement {
-    font-size: 0.9rem;
-    line-height: 1.55;
+    font-size: 1.08rem;
+    line-height: 1.62;
     text-align: center;
-    max-width: 460px;
+    max-width: 520px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 0.25rem;
-    color: rgba(226, 232, 240, 0.78);
+    color: rgba(226, 232, 240, 0.82);
   }
 
   .contact-form-box {
@@ -556,7 +558,7 @@ body.page-contact .footer-bottom {
   }
 
   .contact-channels-line {
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     font-weight: 600;
     color: #ffffff;
     margin-bottom: 1.15rem;
@@ -582,30 +584,48 @@ body.page-contact .footer-bottom {
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 0.75rem;
+    font-size: 0.8rem;
   }
 
   .contact-title {
-    font-size: clamp(2rem, 8.5vw, 2.5rem);
+    font-size: clamp(2.2rem, 8.5vw, 2.75rem);
     text-align: center;
     margin-bottom: 0.75rem;
   }
 
   .contact-statement {
-    font-size: 0.86rem;
-    line-height: 1.5;
+    font-size: 1rem;
+    line-height: 1.58;
     text-align: center;
-    max-width: 380px;
+    max-width: 420px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 0;
   }
   
+  .contact-channels-line {
+    font-size: 1.08rem;
+  }
+
   .form-grid {
     grid-template-columns: 1fr;
   }
   
   .form-group-full {
     grid-column: span 1;
+  }
+
+  .field-label {
+    font-size: 0.86rem;
+  }
+
+  .input-field,
+  .textarea-field {
+    font-size: 0.98rem;
+  }
+
+  .btn-send-midnight {
+    font-size: 1.05rem;
   }
   
   .contact-form-box {

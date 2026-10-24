@@ -114,7 +114,7 @@ body.page-home .site-nav.scrolled {
   justify-content: space-between;
   margin-bottom: 1.5rem;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.92rem;
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -184,23 +184,23 @@ body.page-home .site-nav.scrolled {
   align-items: center;
   gap: 0.5rem;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.86rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #ffffff;
-  padding: 0.35rem 0.85rem;
+  padding: 0.42rem 0.95rem;
   border: 1px solid var(--home-border-strong);
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.04);
 }
 
 .mono-status-pill {
-  font-size: 0.8rem;
+  font-size: 0.92rem;
   color: var(--home-text-muted);
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.5rem;
 }
 
 .status-dot-white {
@@ -219,12 +219,12 @@ body.page-home .site-nav.scrolled {
 
 .home-headline {
   font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  font-size: clamp(2.4rem, 4.5vw, 4.2rem);
+  font-size: clamp(2.75rem, 5vw, 4.65rem);
   font-weight: 800;
   letter-spacing: -0.04em;
-  line-height: 1.08;
+  line-height: 1.1;
   color: #ffffff;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.35rem;
 }
 
 .home-headline .contrast-light {
@@ -237,11 +237,11 @@ body.page-home .site-nav.scrolled {
 
 .home-subtext {
   font-family: 'Inter', -apple-system, sans-serif;
-  font-size: 1.05rem;
-  line-height: 1.65;
+  font-size: 1.2rem;
+  line-height: 1.7;
   color: var(--home-text-secondary);
-  margin-bottom: 2rem;
-  max-width: 540px;
+  margin-bottom: 2.25rem;
+  max-width: 580px;
 }
 
 /* Action Buttons */
@@ -257,10 +257,10 @@ body.page-home .site-nav.scrolled {
   background: #ffffff !important;
   color: #040508 !important;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   font-weight: 700;
   letter-spacing: -0.01em;
-  padding: 0.85rem 2rem;
+  padding: 0.95rem 2.2rem;
   border-radius: 9999px;
   border: 1px solid #ffffff;
   display: inline-flex;
@@ -298,10 +298,10 @@ body.page-home .site-nav.scrolled {
   backdrop-filter: blur(14px);
   color: #ffffff !important;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   font-weight: 600;
   letter-spacing: -0.01em;
-  padding: 0.85rem 2rem;
+  padding: 0.95rem 2.2rem;
   border-radius: 9999px;
   border: 1px solid var(--home-border-strong);
   display: inline-flex;
@@ -330,10 +330,10 @@ body.page-home .site-nav.scrolled {
   backdrop-filter: blur(14px);
   color: #a1a1aa;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.88rem;
+  font-size: 0.96rem;
   font-weight: 600;
   letter-spacing: -0.01em;
-  padding: 0.85rem 1.45rem;
+  padding: 0.95rem 1.6rem;
   border-radius: 9999px;
   border: 1px solid var(--home-border-subtle);
   display: inline-flex;
@@ -385,7 +385,7 @@ body.page-home .site-nav.scrolled {
   align-items: center;
   gap: 0.6rem;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.78rem;
+  font-size: 0.88rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -405,10 +405,10 @@ body.page-home .site-nav.scrolled {
   background: #ffffff;
   color: #040508;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.76rem;
+  font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.02em;
-  padding: 0.38rem 0.95rem;
+  padding: 0.45rem 1.05rem;
   border-radius: 9999px;
   text-decoration: none;
   display: inline-flex;
@@ -471,10 +471,10 @@ body.page-home .site-nav.scrolled {
   background: rgba(255, 255, 255, 0.95);
   color: #040508;
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.82rem;
+  font-size: 0.92rem;
   font-weight: 700;
   letter-spacing: -0.01em;
-  padding: 0.55rem 1.25rem;
+  padding: 0.65rem 1.4rem;
   border-radius: 9999px;
   display: inline-flex;
   align-items: center;
@@ -499,7 +499,7 @@ body.page-home .site-nav.scrolled {
 
 .dock-header {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.86rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -557,7 +557,7 @@ body.page-home .site-nav.scrolled {
 
 .dock-label {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.82rem;
+  font-size: 0.92rem;
   font-weight: 600;
   letter-spacing: -0.01em;
   color: var(--home-text-secondary);
@@ -580,7 +580,7 @@ body.page-home .site-nav.scrolled {
   }
 
   .home-meta-header {
-    font-size: 0.74rem;
+    font-size: 0.85rem;
     letter-spacing: 0.08em;
     margin-bottom: 1.15rem;
     padding: 0 0.5rem;
@@ -597,13 +597,13 @@ body.page-home .site-nav.scrolled {
   }
 
   .home-headline {
-    font-size: clamp(2.2rem, 4.2vw, 3rem);
+    font-size: clamp(2.5rem, 4.6vw, 3.4rem);
     line-height: 1.12;
   }
 
   .home-subtext {
-    font-size: 0.96rem;
-    line-height: 1.6;
+    font-size: 1.12rem;
+    line-height: 1.62;
   }
 
   .dock-cards-strip {
@@ -616,7 +616,7 @@ body.page-home .site-nav.scrolled {
   }
 
   .dock-label {
-    font-size: 0.78rem;
+    font-size: 0.88rem;
   }
 }
 
@@ -631,7 +631,7 @@ body.page-home .site-nav.scrolled {
   }
 
   .home-meta-header {
-    font-size: 0.72rem;
+    font-size: 0.82rem;
     letter-spacing: 0.08em;
     margin-bottom: 1rem;
     padding: 0 0.25rem;
@@ -672,9 +672,9 @@ body.page-home .site-nav.scrolled {
     justify-content: space-between;
     align-items: center;
     gap: 0.35rem 0.75rem;
-    padding: 0.45rem 0.75rem;
-    margin-bottom: 0.85rem;
-    font-size: 0.63rem;
+    padding: 0.5rem 0.85rem;
+    margin-bottom: 0.95rem;
+    font-size: 0.74rem;
     letter-spacing: 0.06em;
     background: rgba(255, 255, 255, 0.035);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -684,59 +684,59 @@ body.page-home .site-nav.scrolled {
   .meta-item {
     display: inline-flex;
     align-items: center;
-    gap: 0.3rem;
+    gap: 0.35rem;
   }
 
   .meta-item span {
-    font-size: 0.58rem;
+    font-size: 0.7rem;
     color: var(--home-text-dim);
     font-weight: 500;
   }
 
   .meta-item strong {
-    font-size: 0.63rem;
+    font-size: 0.75rem;
     color: #f4f4f5;
     font-weight: 600;
   }
 
   .framed-device-canvas {
-    padding: 1.5rem 1.15rem;
+    padding: 1.6rem 1.25rem;
     border-radius: 18px;
   }
 
   .home-headline {
-    font-size: clamp(1.75rem, 6.8vw, 2.35rem);
-    line-height: 1.14;
-    margin-bottom: 0.9rem;
+    font-size: clamp(2rem, 7.5vw, 2.65rem);
+    line-height: 1.15;
+    margin-bottom: 1rem;
   }
 
   .home-subtext {
-    font-size: 0.9rem;
-    line-height: 1.55;
-    margin-bottom: 1.25rem;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin-bottom: 1.45rem;
   }
 
   .mono-tag-pill {
-    font-size: 0.68rem;
-    padding: 0.25rem 0.65rem;
+    font-size: 0.78rem;
+    padding: 0.32rem 0.75rem;
   }
 
   .mono-status-pill {
-    font-size: 0.72rem;
+    font-size: 0.82rem;
   }
 
   .home-actions {
     flex-direction: column;
     width: 100%;
-    gap: 0.65rem;
+    gap: 0.75rem;
   }
 
   .btn-solid-white,
   .btn-ghost-white {
     width: 100%;
     justify-content: center;
-    padding: 0.75rem 1.25rem;
-    font-size: 0.88rem;
+    padding: 0.85rem 1.35rem;
+    font-size: 0.98rem;
   }
 
   /* Remove Technical Capabilities & Specialties in mobile view as requested */

@@ -423,7 +423,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   bindMobileMenu();
 
-  // --- 5. React Bits Pill Nav: Continuous Dual-Spring Hover Pill Navigation ---
+  // --- 5. React Bits Pill Nav: Continuous Dual-Spring Active & Hover Pill Navigation ---
   let desktopPillCleanup = null;
 
   function initDesktopHoverPill() {
@@ -448,6 +448,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const links = Array.from(navMenu.querySelectorAll('.nav-link'));
     if (!links.length) return;
 
+    const getActiveIndex = () => {
+      const activeLink = navMenu.querySelector('.nav-link.active');
+      if (!activeLink) return 0;
+      const idx = links.indexOf(activeLink);
+      return idx >= 0 ? idx : 0;
+    };
+
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const clamp = (val, min, max) => Math.min(max, Math.max(min, val));
 
@@ -462,7 +469,7 @@ document.addEventListener('DOMContentLoaded', () => {
       x1: 0,
       v0: 0,
       v1: 0,
-      alpha: 0,
+      alpha: 1,
       pop: 1,
       press: 1,
       pressVelocity: 0,
@@ -470,6 +477,11 @@ document.addEventListener('DOMContentLoaded', () => {
       focus: false,
       sliding: false,
       pressing: false
+    };
+
+    const getTargetIndex = () => {
+      if (state.hover >= 0) return state.hover;
+      return getActiveIndex();
     };
 
     let rects = [];
@@ -493,9 +505,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const sync = () => {
+      const targetIdx = getTargetIndex();
       links.forEach((link, idx) => {
-        const hovered = state.hover === idx;
-        link.toggleAttribute('data-lit', hovered);
+        const isLit = idx === targetIdx;
+        link.toggleAttribute('data-lit', isLit);
       });
       navMenu.toggleAttribute('data-focus', state.focus && state.hover >= 0);
     };
@@ -504,7 +517,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!pill) return;
       const width = Math.max(0, state.x1 - state.x0);
       const scale = state.press * state.pop;
-      const target = state.hover >= 0 ? rects[state.hover] : null;
+      const target = rects[getTargetIndex()];
       if (target) {
         lastTop = target.top;
         lastHeight = target.height;
@@ -522,23 +535,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const dt = last ? Math.min(0.05, (now - last) / 1000) : 1 / 60;
       last = now;
 
-      const target = state.hover >= 0 ? rects[state.hover] : null;
+      const target = rects[getTargetIndex()];
       let busy = false;
 
       if (target) {
         const t0 = target.left;
         const t1 = target.left + target.width;
-
-        if (state.alpha < 0.02 && !state.sliding) {
-          // Entering or re-entering: snap start coordinates directly under target heading
-          state.x0 = t0;
-          state.x1 = t1;
-          state.v0 = 0;
-          state.v1 = 0;
-          state.pop = 0.9;
-          lastTop = target.top;
-          lastHeight = target.height;
-        }
 
         if (reduce) {
           state.x0 = t0;
@@ -562,22 +564,12 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         }
 
-        state.alpha += (1 - state.alpha) * (reduce ? 1 : 1 - Math.exp(-dt / 0.06));
         busy =
           Math.abs(state.x0 - t0) > 0.05 ||
           Math.abs(state.x1 - t1) > 0.05 ||
           Math.abs(state.v0) > 0.5 ||
-          Math.abs(state.v1) > 0.5 ||
-          state.alpha < 0.999;
+          Math.abs(state.v1) > 0.5;
         if (!busy) state.sliding = false;
-      } else {
-        // Pointer left navbar: smoothly fade out pill opacity without persistent background
-        state.alpha += (0 - state.alpha) * (reduce ? 1 : 1 - Math.exp(-dt / 0.07));
-        if (state.alpha > 0.002) {
-          busy = true;
-        } else {
-          state.alpha = 0;
-        }
       }
 
       state.pop += (1 - state.pop) * (reduce ? 1 : 1 - Math.exp(-dt / 0.09));
@@ -623,6 +615,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (event && event.pointerType === 'touch') return;
       if (state.focus) return;
       state.hover = -1;
+      state.sliding = true;
       sync();
       wake();
     };
@@ -640,6 +633,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!state.focus) return;
       state.focus = false;
       state.hover = -1;
+      state.sliding = true;
       sync();
       wake();
     };
@@ -692,23 +686,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     ro.observe(navMenu);
 
-    document.fonts?.ready?.then(() => {
+    const initializePosition = () => {
       measure();
-      render();
-      wake();
-    }).catch(() => {});
+      const target = rects[getTargetIndex()];
+      if (target && target.width > 0) {
+        state.x0 = target.left;
+        state.x1 = target.left + target.width;
+        lastTop = target.top;
+        lastHeight = target.height;
+        state.alpha = 1;
+        render();
+      }
+      sync();
+    };
 
-    // Initial measurement & render
-    measure();
-    sync();
-    render();
+    initializePosition();
+    setTimeout(initializePosition, 50);
+    setTimeout(initializePosition, 250);
+    document.fonts?.ready?.then(initializePosition).catch(() => {});
 
     // Global reset method for clean transitions
     window.__resetDesktopPill = () => {
       state.hover = -1;
-      state.alpha = 0;
       sync();
-      render();
     };
 
     desktopPillCleanup = () => {

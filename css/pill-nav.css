@@ -165,7 +165,6 @@
 
   /* React Bits Mobile Dropdown Panel */
   .pill-nav__panel {
-    display: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -178,16 +177,22 @@
     -webkit-backdrop-filter: blur(28px) saturate(1.8);
     border: 1px solid rgba(255, 255, 255, 0.12);
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    
+    /* Symmetrical smooth enter and exit transitions */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px) scale(0.98);
+    pointer-events: none;
+    transition: opacity 0.26s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.26s cubic-bezier(0.22, 1, 0.36, 1),
+                visibility 0.26s ease;
   }
 
   .pill-nav[data-open] .pill-nav__panel {
-    display: block;
-    animation: pillPanelEnter 0.28s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  }
-
-  @keyframes pillPanelEnter {
-    from { opacity: 0; transform: translateY(-6px) scale(0.98); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
   }
 
   .pill-nav__menu {
@@ -213,17 +218,50 @@
     font-size: 14px;
     font-weight: 500;
     text-decoration: none;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
   }
 
   .pill-nav__row:hover {
     background: rgba(255, 255, 255, 0.08);
   }
 
+  /* Refined translucent glass active highlight (not solid white) */
   .pill-nav__row.active {
-    background: linear-gradient(180deg, #ffffff 0%, #ebebf0 100%);
-    color: #121016;
-    font-weight: 700;
-    box-shadow: 0 4px 14px -4px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), 0 4px 16px rgba(0, 0, 0, 0.4);
+  }
+
+  .pill-nav__row.active span[aria-hidden="true"],
+  .pill-nav__row.active span:last-child {
+    color: #ffffff;
+    opacity: 1;
+  }
+
+  /* Page-specific subtle translucent accents for active item */
+  body.page-home .pill-nav__row.active {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.24);
+    color: #ffffff;
+  }
+
+  body.page-projects .pill-nav__row.active {
+    background: rgba(168, 85, 247, 0.18);
+    border-color: rgba(168, 85, 247, 0.4);
+    color: #f3e8ff;
+  }
+
+  body.page-expertise .pill-nav__row.active {
+    background: rgba(249, 115, 22, 0.18);
+    border-color: rgba(249, 115, 22, 0.4);
+    color: #ffedd5;
+  }
+
+  body.page-contact .pill-nav__row.active {
+    background: rgba(37, 99, 235, 0.22);
+    border-color: rgba(96, 165, 250, 0.45);
+    color: #dbeafe;
   }
 }

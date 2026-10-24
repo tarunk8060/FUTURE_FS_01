@@ -231,19 +231,14 @@ a {
   box-shadow: none !important;
 }
 
-/* Device Capability Check: Enabled only on devices with genuine hover and fine pointer */
-@media (hover: hover) and (pointer: fine) {
-  .nav-hover-pill {
-    display: block;
-  }
+/* Hover pill active on desktop/laptop and hidden on mobile screens */
+.nav-hover-pill {
+  display: block;
 }
 
-/* Disabled on touch-only / coarse pointer mobile devices */
-@media (hover: none), (pointer: coarse) {
+@media (max-width: 680px) {
   .nav-hover-pill {
     display: none !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
   }
 }
 

@@ -605,9 +605,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const enter = (index, event) => {
-      if (event?.pointerType === 'touch') return;
-      const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-      if (!hasFinePointer && event?.pointerType !== 'mouse') return;
+      if (event && event.pointerType === 'touch') return;
+      if (window.innerWidth <= 680) return;
+
+      measure();
 
       if (state.hover >= 0 && state.hover !== index) {
         state.sliding = true;
@@ -619,7 +620,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const leave = (event) => {
-      if (event?.pointerType === 'touch') return;
+      if (event && event.pointerType === 'touch') return;
       if (state.focus) return;
       state.hover = -1;
       sync();
@@ -645,7 +646,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const press = (event) => {
       if (event && event.button > 0) return;
-      if (event?.pointerType === 'touch') return;
+      if (event && event.pointerType === 'touch') return;
       state.pressing = true;
       wake();
     };
@@ -656,15 +657,17 @@ document.addEventListener('DOMContentLoaded', () => {
       wake();
     };
 
-    // Attach listeners to navigation links
+    // Attach listeners to navigation links (supporting both pointerenter and mouseenter)
     links.forEach((link, idx) => {
       link.addEventListener('pointerenter', (e) => enter(idx, e));
+      link.addEventListener('mouseenter', (e) => enter(idx, e));
       link.addEventListener('pointerdown', press);
       link.addEventListener('focus', (e) => focus(idx, e));
       link.addEventListener('blur', blur);
     });
 
     navMenu.addEventListener('pointerleave', leave);
+    navMenu.addEventListener('mouseleave', leave);
     const onFocusOut = (e) => {
       if (!navMenu.contains(e.relatedTarget)) {
         leave(e);

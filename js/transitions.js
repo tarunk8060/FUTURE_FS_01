@@ -213,12 +213,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isNavigating) {
           overlay.classList.add('heading-visible');
         }
-      }, 120);
+      }, 160);
 
-      // 4. Wait for overlay to completely cover screen (380ms) and for HTML fetch to complete
+      // 4. Wait for overlay to completely cover screen (540ms) and for HTML fetch to complete
       const [htmlText] = await Promise.all([
         fetchPromise,
-        new Promise(r => setTimeout(r, 380))
+        new Promise(r => setTimeout(r, 540))
       ]);
 
       const parser = new DOMParser();
@@ -265,10 +265,10 @@ document.addEventListener('DOMContentLoaded', () => {
       // Re-initialize dynamic page behaviors
       initializePageBehaviors();
 
-      // 6. Brief hold while destination heading is prominently displayed (~180ms)
-      await new Promise(r => setTimeout(r, 180));
+      // 6. Calm hold while destination heading is prominently admired (~380ms)
+      await new Promise(r => setTimeout(r, 380));
 
-      // 7. Animate heading out and animate overlay UPWARD to reveal destination page (~360ms)
+      // 7. Animate heading out and animate overlay UPWARD to reveal destination page (~540ms)
       overlay.classList.add('heading-exit');
       overlay.classList.remove('slide-down');
       overlay.classList.add('slide-up');
@@ -277,7 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         overlay.classList.remove('is-active', 'slide-up', 'heading-visible', 'heading-exit');
         isNavigating = false;
-      }, 360);
+      }, 540);
 
     } catch (err) {
       console.warn('Navigation fallback due to fetch error:', err);

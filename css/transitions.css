@@ -179,7 +179,7 @@
   pointer-events: none;
   overflow: hidden;
   transform: translateY(-100%);
-  transition: transform 0.36s cubic-bezier(0.76, 0, 0.24, 1);
+  transition: transform 0.52s cubic-bezier(0.76, 0, 0.24, 1);
   will-change: transform;
 }
 
@@ -198,7 +198,7 @@
   background-color: #ffffff;
   z-index: 1;
   transform: translateY(-100%);
-  transition: transform 0.36s cubic-bezier(0.76, 0, 0.24, 1);
+  transition: transform 0.52s cubic-bezier(0.76, 0, 0.24, 1);
   will-change: transform;
 }
 
@@ -215,7 +215,7 @@
   align-items: center;
   justify-content: center;
   transform: translateY(-100%);
-  transition: transform 0.36s cubic-bezier(0.76, 0, 0.24, 1);
+  transition: transform 0.52s cubic-bezier(0.76, 0, 0.24, 1);
   will-change: transform;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
 }
@@ -238,7 +238,7 @@
 
 .page-transition-overlay.slide-down .transition-layer-main {
   transform: translateY(0%);
-  transition-delay: 0.05s;
+  transition-delay: 0.08s;
 }
 
 /* 2. Animate UPWARD to reveal destination page (Porcelain lifts first, Pure White follows) */
@@ -249,7 +249,7 @@
 
 .page-transition-overlay.slide-up .transition-layer-white {
   transform: translateY(-100%);
-  transition-delay: 0.05s;
+  transition-delay: 0.08s;
 }
 
 /* Instant reset without animation */
@@ -287,10 +287,10 @@
   transform: translateY(32px) scale(0.96);
   filter: blur(8px);
   will-change: opacity, transform, filter, letter-spacing;
-  transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.36s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-              letter-spacing 0.36s ease;
+  transition: opacity 0.44s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.48s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.44s cubic-bezier(0.16, 1, 0.3, 1),
+              letter-spacing 0.48s ease;
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
 }
 
@@ -307,9 +307,9 @@
   opacity: 0;
   transform: translateY(-26px) scale(1.02);
   filter: blur(6px);
-  transition: opacity 0.22s cubic-bezier(0.4, 0, 1, 1),
-              transform 0.24s cubic-bezier(0.4, 0, 1, 1),
-              filter 0.22s cubic-bezier(0.4, 0, 1, 1);
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 1, 1),
+              transform 0.32s cubic-bezier(0.4, 0, 1, 1),
+              filter 0.3s cubic-bezier(0.4, 0, 1, 1);
 }
 
 /* Responsive Font Scaling for Mobile & Small Tablets */

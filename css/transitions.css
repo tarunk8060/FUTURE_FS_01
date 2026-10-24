@@ -315,8 +315,16 @@
 /* Responsive Font Scaling for Mobile & Small Tablets */
 @media (max-width: 640px) {
   .transition-heading {
-    font-size: clamp(2.3rem, 11vw, 4rem);
-    letter-spacing: -0.03em;
+    font-size: clamp(3.2rem, 14.5vw, 5.6rem);
+    letter-spacing: -0.04em;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 380px) {
+  .transition-heading {
+    font-size: clamp(2.75rem, 13vw, 3.4rem);
+    letter-spacing: -0.045em;
   }
 }
 

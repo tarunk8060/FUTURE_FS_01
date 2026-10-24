@@ -240,28 +240,77 @@
     opacity: 1;
   }
 
-  /* Page-specific subtle translucent accents for active item */
+  /* Page-specific capsule accents for active mobile navigation item */
   body.page-home .pill-nav__row.active {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.24);
-    color: #ffffff;
+    background: #ffffff !important;
+    border: 1px solid #ffffff !important;
+    color: #090a0f !important;
+    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.25);
+  }
+  body.page-home .pill-nav__row.active span {
+    color: #090a0f !important;
   }
 
   body.page-projects .pill-nav__row.active {
-    background: rgba(168, 85, 247, 0.18);
-    border-color: rgba(168, 85, 247, 0.4);
-    color: #f3e8ff;
+    background: linear-gradient(135deg, #A445F5 0%, #8B20D9 100%) !important;
+    border: 1px solid rgba(164, 69, 245, 0.6) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 16px rgba(164, 69, 245, 0.35);
+  }
+  body.page-projects .pill-nav__row.active span {
+    color: #ffffff !important;
   }
 
   body.page-expertise .pill-nav__row.active {
-    background: rgba(249, 115, 22, 0.18);
-    border-color: rgba(249, 115, 22, 0.4);
-    color: #ffedd5;
+    background: linear-gradient(135deg, #ff6b2b 0%, #ea580c 100%) !important;
+    border: 1px solid rgba(255, 107, 43, 0.6) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 16px rgba(255, 107, 43, 0.35);
+  }
+  body.page-expertise .pill-nav__row.active span {
+    color: #ffffff !important;
   }
 
   body.page-contact .pill-nav__row.active {
-    background: rgba(37, 99, 235, 0.22);
-    border-color: rgba(96, 165, 250, 0.45);
-    color: #dbeafe;
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+    border: 1px solid rgba(59, 130, 246, 0.6) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
+  }
+  body.page-contact .pill-nav__row.active span {
+    color: #ffffff !important;
+  }
+
+  /* Page-specific outer pill-nav container borders & logo badges */
+  body.page-home .pill-nav {
+    border: 1px solid rgba(255, 255, 255, 0.22);
+  }
+  body.page-home .pill-nav__mark {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+  }
+
+  body.page-projects .pill-nav {
+    border: 1px solid rgba(164, 69, 245, 0.35);
+  }
+  body.page-projects .pill-nav__mark {
+    background: rgba(164, 69, 245, 0.25);
+    color: #C084FC;
+  }
+
+  body.page-expertise .pill-nav {
+    border: 1px solid rgba(255, 107, 43, 0.38);
+  }
+  body.page-expertise .pill-nav__mark {
+    background: rgba(255, 107, 43, 0.25);
+    color: #ff6b2b;
+  }
+
+  body.page-contact .pill-nav {
+    border: 1px solid rgba(59, 130, 246, 0.38);
+  }
+  body.page-contact .pill-nav__mark {
+    background: rgba(59, 130, 246, 0.25);
+    color: #7fa8dc;
   }
 }

@@ -217,12 +217,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isNavigating) {
           overlay.classList.add('heading-visible');
         }
-      }, 160);
+      }, 220);
 
-      // 4. Wait for white overlay to completely cover screen (600ms) and for HTML fetch to complete
+      // 4. Wait for white overlay to completely cover screen (850ms) and for HTML fetch to complete
       const [htmlText] = await Promise.all([
         fetchPromise,
-        new Promise(r => setTimeout(r, 600))
+        new Promise(r => setTimeout(r, 850))
       ]);
 
       const parser = new DOMParser();
@@ -269,10 +269,10 @@ document.addEventListener('DOMContentLoaded', () => {
       // Re-initialize dynamic page behaviors
       initializePageBehaviors();
 
-      // 6. Hold while destination heading is prominently displayed (~400ms)
-      await new Promise(r => setTimeout(r, 400));
+      // 6. Hold while destination heading is prominently displayed (~650ms)
+      await new Promise(r => setTimeout(r, 650));
 
-      // 7. Animate heading out and animate white overlay UPWARD to reveal destination page (~600ms)
+      // 7. Animate heading out and animate white overlay UPWARD to reveal destination page (~850ms)
       overlay.classList.add('heading-exit');
       overlay.classList.remove('slide-down');
       overlay.classList.add('slide-up');
@@ -281,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         overlay.classList.remove('is-active', 'slide-up', 'heading-visible', 'heading-exit');
         isNavigating = false;
-      }, 600);
+      }, 850);
 
     } catch (err) {
       console.warn('Navigation fallback due to fetch error:', err);
@@ -291,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Intercept navigation clicks
   function attachLinkInterceptors() {
-    const internalLinks = document.querySelectorAll('a[href$=".html"], a[href^="./"], a[href^="/"], a.nav-link, a.brand-logo, a.btn');
+    const internalLinks = document.querySelectorAll('a[href$=".html"], a[href^="./"], a[href^="/"], a.nav-link, a.brand-logo, a.btn, .home-actions a, .btn-solid-white, .btn-ghost-white');
     internalLinks.forEach(link => {
       link.removeEventListener('click', handleLinkClick);
       link.addEventListener('click', handleLinkClick);
@@ -311,13 +311,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     e.preventDefault();
-
-    // Hide desktop hover pill on click
-    if (typeof window.__resetDesktopPill === 'function') {
-      window.__resetDesktopPill();
-    }
-    const desktopPill = document.querySelector('.nav-hover-pill');
-    if (desktopPill) desktopPill.style.opacity = '0';
 
     // Close PillNav if open
     const pillNav = document.getElementById('pillNav');

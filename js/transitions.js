@@ -594,7 +594,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const enter = (index, event) => {
       if (event && event.pointerType === 'touch') return;
-      if (window.innerWidth <= 680) return;
+      if (window.innerWidth <= 768) return;
       measure();
       state.hover = index;
       state.focus = false;

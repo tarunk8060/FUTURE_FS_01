@@ -157,8 +157,38 @@ body.page-contact .mobile-nav-item.active {
 .contact-layout-grid {
   display: grid;
   grid-template-columns: 1fr 1.22fr;
-  gap: 3.5rem;
+  grid-template-areas:
+    "intro form"
+    "channels form";
+  gap: 2rem 3.5rem;
   align-items: start;
+}
+
+.contact-intro-col {
+  grid-area: intro;
+}
+
+.contact-form-box {
+  grid-area: form;
+}
+
+.contact-channels-wrap {
+  grid-area: channels;
+}
+
+.contact-channels-line {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--cnt-white);
+  margin-bottom: 1.15rem;
+  line-height: 1.5;
+}
+
+.contact-async-note {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  line-height: 1.6;
+  margin-top: 1.25rem;
 }
 
 /* ==========================================================================
@@ -487,8 +517,30 @@ body.page-contact .footer-bottom {
    ========================================================================== */
 @media (max-width: 900px) {
   .contact-layout-grid {
-    grid-template-columns: 1fr;
-    gap: 2.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+  }
+
+  .contact-intro-col {
+    order: 1;
+  }
+
+  .contact-form-box {
+    order: 2;
+  }
+
+  .contact-channels-wrap {
+    order: 3;
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+
+  .contact-channels-line {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 1.15rem;
   }
 }
 

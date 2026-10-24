@@ -550,8 +550,27 @@ body.page-home .nav-link.active:not([data-lit]) {
   }
 }
 
-/* Mobile View (<= 680px): Switch to React Bits Pill Nav */
-@media (max-width: 680px) {
+/* ==========================================================================
+   Navigation Responsive Isolation: Mobile vs Desktop (Breakpoint: 768px)
+   ========================================================================== */
+.site-nav-desktop-wrap {
+  display: none !important;
+}
+
+.pill-nav-mobile-wrap {
+  display: none !important;
+}
+
+/* Mobile View (<= 768px): Strict display of mobile floating pill only */
+@media (max-width: 768px) {
+  .site-nav-desktop-wrap,
+  .pill-nav--desktop,
+  #siteNavDesktopWrap {
+    display: none !important;
+  }
+  .pill-nav-mobile-wrap {
+    display: flex !important;
+  }
   .site-nav {
     display: none !important;
   }
@@ -574,5 +593,15 @@ body.page-home .nav-link.active:not([data-lit]) {
   .site-footer {
     padding-top: 3.5rem;
     padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 24px));
+  }
+}
+
+/* Desktop & Tablet View (>= 769px): Authentic React Bits desktop Pill Nav */
+@media (min-width: 769px) {
+  .site-nav-desktop-wrap {
+    display: flex !important;
+  }
+  .pill-nav-mobile-wrap {
+    display: none !important;
   }
 }

@@ -8,8 +8,14 @@
   display: none !important;
 }
 
-/* Activated strictly in Mobile View (<= 680px) */
-@media (max-width: 680px) {
+/* Activated strictly in Mobile View (<= 768px) */
+@media (max-width: 768px) {
+  .site-nav-desktop-wrap,
+  .pill-nav--desktop,
+  #siteNavDesktopWrap {
+    display: none !important;
+  }
+
   .pill-nav-mobile-wrap {
     display: flex !important;
     position: fixed;

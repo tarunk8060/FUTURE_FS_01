@@ -3,8 +3,8 @@
    Reference: https://reactbits.dev/components/pill-nav
    ========================================================================== */
 
-/* Scoped exclusively to Desktop & Tablet viewports (min-width: 681px) */
-@media (min-width: 681px) {
+/* Scoped exclusively to Desktop & Tablet viewports (min-width: 769px) */
+@media (min-width: 769px) {
   /* Positioning wrapper for centered floating navigation */
   .site-nav-desktop-wrap {
     position: fixed;
@@ -421,8 +421,21 @@
 }
 
 /* Hidden on mobile */
-@media (max-width: 680px) {
+.site-nav-desktop-wrap,
+.pill-nav--desktop {
+  display: none !important;
+}
+
+@media (min-width: 769px) {
   .site-nav-desktop-wrap {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .site-nav-desktop-wrap,
+  .pill-nav--desktop,
+  #siteNavDesktopWrap {
     display: none !important;
   }
 }

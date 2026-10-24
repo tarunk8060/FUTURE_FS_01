@@ -1,13 +1,14 @@
 /**
- * Tarun.K Portfolio - Buttery Smooth Multi-Layer Top-Down Page Shift & Content Swap
- * Layers: Gray -> White -> Black cascading from top with zero browser reload flicker.
+ * Tarun.K Portfolio - Modern Top-to-Bottom Page Transition & Content Swap
+ * Light-grey overlay slides down, displays destination heading, then lifts upward.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   const introScreen = document.getElementById('welcomeIntroScreen');
   const skipBtn = document.getElementById('introSkipBtn');
   const progressBar = document.getElementById('introProgressBar');
-  const shiftWrapper = document.getElementById('pageShiftWrapper');
+  const transitionOverlay = document.getElementById('pageTransitionOverlay') || document.getElementById('pageShiftWrapper');
+  const transitionHeading = document.getElementById('transitionHeading');
 
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -85,42 +86,137 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // --- 3. Seamless Multi-Layer Top-Down Staggered Page Shift (Zero Jitter / Flash) ---
-  // --- 3. Seamless Multi-Layer Top-Down Staggered Page Shift (Zero Jitter / Flash) ---
+  // --- 3. Modern Top-to-Bottom Page Transition with Dynamic Heading Reveal ---
   let isNavigating = false;
   let shapeGridAnimationId = null;
 
-  async function performSmoothPageShift(targetUrl) {
-    if (isNavigating || !shiftWrapper) return;
+  function getDestinationHeading(url) {
+    const cleanPath = url.split(/[?#]/)[0].toLowerCase();
+    const filename = cleanPath.split('/').pop() || 'index.html';
+
+    if (!filename || filename === 'index.html' || filename === '') {
+      return { text: 'HELLO.', isHome: true };
+    } else if (filename.includes('project')) {
+      return { text: 'PROJECTS.', isHome: false };
+    } else if (filename.includes('expert')) {
+      return { text: 'EXPERTISE.', isHome: false };
+    } else if (filename.includes('contact')) {
+      return { text: 'CONTACT.', isHome: false };
+    } else if (filename.includes('about')) {
+      return { text: 'ABOUT.', isHome: false };
+    }
+
+    const fallback = filename.replace(/\.html$/i, '').toUpperCase();
+    return { text: fallback ? `${fallback}.` : 'HELLO.', isHome: false };
+  }
+
+  function updateNavActiveStates(targetUrl) {
+    const targetPath = targetUrl.split(/[?#]/)[0].split('/').pop() || 'index.html';
+    const isTargetHome = targetPath === 'index.html' || targetPath === '';
+
+    document.querySelectorAll('.nav-link, .mobile-nav-item, .pill-nav__row').forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href) return;
+      const linkPath = href.split(/[?#]/)[0].split('/').pop() || 'index.html';
+      const isLinkHome = linkPath === 'index.html' || linkPath === '';
+
+      if (linkPath === targetPath || (isTargetHome && isLinkHome)) {
+        link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.classList.remove('active');
+        link.removeAttribute('aria-current');
+      }
+    });
+  }
+
+  async function performSmoothPageShift(targetUrl, pushHistory = true) {
+    if (isNavigating) return;
     isNavigating = true;
 
+    const overlay = document.getElementById('pageTransitionOverlay') || document.getElementById('pageShiftWrapper');
+    const heading = document.getElementById('transitionHeading');
+
+    // If reduced motion is preferred or overlay missing, perform instant content swap without animation delays
+    if (!overlay || prefersReducedMotion) {
+      try {
+        const res = await fetch(targetUrl);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const htmlText = await res.text();
+        const parser = new DOMParser();
+        const newDoc = parser.parseFromString(htmlText, 'text/html');
+
+        const currentPageContent = document.getElementById('pageContent');
+        const newPageContent = newDoc.getElementById('pageContent');
+        if (currentPageContent && newPageContent) {
+          currentPageContent.innerHTML = newPageContent.innerHTML;
+        }
+
+        const currentHeader = document.querySelector('header');
+        const newHeader = newDoc.querySelector('header');
+        if (currentHeader && newHeader) {
+          currentHeader.innerHTML = newHeader.innerHTML;
+        }
+
+        if (newDoc.title) document.title = newDoc.title;
+        document.body.className = newDoc.body.className;
+
+        updateNavActiveStates(targetUrl);
+        if (pushHistory) history.pushState({ url: targetUrl }, '', targetUrl);
+        window.scrollTo(0, 0);
+        initializePageBehaviors();
+      } catch (err) {
+        window.location.href = targetUrl;
+      } finally {
+        isNavigating = false;
+      }
+      return;
+    }
+
     try {
-      // 1. Fetch new HTML in background concurrently
+      // 1. Concurrent HTML fetch in background
       const fetchPromise = fetch(targetUrl).then(res => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.text();
       });
 
-      // 2. Cascade layers DOWN from top (Gray -> White -> Black)
-      shiftWrapper.classList.remove('shifting-out', 'no-transition');
-      shiftWrapper.classList.add('shifting-in');
+      // 2. Configure destination heading
+      const headingInfo = getDestinationHeading(targetUrl);
+      if (heading) {
+        heading.textContent = headingInfo.text;
+        if (headingInfo.isHome) {
+          heading.classList.add('is-home');
+        } else {
+          heading.classList.remove('is-home');
+        }
+      }
 
-      // 3. Wait for black layer to cover screen completely (0.14s delay + 0.45s duration = 0.59s)
+      // Reset overlay state
+      overlay.classList.remove('slide-up', 'heading-visible', 'heading-exit', 'no-transition');
+      overlay.classList.add('is-active', 'slide-down');
+
+      // 3. Trigger heading entrance as overlay slides down
+      setTimeout(() => {
+        if (isNavigating) {
+          overlay.classList.add('heading-visible');
+        }
+      }, 140);
+
+      // 4. Wait for overlay to completely cover screen (380ms) and for HTML fetch to complete
       const [htmlText] = await Promise.all([
         fetchPromise,
-        new Promise(r => setTimeout(r, 600))
+        new Promise(r => setTimeout(r, 380))
       ]);
 
       const parser = new DOMParser();
       const newDoc = parser.parseFromString(htmlText, 'text/html');
 
-      // 4. Swap Page Content behind the black curtain
+      // 5. Swap DOM behind the light-grey curtain
       const currentPageContent = document.getElementById('pageContent');
       const newPageContent = newDoc.getElementById('pageContent');
       if (currentPageContent && newPageContent) {
         currentPageContent.innerHTML = newPageContent.innerHTML;
       } else {
-        // Fallback to main if pageContent is not present
         const currentMain = document.querySelector('main');
         const newMain = newDoc.querySelector('main');
         if (currentMain && newMain) {
@@ -141,56 +237,44 @@ document.addEventListener('DOMContentLoaded', () => {
         document.title = newDoc.title;
       }
 
-      // Update body theme class (page-home, page-projects, page-expertise, page-contact)
+      // Update body theme classes
       document.body.className = newDoc.body.className;
 
       // Update active navigation state
-      const targetPath = targetUrl.split('/').pop() || 'index.html';
-      document.querySelectorAll('.nav-link, .mobile-nav-item, .pill-nav__row').forEach(link => {
-        const href = link.getAttribute('href');
-        if (href === targetPath || (targetPath === '' && href === 'index.html')) {
-          link.classList.add('active');
-          link.setAttribute('aria-current', 'page');
-        } else {
-          link.classList.remove('active');
-          link.removeAttribute('aria-current');
-        }
-      });
+      updateNavActiveStates(targetUrl);
 
       // Update browser history URL
-      history.pushState({ url: targetUrl }, '', targetUrl);
+      if (pushHistory) {
+        history.pushState({ url: targetUrl }, '', targetUrl);
+      }
       window.scrollTo(0, 0);
 
-      // Re-initialize page-specific behaviors (projects modal/filters, contact form, ShapeGrid, mobile toggle)
+      // Re-initialize dynamic page behaviors
       initializePageBehaviors();
 
-      // Brief paint pause while curtain is completely closed
-      await new Promise(r => setTimeout(r, 50));
+      // 6. Brief hold while destination heading is prominently displayed (~180ms)
+      await new Promise(r => setTimeout(r, 180));
 
-      // 5. Cascade layers DOWN and OUT (revealing new page with zero shift!)
-      shiftWrapper.classList.remove('shifting-in');
-      shiftWrapper.classList.add('shifting-out');
+      // 7. Animate heading out and animate overlay UPWARD to reveal destination page (~360ms)
+      overlay.classList.add('heading-exit');
+      overlay.classList.remove('slide-down');
+      overlay.classList.add('slide-up');
 
-      // 6. Reset layers back to top silently without reverse animation
+      // 8. After overlay has animated upward off screen, finalize and unlock navigation
       setTimeout(() => {
-        shiftWrapper.classList.add('no-transition');
-        shiftWrapper.classList.remove('shifting-out');
-        void shiftWrapper.offsetHeight; // force reflow
-        requestAnimationFrame(() => {
-          shiftWrapper.classList.remove('no-transition');
-          isNavigating = false;
-        });
-      }, 650);
+        overlay.classList.remove('is-active', 'slide-up', 'heading-visible', 'heading-exit');
+        isNavigating = false;
+      }, 360);
 
     } catch (err) {
-      console.warn('Fallback standard navigation due to fetch error:', err);
+      console.warn('Navigation fallback due to fetch error:', err);
       window.location.href = targetUrl;
     }
   }
 
   // Intercept navigation clicks
   function attachLinkInterceptors() {
-    const internalLinks = document.querySelectorAll('a[href$=".html"], a[href^="./"], a[href^="/"]');
+    const internalLinks = document.querySelectorAll('a[href$=".html"], a[href^="./"], a[href^="/"], a.nav-link, a.brand-logo, a.btn');
     internalLinks.forEach(link => {
       link.removeEventListener('click', handleLinkClick);
       link.addEventListener('click', handleLinkClick);
@@ -199,11 +283,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function handleLinkClick(e) {
     const href = this.getAttribute('href');
-    if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('#') || this.getAttribute('target') === '_blank') {
+    if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('#') || this.getAttribute('target') === '_blank' || href.endsWith('.pdf')) {
       return;
     }
 
-    const targetBase = href.split('#')[0].replace(/^\.\//, '');
+    const targetBase = href.split(/[?#]/)[0].replace(/^\.\//, '');
     const currentBase = (window.location.pathname.split('/').pop() || 'index.html').replace(/^\.\//, '');
     if (targetBase === currentBase && targetBase !== '') {
       return; // Already on this page
@@ -211,19 +295,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     e.preventDefault();
 
-    // Close mobile menu if open
+    // Close PillNav if open
     const pillNav = document.getElementById('pillNav');
+    const pillToggle = document.getElementById('pillNavToggle');
     if (pillNav) pillNav.removeAttribute('data-open');
+    if (pillToggle) pillToggle.setAttribute('aria-expanded', 'false');
 
+    // Close legacy mobile nav if open
     const mobileNav = document.getElementById('mobileNavOverlay');
     const mobileToggle = document.getElementById('mobileToggle');
     if (mobileNav && mobileNav.classList.contains('active')) {
       mobileNav.classList.remove('active');
-      if (mobileToggle) mobileToggle.classList.remove('active');
+      if (mobileToggle) {
+        mobileToggle.classList.remove('active');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+      }
       document.body.style.overflow = '';
     }
 
-    performSmoothPageShift(href);
+    performSmoothPageShift(href, true);
   }
 
   attachLinkInterceptors();
@@ -231,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Handle browser Back / Forward buttons
   window.addEventListener('popstate', () => {
     const targetUrl = window.location.pathname.split('/').pop() || 'index.html';
-    performSmoothPageShift(targetUrl);
+    performSmoothPageShift(targetUrl, false);
   });
 
   // --- 4. PillNav Menu Navigation (React Bits PillNav) ---

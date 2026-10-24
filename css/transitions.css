@@ -165,99 +165,137 @@
 }
 
 /* ==========================================================================
-   Multi-Layer Cascading Top-Down Page Shift Transition
-   Layers come from the top and shift the page:
-   Layer 1: Dark Charcoal / Slate Gray (#27272a)
-   Layer 2: Clean Brilliant White (#ffffff)
-   Layer 3: Deep Obsidian Black (#05070a)
+   Modern Top-to-Bottom Page Transition with Dynamic Centered Heading
+   Minimal Aesthetic: Light-Grey (#E5E5E5) & Editorial Bold (#171717)
    ========================================================================== */
-.page-shift-wrapper {
+
+.page-transition-overlay {
   position: fixed;
   inset: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: 99990;
+  background-color: #E5E5E5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   pointer-events: none;
   overflow: hidden;
-}
-
-.shift-layer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   transform: translateY(-100%);
-  transition: transform 0.45s cubic-bezier(0.76, 0, 0.24, 1);
+  transition: transform 0.36s cubic-bezier(0.76, 0, 0.24, 1);
   will-change: transform;
 }
 
-/* Layer 1: Dark Charcoal / Slate Gray */
-.shift-layer-gray {
-  background-color: #27272a;
-  z-index: 1;
-}
-
-/* Layer 2: Clean Brilliant White */
-.shift-layer-white {
-  background-color: #ffffff;
-  z-index: 2;
-}
-
-/* Layer 3: Deep Obsidian Black */
-.shift-layer-black {
-  background-color: #05070a;
-  z-index: 3;
-}
-
-/* Entering / Triggering page shift: Layers cascade DOWN from top (Gray -> White -> Black) */
-.page-shift-wrapper.shifting-in {
+/* While transition is actively running, absorb clicks to prevent concurrent navigation */
+.page-transition-overlay.is-active {
   pointer-events: auto;
 }
 
-.page-shift-wrapper.shifting-in .shift-layer-gray {
+/* 1. Slide down from top to cover the screen */
+.page-transition-overlay.slide-down {
   transform: translateY(0%);
-  transition-delay: 0s;
 }
 
-.page-shift-wrapper.shifting-in .shift-layer-white {
-  transform: translateY(0%);
-  transition-delay: 0.07s;
+/* 2. Animate upward to reveal the destination page */
+.page-transition-overlay.slide-up {
+  transform: translateY(-100%);
 }
 
-.page-shift-wrapper.shifting-in .shift-layer-black {
-  transform: translateY(0%);
-  transition-delay: 0.14s;
-}
-
-/* Revealing page: Layers cascade DOWN and OFF the screen (Black -> White -> Gray) */
-.page-shift-wrapper.shifting-out {
-  pointer-events: auto;
-}
-
-.page-shift-wrapper.shifting-out .shift-layer-black {
-  transform: translateY(100%);
-  transition-delay: 0s;
-}
-
-.page-shift-wrapper.shifting-out .shift-layer-white {
-  transform: translateY(100%);
-  transition-delay: 0.07s;
-}
-
-.page-shift-wrapper.shifting-out .shift-layer-gray {
-  transform: translateY(100%);
-  transition-delay: 0.14s;
-}
-
-/* Instant silent reset without reverse animation */
-.page-shift-wrapper.no-transition .shift-layer {
+/* Instant reset without animation */
+.page-transition-overlay.no-transition {
   transition: none !important;
-  transform: translateY(-100%) !important;
+}
+
+/* Centered heading container */
+.transition-heading-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 1.5rem;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* Dynamic Destination Page Heading */
+.transition-heading {
+  font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: clamp(3rem, 9vw, 6.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: #171717;
+  text-transform: uppercase;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              letter-spacing 0.32s ease,
+              filter 0.3s ease;
+  will-change: opacity, transform, filter;
+}
+
+/* Heading revealed in center */
+.page-transition-overlay.heading-visible .transition-heading {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Heading fades and glides upward as overlay lifts */
+.page-transition-overlay.heading-exit .transition-heading {
+  opacity: 0;
+  transform: translateY(-22px);
+  transition: opacity 0.22s cubic-bezier(0.4, 0, 1, 1), transform 0.24s cubic-bezier(0.4, 0, 1, 1);
+}
+
+/* --- Special Home Transition (HELLO.) --- */
+.transition-heading.is-home {
+  font-size: clamp(4.2rem, 13vw, 9.2rem);
+  letter-spacing: -0.04em;
+  transform: translateY(32px) scale(0.96);
+  filter: blur(6px);
+}
+
+.page-transition-overlay.heading-visible .transition-heading.is-home {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  letter-spacing: -0.02em;
+  filter: blur(0px);
+}
+
+.page-transition-overlay.heading-exit .transition-heading.is-home {
+  opacity: 0;
+  transform: translateY(-26px) scale(1.02);
+  filter: blur(5px);
+}
+
+/* Responsive Font Scaling for Mobile & Small Tablets */
+@media (max-width: 640px) {
+  .transition-heading {
+    font-size: clamp(2.3rem, 11vw, 3.8rem);
+    letter-spacing: -0.02em;
+  }
+  .transition-heading.is-home {
+    font-size: clamp(3.2rem, 15vw, 5.2rem);
+    letter-spacing: -0.03em;
+  }
+}
+
+/* Deprecated wrapper backward compatibility */
+.page-shift-wrapper {
+  display: none !important;
 }
 
 /* Reduced Motion Override */
 @media (prefers-reduced-motion: reduce) {
   .welcome-intro-screen,
-  .page-shift-wrapper {
+  .page-transition-overlay {
     display: none !important;
+    transition: none !important;
+  }
+  .transition-heading {
+    transition: none !important;
   }
 }

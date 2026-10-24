@@ -184,13 +184,6 @@ body.page-contact .mobile-nav-item.active {
   line-height: 1.5;
 }
 
-.contact-async-note {
-  font-size: 0.88rem;
-  color: #94a3b8;
-  line-height: 1.6;
-  margin-top: 1.25rem;
-}
-
 /* ==========================================================================
    Left Column: Context & Direct Communication Channels
    ========================================================================== */
@@ -237,7 +230,7 @@ body.page-contact .mobile-nav-item.active {
   font-size: 1.05rem;
   line-height: 1.7;
   color: var(--cnt-text-secondary);
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .contact-channels {
@@ -519,11 +512,15 @@ body.page-contact .footer-bottom {
   .contact-layout-grid {
     display: flex;
     flex-direction: column;
-    gap: 2.25rem;
+    gap: 1.25rem;
   }
 
   .contact-intro-col {
     order: 1;
+  }
+
+  .contact-statement {
+    margin-bottom: 0.25rem;
   }
 
   .contact-form-box {
@@ -532,7 +529,7 @@ body.page-contact .footer-bottom {
 
   .contact-channels-wrap {
     order: 3;
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
     width: 100%;
   }
 
@@ -546,8 +543,20 @@ body.page-contact .footer-bottom {
 
 @media (max-width: 600px) {
   .contact-section {
-    padding-top: 110px;
-    padding-bottom: 70px;
+    padding-top: 100px;
+    padding-bottom: 60px;
+  }
+
+  .contact-layout-grid {
+    gap: 1.15rem;
+  }
+
+  .contact-title {
+    margin-bottom: 0.85rem;
+  }
+
+  .contact-statement {
+    margin-bottom: 0;
   }
   
   .form-grid {

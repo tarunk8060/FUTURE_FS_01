@@ -166,7 +166,8 @@
 
 /* ==========================================================================
    Modern Top-to-Bottom Page Transition with Dynamic Centered Heading
-   Minimal Aesthetic: Light-Grey (#E5E5E5) & Editorial Bold (#171717)
+   Palette: Pure Brilliant White (#FFFFFF) & Luminous Porcelain (#F5F5F7)
+   Typography: #111111 Bold Sans-Serif with Signature Blur-Scale-Fade Reveal
    ========================================================================== */
 
 .page-transition-overlay {
@@ -175,10 +176,6 @@
   width: 100vw;
   height: 100vh;
   z-index: 99990;
-  background-color: #E5E5E5;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   pointer-events: none;
   overflow: hidden;
   transform: translateY(-100%);
@@ -191,19 +188,76 @@
   pointer-events: auto;
 }
 
-/* 1. Slide down from top to cover the screen */
-.page-transition-overlay.slide-down {
-  transform: translateY(0%);
+/* Layer 1: Pure Brilliant White Leading Curtain */
+.transition-layer-white {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  z-index: 1;
+  transform: translateY(-100%);
+  transition: transform 0.36s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
 }
 
-/* 2. Animate upward to reveal the destination page */
+/* Layer 2: Soft Luminous Porcelain Canvas with Centered Heading */
+.transition-layer-main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #ffffff 0%, #f6f6f8 50%, #ededf0 100%);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateY(-100%);
+  transition: transform 0.36s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+}
+
+/* Direct container slide down (Fallback if single container without inner layers) */
+.page-transition-overlay.slide-down {
+  transform: translateY(0%);
+  background: linear-gradient(180deg, #ffffff 0%, #f6f6f8 50%, #ededf0 100%);
+}
+
 .page-transition-overlay.slide-up {
   transform: translateY(-100%);
 }
 
+/* 1. Cascading Slide DOWN from top (Pure White leads first, Porcelain follows) */
+.page-transition-overlay.slide-down .transition-layer-white {
+  transform: translateY(0%);
+  transition-delay: 0s;
+}
+
+.page-transition-overlay.slide-down .transition-layer-main {
+  transform: translateY(0%);
+  transition-delay: 0.05s;
+}
+
+/* 2. Animate UPWARD to reveal destination page (Porcelain lifts first, Pure White follows) */
+.page-transition-overlay.slide-up .transition-layer-main {
+  transform: translateY(-100%);
+  transition-delay: 0s;
+}
+
+.page-transition-overlay.slide-up .transition-layer-white {
+  transform: translateY(-100%);
+  transition-delay: 0.05s;
+}
+
 /* Instant reset without animation */
-.page-transition-overlay.no-transition {
+.page-transition-overlay.no-transition,
+.page-transition-overlay.no-transition .transition-layer-white,
+.page-transition-overlay.no-transition .transition-layer-main {
   transition: none !important;
+  transform: translateY(-100%) !important;
 }
 
 /* Centered heading container */
@@ -216,69 +270,52 @@
   padding: 0 1.5rem;
   overflow: hidden;
   user-select: none;
+  z-index: 5;
 }
 
-/* Dynamic Destination Page Heading */
+/* Dynamic Destination Page Heading - ALL Words Use the Signature Home Blur-Scale-Fade Reveal */
 .transition-heading {
   font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  font-size: clamp(3rem, 9vw, 6.5rem);
+  font-size: clamp(3.2rem, 10.5vw, 7.5rem);
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
   line-height: 1.05;
-  color: #171717;
+  color: #111111;
   text-transform: uppercase;
   margin: 0;
   opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-              letter-spacing 0.32s ease,
-              filter 0.3s ease;
-  will-change: opacity, transform, filter;
-}
-
-/* Heading revealed in center */
-.page-transition-overlay.heading-visible .transition-heading {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Heading fades and glides upward as overlay lifts */
-.page-transition-overlay.heading-exit .transition-heading {
-  opacity: 0;
-  transform: translateY(-22px);
-  transition: opacity 0.22s cubic-bezier(0.4, 0, 1, 1), transform 0.24s cubic-bezier(0.4, 0, 1, 1);
-}
-
-/* --- Special Home Transition (HELLO.) --- */
-.transition-heading.is-home {
-  font-size: clamp(4.2rem, 13vw, 9.2rem);
-  letter-spacing: -0.04em;
   transform: translateY(32px) scale(0.96);
-  filter: blur(6px);
+  filter: blur(8px);
+  will-change: opacity, transform, filter, letter-spacing;
+  transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.36s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+              letter-spacing 0.36s ease;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.85);
 }
 
-.page-transition-overlay.heading-visible .transition-heading.is-home {
+/* Heading revealed in center: smooth unblur, scale settle, tracking expand */
+.page-transition-overlay.heading-visible .transition-heading {
   opacity: 1;
   transform: translateY(0) scale(1);
   letter-spacing: -0.02em;
   filter: blur(0px);
 }
 
-.page-transition-overlay.heading-exit .transition-heading.is-home {
+/* Heading fades and glides upward as overlay lifts */
+.page-transition-overlay.heading-exit .transition-heading {
   opacity: 0;
   transform: translateY(-26px) scale(1.02);
-  filter: blur(5px);
+  filter: blur(6px);
+  transition: opacity 0.22s cubic-bezier(0.4, 0, 1, 1),
+              transform 0.24s cubic-bezier(0.4, 0, 1, 1),
+              filter 0.22s cubic-bezier(0.4, 0, 1, 1);
 }
 
 /* Responsive Font Scaling for Mobile & Small Tablets */
 @media (max-width: 640px) {
   .transition-heading {
-    font-size: clamp(2.3rem, 11vw, 3.8rem);
-    letter-spacing: -0.02em;
-  }
-  .transition-heading.is-home {
-    font-size: clamp(3.2rem, 15vw, 5.2rem);
+    font-size: clamp(2.3rem, 11vw, 4rem);
     letter-spacing: -0.03em;
   }
 }

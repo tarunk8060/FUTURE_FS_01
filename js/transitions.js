@@ -130,12 +130,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function ensureOverlayLayers(overlay) {
+    if (!overlay) return;
+    if (!overlay.querySelector('.transition-layer-white')) {
+      const whiteLayer = document.createElement('div');
+      whiteLayer.className = 'transition-layer-white';
+      whiteLayer.setAttribute('aria-hidden', 'true');
+      overlay.prepend(whiteLayer);
+    }
+    const headingWrap = overlay.querySelector('.transition-heading-wrap');
+    if (headingWrap && !overlay.querySelector('.transition-layer-main')) {
+      const mainLayer = document.createElement('div');
+      mainLayer.className = 'transition-layer-main';
+      headingWrap.parentNode.insertBefore(mainLayer, headingWrap);
+      mainLayer.appendChild(headingWrap);
+    }
+  }
+
   async function performSmoothPageShift(targetUrl, pushHistory = true) {
     if (isNavigating) return;
     isNavigating = true;
 
     const overlay = document.getElementById('pageTransitionOverlay') || document.getElementById('pageShiftWrapper');
     const heading = document.getElementById('transitionHeading');
+    ensureOverlayLayers(overlay);
 
     // If reduced motion is preferred or overlay missing, perform instant content swap without animation delays
     if (!overlay || prefersReducedMotion) {
@@ -184,23 +202,18 @@ document.addEventListener('DOMContentLoaded', () => {
       const headingInfo = getDestinationHeading(targetUrl);
       if (heading) {
         heading.textContent = headingInfo.text;
-        if (headingInfo.isHome) {
-          heading.classList.add('is-home');
-        } else {
-          heading.classList.remove('is-home');
-        }
       }
 
       // Reset overlay state
       overlay.classList.remove('slide-up', 'heading-visible', 'heading-exit', 'no-transition');
       overlay.classList.add('is-active', 'slide-down');
 
-      // 3. Trigger heading entrance as overlay slides down
+      // 3. Trigger signature blur-scale fade entrance as overlay slides down
       setTimeout(() => {
         if (isNavigating) {
           overlay.classList.add('heading-visible');
         }
-      }, 140);
+      }, 120);
 
       // 4. Wait for overlay to completely cover screen (380ms) and for HTML fetch to complete
       const [htmlText] = await Promise.all([

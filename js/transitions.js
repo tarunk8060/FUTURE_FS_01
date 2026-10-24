@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const targetPath = targetUrl.split(/[?#]/)[0].split('/').pop() || 'index.html';
     const isTargetHome = targetPath === 'index.html' || targetPath === '';
 
-    document.querySelectorAll('.nav-link, .mobile-nav-item, .pill-nav__row').forEach(link => {
+    document.querySelectorAll('.nav-link, .mobile-nav-item, .pill-nav__row, .pill-nav__item').forEach(link => {
       const href = link.getAttribute('href');
       if (!href) return;
       const linkPath = href.split(/[?#]/)[0].split('/').pop() || 'index.html';
@@ -423,7 +423,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   bindMobileMenu();
 
-  // --- 5. React Bits Pill Nav: Continuous Dual-Spring Active & Hover Pill Navigation ---
+  // --- 5. React Bits Pill Nav: Authentic Continuous Dual-Spring & Clipped Ink Engine ---
   let desktopPillCleanup = null;
 
   function initDesktopHoverPill() {
@@ -432,35 +432,32 @@ document.addEventListener('DOMContentLoaded', () => {
       desktopPillCleanup = null;
     }
 
-    const navMenu = document.querySelector('.nav-menu-desktop');
-    if (!navMenu) return;
+    const nav = document.querySelector('.site-nav-desktop-wrap .pill-nav--desktop');
+    if (!nav) return;
 
-    // Ensure single shared hover pill element exists inside navMenu
-    let pill = navMenu.querySelector('.nav-hover-pill');
-    if (!pill) {
-      pill = document.createElement('div');
-      pill.className = 'nav-hover-pill';
-      pill.id = 'navHoverPill';
-      pill.setAttribute('aria-hidden', 'true');
-      navMenu.prepend(pill);
-    }
+    const track = nav.querySelector('.pill-nav__track');
+    const glideEl = nav.querySelector('.pill-nav__glide');
+    const ink = nav.querySelector('.pill-nav__ink');
+    const slotElements = Array.from(nav.querySelectorAll('.pill-nav__slot'));
+    const items = Array.from(nav.querySelectorAll('.pill-nav__item'));
+    const mark = nav.querySelector('.pill-nav__mark');
+    const logoLink = nav.querySelector('.pill-nav__logo-link');
 
-    const links = Array.from(navMenu.querySelectorAll('.nav-link'));
-    if (!links.length) return;
-
-    const getActiveIndex = () => {
-      const activeLink = navMenu.querySelector('.nav-link.active');
-      if (!activeLink) return 0;
-      const idx = links.indexOf(activeLink);
-      return idx >= 0 ? idx : 0;
-    };
+    if (!track || !slotElements.length) return;
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const clamp = (val, min, max) => Math.min(max, Math.max(min, val));
 
+    const getActiveIndex = () => {
+      const activeItem = nav.querySelector('.pill-nav__item.active, .pill-nav__item[aria-current="page"]');
+      if (!activeItem) return 0;
+      const idx = items.indexOf(activeItem);
+      return idx >= 0 ? idx : 0;
+    };
+
     // Physics parameters from React Bits PillNav
-    const bounce = 0.25;
-    const stretch = 0.45;
+    const bounce = 0.3;
+    const stretch = 0.5;
     const zeta = 1 - 0.55 * bounce;
     const base = 520;
 
@@ -476,58 +473,57 @@ document.addEventListener('DOMContentLoaded', () => {
       hover: -1,
       focus: false,
       sliding: false,
-      pressing: false
+      pressing: false,
+      waiting: false
     };
 
-    const getTargetIndex = () => {
-      if (state.hover >= 0) return state.hover;
-      return getActiveIndex();
-    };
-
-    let rects = [];
-    let lastTop = 0;
-    let lastHeight = 0;
+    const rects = [];
+    let trackWidth = 0;
+    let trackHeight = 0;
     let raf = 0;
     let last = 0;
 
     const measure = () => {
-      if (!navMenu) return;
-      const menuRect = navMenu.getBoundingClientRect();
-      rects = links.map(link => {
-        const linkRect = link.getBoundingClientRect();
-        return {
-          left: linkRect.left - menuRect.left,
-          top: linkRect.top - menuRect.top,
-          width: linkRect.width,
-          height: linkRect.height
-        };
+      trackWidth = track.offsetWidth;
+      trackHeight = track.offsetHeight;
+      slotElements.forEach((slot, index) => {
+        rects[index] = { left: slot.offsetLeft, width: slot.offsetWidth };
       });
+    };
+
+    const glideIndex = () => {
+      if (state.hover >= 0) return state.hover;
+      return getActiveIndex();
     };
 
     const sync = () => {
-      const targetIdx = getTargetIndex();
-      links.forEach((link, idx) => {
-        const isLit = idx === targetIdx;
-        link.toggleAttribute('data-lit', isLit);
+      const target = glideIndex();
+      slotElements.forEach((slot, index) => {
+        const isCurrent = target === index;
+        slot.toggleAttribute('data-lit', isCurrent);
       });
-      navMenu.toggleAttribute('data-focus', state.focus && state.hover >= 0);
+      nav.toggleAttribute('data-focus', state.focus && state.hover >= 0);
     };
 
     const render = () => {
-      if (!pill) return;
       const width = Math.max(0, state.x1 - state.x0);
       const scale = state.press * state.pop;
-      const target = rects[getTargetIndex()];
-      if (target) {
-        lastTop = target.top;
-        lastHeight = target.height;
-      }
+      const target = rects[glideIndex()];
       const squash = target ? 1 - clamp((width / Math.max(target.width, 1) - 1) * 0.3, 0, 0.14) : 1;
 
-      pill.style.width = `${width}px`;
-      pill.style.height = `${lastHeight}px`;
-      pill.style.transform = `translate3d(${state.x0}px, ${lastTop}px, 0) scale(${scale}, ${scale * squash})`;
-      pill.style.opacity = `${state.alpha}`;
+      if (glideEl) {
+        glideEl.style.width = `${width}px`;
+        glideEl.style.transform = `translate3d(${state.x0}px, 0, 0) scale(${scale}, ${scale * squash})`;
+        glideEl.style.opacity = `${state.alpha}`;
+      }
+
+      if (ink) {
+        const half = (width * scale) / 2;
+        const center = (state.x0 + state.x1) / 2;
+        const inset = (trackHeight * (1 - scale * squash)) / 2;
+        ink.style.clipPath = `inset(${inset}px ${trackWidth - center - half}px ${inset}px ${center - half}px round ${trackHeight / 2}px)`;
+        ink.style.opacity = `${state.alpha}`;
+      }
     };
 
     const tick = (now) => {
@@ -535,10 +531,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const dt = last ? Math.min(0.05, (now - last) / 1000) : 1 / 60;
       last = now;
 
-      const target = rects[getTargetIndex()];
+      const index = glideIndex();
+      const target = rects[index];
       let busy = false;
 
-      if (target) {
+      if (target && !state.waiting) {
         const t0 = target.left;
         const t1 = target.left + target.width;
 
@@ -548,7 +545,6 @@ document.addEventListener('DOMContentLoaded', () => {
           state.v0 = 0;
           state.v1 = 0;
         } else {
-          // React Bits dual-spring differential simulation
           const direction = Math.sign((t0 + t1) / 2 - (state.x0 + state.x1) / 2);
           const lead = base * (1 + 0.9 * stretch);
           const trail = base * (1 - 0.5 * stretch);
@@ -599,14 +595,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const enter = (index, event) => {
       if (event && event.pointerType === 'touch') return;
       if (window.innerWidth <= 680) return;
-
       measure();
-
-      if (state.hover >= 0 && state.hover !== index) {
-        state.sliding = true;
-      }
       state.hover = index;
       state.focus = false;
+      state.sliding = true;
       sync();
       wake();
     };
@@ -651,23 +643,33 @@ document.addEventListener('DOMContentLoaded', () => {
       wake();
     };
 
-    // Attach listeners to navigation links (supporting both pointerenter and mouseenter)
-    links.forEach((link, idx) => {
-      link.addEventListener('pointerenter', (e) => enter(idx, e));
-      link.addEventListener('mouseenter', (e) => enter(idx, e));
-      link.addEventListener('pointerdown', press);
-      link.addEventListener('focus', (e) => focus(idx, e));
-      link.addEventListener('blur', blur);
+    // Spin animation on logo mark (360 degrees)
+    const spin = (event) => {
+      if (!mark || (event && event.pointerType === 'touch') || mark.getAnimations().length) return;
+      if (reduce) return;
+      mark.animate([{ transform: 'rotate(0deg)' }, { transform: 'rotate(360deg)' }], {
+        duration: 900,
+        easing: 'cubic-bezier(0.65, 0, 0.25, 1)'
+      });
+    };
+
+    if (logoLink) {
+      logoLink.addEventListener('pointerenter', spin);
+    }
+
+    slotElements.forEach((slot, idx) => {
+      slot.addEventListener('pointerenter', (e) => enter(idx, e));
+      slot.addEventListener('mouseenter', (e) => enter(idx, e));
+      slot.addEventListener('pointerdown', press);
+      const link = slot.querySelector('.pill-nav__item');
+      if (link) {
+        link.addEventListener('focus', (e) => focus(idx, e));
+        link.addEventListener('blur', blur);
+      }
     });
 
-    navMenu.addEventListener('pointerleave', leave);
-    navMenu.addEventListener('mouseleave', leave);
-    const onFocusOut = (e) => {
-      if (!navMenu.contains(e.relatedTarget)) {
-        leave(e);
-      }
-    };
-    navMenu.addEventListener('focusout', onFocusOut);
+    track.addEventListener('pointerleave', leave);
+    track.addEventListener('mouseleave', leave);
 
     window.addEventListener('pointerup', release);
     window.addEventListener('pointercancel', release);
@@ -684,16 +686,14 @@ document.addEventListener('DOMContentLoaded', () => {
       render();
       wake();
     });
-    ro.observe(navMenu);
+    ro.observe(track);
 
     const initializePosition = () => {
       measure();
-      const target = rects[getTargetIndex()];
+      const target = rects[glideIndex()];
       if (target && target.width > 0) {
         state.x0 = target.left;
         state.x1 = target.left + target.width;
-        lastTop = target.top;
-        lastHeight = target.height;
         state.alpha = 1;
         render();
       }
@@ -705,7 +705,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(initializePosition, 250);
     document.fonts?.ready?.then(initializePosition).catch(() => {});
 
-    // Global reset method for clean transitions
     window.__resetDesktopPill = () => {
       state.hover = -1;
       sync();
@@ -714,10 +713,17 @@ document.addEventListener('DOMContentLoaded', () => {
     desktopPillCleanup = () => {
       if (raf) cancelAnimationFrame(raf);
       ro.disconnect();
+      if (logoLink) logoLink.removeEventListener('pointerenter', spin);
       window.removeEventListener('pointerup', release);
       window.removeEventListener('pointercancel', release);
       window.removeEventListener('resize', onResize);
-      navMenu.removeEventListener('focusout', onFocusOut);
+      track.removeEventListener('pointerleave', leave);
+      track.removeEventListener('mouseleave', leave);
+      slotElements.forEach((slot, idx) => {
+        slot.removeEventListener('pointerenter', (e) => enter(idx, e));
+        slot.removeEventListener('mouseenter', (e) => enter(idx, e));
+        slot.removeEventListener('pointerdown', press);
+      });
     };
   }
 

@@ -9,12 +9,12 @@
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ff6b2b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='2' y='7' width='20' height='14' rx='2' ry='2'></rect><path d='M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16'></path></svg>">
 
-  <link rel="stylesheet" href="css/base.css?v=2.3">
-  <link rel="stylesheet" href="css/transitions.css?v=2.3">
-  <link rel="stylesheet" href="css/home.css?v=2.3">
-  <link rel="stylesheet" href="css/projects.css?v=2.3">
-  <link rel="stylesheet" href="css/expertise.css?v=2.3">
-  <link rel="stylesheet" href="css/contact.css?v=2.3">
+  <link rel="stylesheet" href="css/base.css?v=2.4">
+  <link rel="stylesheet" href="css/transitions.css?v=2.4">
+  <link rel="stylesheet" href="css/home.css?v=2.4">
+  <link rel="stylesheet" href="css/projects.css?v=2.4">
+  <link rel="stylesheet" href="css/expertise.css?v=2.4">
+  <link rel="stylesheet" href="css/contact.css?v=2.4">
 </head>
 <body class="page-expertise">
   <!-- Accessible Skip Link -->
@@ -32,25 +32,58 @@
 
   <!-- Shared Header Navigation -->
   <header>
-    <!-- Desktop & Tablet Navigation (Old nav bar with Tarun.K on left, nav towards right) -->
-    <nav class="site-nav" id="siteNav" aria-label="Primary Navigation">
-      <div class="container nav-container">
-        <!-- Brand Wordmark on Left -->
-        <a href="index.html" class="brand-logo" aria-label="Tarun.K Home">
-          <span class="brand-symbol" aria-hidden="true">&gt;_</span>
-          <span>Tarun<span style="color: var(--exp-orange);">.K</span></span>
-        </a>
+    <!-- Desktop & Tablet Navigation: Authentic React Bits Pill Nav (https://reactbits.dev/components/pill-nav) -->
+    <div class="site-nav-desktop-wrap" id="siteNavDesktopWrap">
+      <nav class="pill-nav pill-nav--desktop" data-layout="split" aria-label="Primary Navigation">
+        <!-- Logo Pill (Left) -->
+        <span class="pill-nav__logo pill-nav__surface">
+          <a href="index.html" class="pill-nav__logo-link" aria-label="Tarun.K Home">
+            <span class="pill-nav__mark">&gt;_</span>
+          </a>
+          <span class="pill-nav__rim"></span>
+        </span>
 
-        <!-- Desktop Navigation Links on Right with React Bits–Inspired Shared Hover Pill -->
-        <ul class="nav-menu-desktop" id="navMenuDesktop" role="menubar">
-          <div class="nav-hover-pill" id="navHoverPill" aria-hidden="true"></div>
-          <li role="none"><a href="index.html" class="nav-link" role="menuitem">Home</a></li>
-          <li role="none"><a href="project.html" class="nav-link" role="menuitem">Projects</a></li>
-          <li role="none"><a href="expertise.html" class="nav-link active" role="menuitem" aria-current="page">My Expertise</a></li>
-          <li role="none"><a href="contact.html" class="nav-link" role="menuitem">Contact</a></li>
-        </ul>
-      </div>
-    </nav>
+        <!-- Links Bar Pill (Right) -->
+        <div class="pill-nav__bar pill-nav__surface">
+          <div class="pill-nav__track">
+            <ul class="pill-nav__list" role="menubar">
+              <li class="pill-nav__slot" role="none">
+                <a href="index.html" class="pill-nav__item" role="menuitem">
+                  <span class="pill-nav__face">Home</span>
+                </a>
+              </li>
+              <li class="pill-nav__slot" role="none">
+                <a href="project.html" class="pill-nav__item" role="menuitem">
+                  <span class="pill-nav__face">Projects</span>
+                </a>
+              </li>
+              <li class="pill-nav__slot" role="none">
+                <a href="expertise.html" class="pill-nav__item active" role="menuitem" aria-current="page">
+                  <span class="pill-nav__face">My Expertise</span>
+                </a>
+              </li>
+              <li class="pill-nav__slot" role="none">
+                <a href="contact.html" class="pill-nav__item" role="menuitem">
+                  <span class="pill-nav__face">Contact</span>
+                </a>
+              </li>
+            </ul>
+
+            <!-- Sliding Animated Capsule -->
+            <span class="pill-nav__glide" aria-hidden="true"></span>
+
+            <!-- High-Contrast Clipped Ink Text Layer -->
+            <div class="pill-nav__ink" aria-hidden="true">
+              <span class="pill-nav__ink-item">Home</span>
+              <span class="pill-nav__ink-item">Projects</span>
+              <span class="pill-nav__ink-item">My Expertise</span>
+              <span class="pill-nav__ink-item">Contact</span>
+            </div>
+          </div>
+          <span class="pill-nav__rim"></span>
+        </div>
+      </nav>
+    </div>
 
     <!-- Mobile View: React Bits Floating Pill Nav (https://reactbits.dev/components/pill-nav) -->
     <div class="pill-nav-mobile-wrap">
@@ -288,8 +321,8 @@
   </footer>
   </div>
 
-  <script src="js/transitions.js?v=2.3"></script>
-  <script src="js/projects.js?v=2.3"></script>
-  <script src="js/contact.js?v=2.3"></script>
+  <script src="js/transitions.js?v=2.4"></script>
+  <script src="js/projects.js?v=2.4"></script>
+  <script src="js/contact.js?v=2.4"></script>
 </body>
 </html>

@@ -84,29 +84,7 @@ body.page-home .site-nav.scrolled {
   -webkit-backdrop-filter: blur(20px);
 }
 
-body.page-home .nav-menu-desktop {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--home-border);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-body.page-home .nav-link {
-  color: var(--home-text-muted);
-  transition: all 0.2s ease;
-}
-
-body.page-home .nav-link:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.08);
-}
-
-body.page-home .nav-link.active {
-  color: #000000;
-  background: #ffffff;
-  box-shadow: 0 2px 12px rgba(255, 255, 255, 0.3);
-  font-weight: 600;
-}
+/* Desktop navbar styles are inherited from base.css for shared hover pill */
 
 /* ==========================================================================
    Hero Section Layout

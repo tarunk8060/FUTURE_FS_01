@@ -78,26 +78,7 @@ body.page-projects .site-nav.scrolled {
   -webkit-backdrop-filter: blur(20px);
 }
 
-body.page-projects .nav-menu-desktop {
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid var(--proj-border);
-}
-
-body.page-projects .nav-link {
-  color: rgba(226, 232, 240, 0.8);
-}
-
-body.page-projects .nav-link:hover {
-  color: #ffffff;
-  background: rgba(168, 85, 247, 0.14);
-}
-
-body.page-projects .nav-link.active {
-  color: #ffffff;
-  background: linear-gradient(135deg, var(--proj-purple-vivid), var(--proj-purple-deep));
-  box-shadow: 0 4px 16px var(--proj-purple-glow);
-  font-weight: 700;
-}
+/* Desktop navbar styles are inherited from base.css for shared hover pill */
 
 body.page-projects .mobile-nav-overlay {
   background: rgba(6, 7, 11, 0.97);

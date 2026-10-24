@@ -308,6 +308,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     e.preventDefault();
 
+    // Hide desktop hover pill on click
+    const desktopPill = document.querySelector('.nav-hover-pill');
+    if (desktopPill) desktopPill.classList.remove('is-visible');
+
     // Close PillNav if open
     const pillNav = document.getElementById('pillNav');
     const pillToggle = document.getElementById('pillNavToggle');
@@ -416,10 +420,107 @@ document.addEventListener('DOMContentLoaded', () => {
 
   bindMobileMenu();
 
-  // --- 5. Page-Specific Dynamic Re-initialization ---
+  // --- 5. React Bits–Inspired Shared Animated Hover Pill Navigation ---
+  function initDesktopHoverPill() {
+    const navMenu = document.querySelector('.nav-menu-desktop');
+    if (!navMenu) return;
+
+    // Ensure single shared hover pill element exists inside navMenu
+    let pill = navMenu.querySelector('.nav-hover-pill');
+    if (!pill) {
+      pill = document.createElement('div');
+      pill.className = 'nav-hover-pill';
+      pill.setAttribute('aria-hidden', 'true');
+      navMenu.prepend(pill);
+    }
+
+    const links = navMenu.querySelectorAll('.nav-link');
+    if (!links.length) return;
+
+    let activeHoveredLink = null;
+
+    function movePillTo(link, immediate = false) {
+      if (!pill || !navMenu) return;
+
+      const linkRect = link.getBoundingClientRect();
+      const menuRect = navMenu.getBoundingClientRect();
+
+      const left = linkRect.left - menuRect.left;
+      const top = linkRect.top - menuRect.top;
+      const width = linkRect.width;
+      const height = linkRect.height;
+
+      const wasVisible = pill.classList.contains('is-visible');
+
+      if (!wasVisible || immediate) {
+        // First entry or re-entry after leave: snap position silently, then fade in
+        pill.style.transition = 'opacity 0.2s ease';
+        pill.style.transform = `translate3d(${left}px, ${top}px, 0)`;
+        pill.style.width = `${width}px`;
+        pill.style.height = `${height}px`;
+        void pill.offsetHeight; // force reflow
+        pill.style.transition = '';
+      } else {
+        // Smoothly glide and resize between navigation headings
+        pill.style.transform = `translate3d(${left}px, ${top}px, 0)`;
+        pill.style.width = `${width}px`;
+        pill.style.height = `${height}px`;
+      }
+
+      pill.classList.add('is-visible');
+      activeHoveredLink = link;
+    }
+
+    function hidePill() {
+      if (!pill) return;
+      pill.classList.remove('is-visible');
+      activeHoveredLink = null;
+    }
+
+    // Bind pointer events on each link
+    links.forEach(link => {
+      // Ignore touch events to prevent stuck pills on touch screens
+      link.onpointerenter = (e) => {
+        if (e.pointerType === 'touch') return;
+        const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        if (!hasFinePointer && e.pointerType !== 'mouse') return;
+        movePillTo(link);
+      };
+
+      // Keyboard focus support
+      link.onfocus = () => {
+        movePillTo(link);
+      };
+    });
+
+    // Fade out when leaving the navbar container
+    navMenu.onpointerleave = (e) => {
+      if (e.pointerType === 'touch') return;
+      hidePill();
+    };
+
+    // Keyboard focusout support
+    navMenu.onfocusout = (e) => {
+      if (!navMenu.contains(e.relatedTarget)) {
+        hidePill();
+      }
+    };
+
+    // Keep pill aligned if window resizes while hovering
+    window.addEventListener('resize', () => {
+      if (activeHoveredLink && pill.classList.contains('is-visible')) {
+        movePillTo(activeHoveredLink, true);
+      }
+    });
+  }
+
+  initDesktopHoverPill();
+
+  // --- 6. Page-Specific Dynamic Re-initialization ---
   function initializePageBehaviors() {
     attachLinkInterceptors();
     bindMobileMenu();
+    initDesktopHoverPill();
 
     // Initialize ShapeGrid if on home page
     const canvas = document.getElementById('shapegrid-canvas');

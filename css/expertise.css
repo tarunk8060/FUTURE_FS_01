@@ -83,27 +83,7 @@ body.page-expertise .brand-symbol {
   background: var(--exp-orange-soft);
 }
 
-body.page-expertise .nav-menu-desktop {
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid var(--exp-border);
-  backdrop-filter: blur(16px);
-}
-
-body.page-expertise .nav-link {
-  color: var(--exp-text-muted);
-}
-
-body.page-expertise .nav-link:hover {
-  color: var(--exp-orange);
-  background: var(--exp-orange-soft);
-}
-
-body.page-expertise .nav-link.active {
-  color: #ffffff;
-  background: linear-gradient(135deg, var(--exp-orange), #ea580c);
-  box-shadow: 0 4px 14px var(--exp-orange-glow);
-  font-weight: 600;
-}
+/* Desktop navbar styles are inherited from base.css for shared hover pill */
 
 body.page-expertise .mobile-nav-overlay {
   background: rgba(7, 9, 14, 0.95);

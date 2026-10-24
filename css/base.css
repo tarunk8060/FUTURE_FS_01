@@ -92,8 +92,13 @@ h1, h2, h3, h4, h5, .font-heading {
   line-height: 1.15;
 }
 
-a {
+a, a:visited {
   text-decoration: none;
+  color: inherit;
+}
+
+.nav-link:visited,
+.pill-nav__row:visited {
   color: inherit;
 }
 

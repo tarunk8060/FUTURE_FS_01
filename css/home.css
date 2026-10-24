@@ -737,17 +737,16 @@ body.page-home .nav-link.active {
     font-size: 0.88rem;
   }
 
-  .dock-cards-strip {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
+  /* Remove Technical Capabilities & Specialties in mobile view as requested */
+  .canvas-bottom-dock {
+    display: none !important;
   }
+}
 
-  .dock-item-card {
-    padding: 0.75rem 0.5rem;
-  }
-
-  .dock-label {
-    font-size: 0.75rem;
+@media (max-width: 680px) {
+  /* Ensure Technical Capabilities & Specialties is hidden across all mobile widths */
+  .canvas-bottom-dock {
+    display: none !important;
   }
 }
 

@@ -92,13 +92,15 @@ h1, h2, h3, h4, h5, .font-heading {
   line-height: 1.15;
 }
 
-a, a:visited {
+a {
   text-decoration: none;
   color: inherit;
 }
 
-.nav-link:visited,
-.pill-nav__row:visited {
+/* Guard navbar & footer links against browser visited default purple */
+.site-nav a:visited,
+.pill-nav a:visited,
+.site-footer a:visited {
   color: inherit;
 }
 

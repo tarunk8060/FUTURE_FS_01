@@ -128,6 +128,10 @@ document.addEventListener('DOMContentLoaded', () => {
         link.removeAttribute('aria-current');
       }
     });
+
+    if (window.__resetDesktopPill) {
+      window.__resetDesktopPill();
+    }
   }
 
   function ensureOverlayLayers(overlay) {
@@ -213,12 +217,12 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isNavigating) {
           overlay.classList.add('heading-visible');
         }
-      }, 140);
+      }, 160);
 
-      // 4. Wait for white overlay to completely cover screen (460ms) and for HTML fetch to complete
+      // 4. Wait for white overlay to completely cover screen (600ms) and for HTML fetch to complete
       const [htmlText] = await Promise.all([
         fetchPromise,
-        new Promise(r => setTimeout(r, 460))
+        new Promise(r => setTimeout(r, 600))
       ]);
 
       const parser = new DOMParser();
@@ -265,10 +269,10 @@ document.addEventListener('DOMContentLoaded', () => {
       // Re-initialize dynamic page behaviors
       initializePageBehaviors();
 
-      // 6. Hold while destination heading is prominently displayed (~320ms)
-      await new Promise(r => setTimeout(r, 320));
+      // 6. Hold while destination heading is prominently displayed (~400ms)
+      await new Promise(r => setTimeout(r, 400));
 
-      // 7. Animate heading out and animate white overlay UPWARD to reveal destination page (~460ms)
+      // 7. Animate heading out and animate white overlay UPWARD to reveal destination page (~600ms)
       overlay.classList.add('heading-exit');
       overlay.classList.remove('slide-down');
       overlay.classList.add('slide-up');
@@ -277,7 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         overlay.classList.remove('is-active', 'slide-up', 'heading-visible', 'heading-exit');
         isNavigating = false;
-      }, 460);
+      }, 600);
 
     } catch (err) {
       console.warn('Navigation fallback due to fetch error:', err);
@@ -423,7 +427,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   bindMobileMenu();
 
-  // --- 5. React Bits Pill Nav: Authentic Continuous Dual-Spring & Clipped Ink Engine ---
+  // --- 5. Classic Desktop Navbar: Liquid Fluid Spring Hover Capsule ---
   let desktopPillCleanup = null;
 
   function initDesktopHoverPill() {
@@ -432,34 +436,36 @@ document.addEventListener('DOMContentLoaded', () => {
       desktopPillCleanup = null;
     }
 
-    const nav = document.querySelector('.site-nav-desktop-wrap .pill-nav--desktop');
-    if (!nav) return;
+    const navMenu = document.getElementById('navMenuDesktop');
+    if (!navMenu) return;
 
-    const track = nav.querySelector('.pill-nav__track');
-    const glideEl = nav.querySelector('.pill-nav__glide');
-    const ink = nav.querySelector('.pill-nav__ink');
-    const slotElements = Array.from(nav.querySelectorAll('.pill-nav__slot'));
-    const items = Array.from(nav.querySelectorAll('.pill-nav__item'));
-    const mark = nav.querySelector('.pill-nav__mark');
-    const logoLink = nav.querySelector('.pill-nav__logo-link');
+    let pill = navMenu.querySelector('.nav-hover-pill');
+    if (!pill) {
+      pill = document.createElement('div');
+      pill.className = 'nav-hover-pill';
+      pill.id = 'navHoverPill';
+      pill.setAttribute('aria-hidden', 'true');
+      navMenu.prepend(pill);
+    }
 
-    if (!track || !slotElements.length) return;
+    const links = Array.from(navMenu.querySelectorAll('.nav-link'));
+    if (!links.length) return;
+
+    const getActiveIndex = () => {
+      const activeLink = navMenu.querySelector('.nav-link.active');
+      if (!activeLink) return 0;
+      const idx = links.indexOf(activeLink);
+      return idx >= 0 ? idx : 0;
+    };
 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const clamp = (val, min, max) => Math.min(max, Math.max(min, val));
 
-    const getActiveIndex = () => {
-      const activeItem = nav.querySelector('.pill-nav__item.active, .pill-nav__item[aria-current="page"]');
-      if (!activeItem) return 0;
-      const idx = items.indexOf(activeItem);
-      return idx >= 0 ? idx : 0;
-    };
-
-    // Physics parameters from React Bits PillNav
-    const bounce = 0.3;
-    const stretch = 0.5;
-    const zeta = 1 - 0.55 * bounce;
-    const base = 520;
+    // Refined buttery spring physics for smooth, luxurious glide
+    const bounce = 0.18;
+    const stretch = 0.35;
+    const zeta = 0.92;
+    const base = 420;
 
     const state = {
       x0: 0,
@@ -473,57 +479,58 @@ document.addEventListener('DOMContentLoaded', () => {
       hover: -1,
       focus: false,
       sliding: false,
-      pressing: false,
-      waiting: false
+      pressing: false
     };
 
-    const rects = [];
-    let trackWidth = 0;
-    let trackHeight = 0;
-    let raf = 0;
-    let last = 0;
-
-    const measure = () => {
-      trackWidth = track.offsetWidth;
-      trackHeight = track.offsetHeight;
-      slotElements.forEach((slot, index) => {
-        rects[index] = { left: slot.offsetLeft, width: slot.offsetWidth };
-      });
-    };
-
-    const glideIndex = () => {
+    const getTargetIndex = () => {
       if (state.hover >= 0) return state.hover;
       return getActiveIndex();
     };
 
-    const sync = () => {
-      const target = glideIndex();
-      slotElements.forEach((slot, index) => {
-        const isCurrent = target === index;
-        slot.toggleAttribute('data-lit', isCurrent);
+    let rects = [];
+    let lastTop = 0;
+    let lastHeight = 0;
+    let raf = 0;
+    let last = 0;
+
+    const measure = () => {
+      if (!navMenu) return;
+      const menuRect = navMenu.getBoundingClientRect();
+      rects = links.map(link => {
+        const linkRect = link.getBoundingClientRect();
+        return {
+          left: linkRect.left - menuRect.left,
+          top: linkRect.top - menuRect.top,
+          width: linkRect.width,
+          height: linkRect.height
+        };
       });
-      nav.toggleAttribute('data-focus', state.focus && state.hover >= 0);
+    };
+
+    const sync = () => {
+      const targetIdx = getTargetIndex();
+      links.forEach((link, idx) => {
+        const isLit = idx === targetIdx;
+        link.toggleAttribute('data-lit', isLit);
+      });
+      navMenu.toggleAttribute('data-focus', state.focus && state.hover >= 0);
     };
 
     const render = () => {
+      if (!pill) return;
       const width = Math.max(0, state.x1 - state.x0);
       const scale = state.press * state.pop;
-      const target = rects[glideIndex()];
+      const target = rects[getTargetIndex()];
+      if (target) {
+        lastTop = target.top;
+        lastHeight = target.height;
+      }
       const squash = target ? 1 - clamp((width / Math.max(target.width, 1) - 1) * 0.3, 0, 0.14) : 1;
 
-      if (glideEl) {
-        glideEl.style.width = `${width}px`;
-        glideEl.style.transform = `translate3d(${state.x0}px, 0, 0) scale(${scale}, ${scale * squash})`;
-        glideEl.style.opacity = `${state.alpha}`;
-      }
-
-      if (ink) {
-        const half = (width * scale) / 2;
-        const center = (state.x0 + state.x1) / 2;
-        const inset = (trackHeight * (1 - scale * squash)) / 2;
-        ink.style.clipPath = `inset(${inset}px ${trackWidth - center - half}px ${inset}px ${center - half}px round ${trackHeight / 2}px)`;
-        ink.style.opacity = `${state.alpha}`;
-      }
+      pill.style.width = `${width}px`;
+      pill.style.height = `${lastHeight}px`;
+      pill.style.transform = `translate3d(${state.x0}px, ${lastTop}px, 0) scale(${scale}, ${scale * squash})`;
+      pill.style.opacity = `${state.alpha}`;
     };
 
     const tick = (now) => {
@@ -531,11 +538,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const dt = last ? Math.min(0.05, (now - last) / 1000) : 1 / 60;
       last = now;
 
-      const index = glideIndex();
-      const target = rects[index];
+      const target = rects[getTargetIndex()];
       let busy = false;
 
-      if (target && !state.waiting) {
+      if (target) {
         const t0 = target.left;
         const t1 = target.left + target.width;
 
@@ -545,6 +551,7 @@ document.addEventListener('DOMContentLoaded', () => {
           state.v0 = 0;
           state.v1 = 0;
         } else {
+          // Dual-spring differential simulation for smooth elastic fluid movement
           const direction = Math.sign((t0 + t1) / 2 - (state.x0 + state.x1) / 2);
           const lead = base * (1 + 0.9 * stretch);
           const trail = base * (1 - 0.5 * stretch);
@@ -595,10 +602,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const enter = (index, event) => {
       if (event && event.pointerType === 'touch') return;
       if (window.innerWidth <= 768) return;
+
       measure();
+
+      if (state.hover >= 0 && state.hover !== index) {
+        state.sliding = true;
+      }
       state.hover = index;
       state.focus = false;
-      state.sliding = true;
       sync();
       wake();
     };
@@ -643,33 +654,23 @@ document.addEventListener('DOMContentLoaded', () => {
       wake();
     };
 
-    // Spin animation on logo mark (360 degrees)
-    const spin = (event) => {
-      if (!mark || (event && event.pointerType === 'touch') || mark.getAnimations().length) return;
-      if (reduce) return;
-      mark.animate([{ transform: 'rotate(0deg)' }, { transform: 'rotate(360deg)' }], {
-        duration: 900,
-        easing: 'cubic-bezier(0.65, 0, 0.25, 1)'
-      });
-    };
-
-    if (logoLink) {
-      logoLink.addEventListener('pointerenter', spin);
-    }
-
-    slotElements.forEach((slot, idx) => {
-      slot.addEventListener('pointerenter', (e) => enter(idx, e));
-      slot.addEventListener('mouseenter', (e) => enter(idx, e));
-      slot.addEventListener('pointerdown', press);
-      const link = slot.querySelector('.pill-nav__item');
-      if (link) {
-        link.addEventListener('focus', (e) => focus(idx, e));
-        link.addEventListener('blur', blur);
-      }
+    // Attach listeners to navigation links (supporting pointerenter and mouseenter)
+    links.forEach((link, idx) => {
+      link.addEventListener('pointerenter', (e) => enter(idx, e));
+      link.addEventListener('mouseenter', (e) => enter(idx, e));
+      link.addEventListener('pointerdown', press);
+      link.addEventListener('focus', (e) => focus(idx, e));
+      link.addEventListener('blur', blur);
     });
 
-    track.addEventListener('pointerleave', leave);
-    track.addEventListener('mouseleave', leave);
+    navMenu.addEventListener('pointerleave', leave);
+    navMenu.addEventListener('mouseleave', leave);
+    const onFocusOut = (e) => {
+      if (!navMenu.contains(e.relatedTarget)) {
+        leave(e);
+      }
+    };
+    navMenu.addEventListener('focusout', onFocusOut);
 
     window.addEventListener('pointerup', release);
     window.addEventListener('pointercancel', release);
@@ -686,14 +687,16 @@ document.addEventListener('DOMContentLoaded', () => {
       render();
       wake();
     });
-    ro.observe(track);
+    ro.observe(navMenu);
 
     const initializePosition = () => {
       measure();
-      const target = rects[glideIndex()];
+      const target = rects[getTargetIndex()];
       if (target && target.width > 0) {
         state.x0 = target.left;
         state.x1 = target.left + target.width;
+        lastTop = target.top;
+        lastHeight = target.height;
         state.alpha = 1;
         render();
       }
@@ -705,25 +708,30 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(initializePosition, 250);
     document.fonts?.ready?.then(initializePosition).catch(() => {});
 
+    // Global reset method for clean transitions
     window.__resetDesktopPill = () => {
       state.hover = -1;
+      measure();
+      const target = rects[getTargetIndex()];
+      if (target && target.width > 0) {
+        state.x0 = target.left;
+        state.x1 = target.left + target.width;
+        lastTop = target.top;
+        lastHeight = target.height;
+        state.alpha = 1;
+        render();
+      }
       sync();
+      wake();
     };
 
     desktopPillCleanup = () => {
       if (raf) cancelAnimationFrame(raf);
       ro.disconnect();
-      if (logoLink) logoLink.removeEventListener('pointerenter', spin);
       window.removeEventListener('pointerup', release);
       window.removeEventListener('pointercancel', release);
       window.removeEventListener('resize', onResize);
-      track.removeEventListener('pointerleave', leave);
-      track.removeEventListener('mouseleave', leave);
-      slotElements.forEach((slot, idx) => {
-        slot.removeEventListener('pointerenter', (e) => enter(idx, e));
-        slot.removeEventListener('mouseenter', (e) => enter(idx, e));
-        slot.removeEventListener('pointerdown', press);
-      });
+      navMenu.removeEventListener('focusout', onFocusOut);
     };
   }
 

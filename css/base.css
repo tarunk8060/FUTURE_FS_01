@@ -5,7 +5,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
 @import "pill-nav.css";
-@import "pill-nav-desktop.css";
 
 *, *::before, *::after {
   margin: 0;
@@ -28,6 +27,8 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
@@ -38,6 +39,7 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   display: flex;
   flex-direction: column;
 }
@@ -553,8 +555,8 @@ body.page-home .nav-link.active:not([data-lit]) {
 /* ==========================================================================
    Navigation Responsive Isolation: Mobile vs Desktop (Breakpoint: 768px)
    ========================================================================== */
-.site-nav-desktop-wrap {
-  display: none !important;
+.site-nav {
+  display: flex !important;
 }
 
 .pill-nav-mobile-wrap {
@@ -563,6 +565,7 @@ body.page-home .nav-link.active:not([data-lit]) {
 
 /* Mobile View (<= 768px): Strict display of mobile floating pill only */
 @media (max-width: 768px) {
+  .site-nav,
   .site-nav-desktop-wrap,
   .pill-nav--desktop,
   #siteNavDesktopWrap {
@@ -570,9 +573,6 @@ body.page-home .nav-link.active:not([data-lit]) {
   }
   .pill-nav-mobile-wrap {
     display: flex !important;
-  }
-  .site-nav {
-    display: none !important;
   }
   .mobile-toggle {
     display: none !important;
@@ -596,12 +596,30 @@ body.page-home .nav-link.active:not([data-lit]) {
   }
 }
 
-/* Desktop & Tablet View (>= 769px): Authentic React Bits desktop Pill Nav */
+/* Desktop & Tablet View (>= 769px): Classic Nav with Brand on Left and Navigation Pill on Right */
 @media (min-width: 769px) {
-  .site-nav-desktop-wrap {
+  .site-nav {
     display: flex !important;
   }
+  .site-nav-desktop-wrap,
   .pill-nav-mobile-wrap {
     display: none !important;
   }
 }
+
+/* Smooth Interactive Elements across the Webpage */
+.project-card,
+.resume-preview-card,
+.dock-item-card,
+.expertise-card,
+.contact-channel-card,
+.channel-card,
+.btn-solid-white,
+.btn-ghost-white,
+.btn-contact-submit {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+

@@ -53,9 +53,9 @@ function initProjectBehaviors() {
 
   // --- Filtering ---
   const filterBtns = document.querySelectorAll('.filter-btn');
+  const optionCardBtns = document.querySelectorAll('.option-card-btn');
   const projectCards = document.querySelectorAll('.project-card');
   const filterCount = document.getElementById('filterCount');
-  const mobileFilterSelect = document.getElementById('mobileFilterSelect');
   const mobileFilterCount = document.getElementById('mobileFilterCount');
 
   function setProjectFilter(filter) {
@@ -73,28 +73,34 @@ function initProjectBehaviors() {
     if (filterCount) filterCount.textContent = visible;
     if (mobileFilterCount) mobileFilterCount.textContent = visible;
 
+    // Sync desktop filter buttons
     filterBtns.forEach(b => {
       const isMatch = b.getAttribute('data-filter') === filter;
       b.classList.toggle('active', isMatch);
       b.setAttribute('aria-selected', isMatch ? 'true' : 'false');
     });
 
-    if (mobileFilterSelect && mobileFilterSelect.value !== filter) {
-      mobileFilterSelect.value = filter;
-    }
+    // Sync mobile option cards
+    optionCardBtns.forEach(b => {
+      const isMatch = b.getAttribute('data-filter') === filter;
+      b.classList.toggle('active', isMatch);
+      b.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+    });
   }
 
+  // Desktop buttons
   filterBtns.forEach(btn => {
     btn.onclick = () => {
       setProjectFilter(btn.getAttribute('data-filter'));
     };
   });
 
-  if (mobileFilterSelect) {
-    mobileFilterSelect.onchange = (e) => {
-      setProjectFilter(e.target.value);
+  // Mobile option cards
+  optionCardBtns.forEach(btn => {
+    btn.onclick = () => {
+      setProjectFilter(btn.getAttribute('data-filter'));
     };
-  }
+  });
 
   // --- Architecture Modal Dialog ---
   const modalOverlay = document.getElementById('projectModal');

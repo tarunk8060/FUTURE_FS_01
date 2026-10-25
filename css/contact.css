@@ -573,9 +573,15 @@ body.page-contact .footer-bottom {
   }
 }
 
+@media (max-width: 768px) {
+  .contact-section {
+    padding-top: 120px;
+  }
+}
+
 @media (max-width: 600px) {
   .contact-section {
-    padding-top: 95px;
+    padding-top: 120px;
     padding-bottom: 60px;
   }
 

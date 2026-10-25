@@ -664,21 +664,28 @@ body.page-home .site-nav.scrolled {
     padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 24px));
   }
 
-  /* Compact, beautifully proportioned mobile technical meta header */
+  .home-hero-container {
+    padding-left: 1.1rem !important;
+    padding-right: 1.1rem !important;
+  }
+
+  /* Div 1: Technical Meta Header Bar - expanded a bit on mobile */
   .home-meta-header {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: 0.35rem 0.75rem;
-    padding: 0.5rem 0.85rem;
-    margin-bottom: 0.95rem;
-    font-size: 0.74rem;
+    gap: 0.45rem 0.85rem;
+    padding: 0.65rem 1rem;
+    margin-bottom: 1.15rem;
+    font-size: 0.76rem;
     letter-spacing: 0.06em;
-    background: rgba(255, 255, 255, 0.035);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.045);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .meta-item {
@@ -694,49 +701,64 @@ body.page-home .site-nav.scrolled {
   }
 
   .meta-item strong {
-    font-size: 0.75rem;
+    font-size: 0.76rem;
     color: #f4f4f5;
     font-weight: 600;
   }
 
+  /* Div 2: Master Framed Technical Display Canvas - expanded a bit on mobile */
   .framed-device-canvas {
-    padding: 1.6rem 1.25rem;
-    border-radius: 18px;
+    padding: 2.15rem 1.45rem;
+    border-radius: 22px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .canvas-main-grid {
+    gap: 2.25rem;
+  }
+
+  .canvas-hero-content {
+    width: 100%;
   }
 
   .home-headline {
-    font-size: clamp(2rem, 7.5vw, 2.65rem);
-    line-height: 1.15;
-    margin-bottom: 1rem;
+    font-size: clamp(2.1rem, 7.8vw, 2.75rem);
+    line-height: 1.12;
+    margin-bottom: 1.05rem;
   }
 
   .home-subtext {
     font-size: 1.05rem;
-    line-height: 1.6;
-    margin-bottom: 1.45rem;
+    line-height: 1.62;
+    margin-bottom: 1.6rem;
   }
 
   .mono-tag-pill {
-    font-size: 0.78rem;
-    padding: 0.32rem 0.75rem;
+    font-size: 0.8rem;
+    padding: 0.38rem 0.88rem;
   }
 
   .mono-status-pill {
-    font-size: 0.82rem;
+    font-size: 0.84rem;
   }
 
   .home-actions {
     flex-direction: column;
     width: 100%;
-    gap: 0.75rem;
+    gap: 0.8rem;
   }
 
   .btn-solid-white,
   .btn-ghost-white {
     width: 100%;
     justify-content: center;
-    padding: 0.85rem 1.35rem;
-    font-size: 0.98rem;
+    padding: 0.92rem 1.45rem;
+    font-size: 1.02rem;
+  }
+
+  .resume-preview-card {
+    width: 100%;
   }
 
   /* Remove Technical Capabilities & Specialties in mobile view as requested */
@@ -753,22 +775,33 @@ body.page-home .site-nav.scrolled {
 }
 
 @media (max-width: 400px) {
+  .home-hero-container {
+    padding-left: 0.85rem !important;
+    padding-right: 0.85rem !important;
+  }
+
   .home-meta-header {
-    font-size: 0.58rem;
-    padding: 0.35rem 0.55rem;
-    gap: 0.25rem 0.45rem;
+    font-size: 0.7rem;
+    padding: 0.55rem 0.85rem;
+    gap: 0.35rem 0.65rem;
+    border-radius: 12px;
   }
 
   .meta-item {
-    font-size: 0.58rem;
+    font-size: 0.7rem;
   }
 
   .meta-item span {
-    font-size: 0.54rem;
+    font-size: 0.65rem;
   }
 
   .meta-item strong {
-    font-size: 0.58rem;
+    font-size: 0.7rem;
+  }
+
+  .framed-device-canvas {
+    padding: 1.85rem 1.15rem;
+    border-radius: 18px;
   }
 }
 

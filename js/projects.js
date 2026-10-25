@@ -51,10 +51,20 @@ function initProjectBehaviors() {
     }
   };
 
-  // --- Filtering ---
-  const filterBtns = document.querySelectorAll('.filter-btn');
+  // --- Minimal Text-Tab Filtering ---
+  const filterBtns = document.querySelectorAll('.project-tab-btn');
   const projectCards = document.querySelectorAll('.project-card');
   const filterCount = document.getElementById('filterCount');
+  const filterCountContainer = document.querySelector('.project-tabs-count');
+  const tabIndicator = document.querySelector('.project-tab-indicator');
+
+  function updateIndicator(btn) {
+    if (!tabIndicator || !btn) return;
+    const width = btn.offsetWidth;
+    const left = btn.offsetLeft;
+    tabIndicator.style.width = `${width}px`;
+    tabIndicator.style.transform = `translateX(${left}px)`;
+  }
 
   filterBtns.forEach(btn => {
     btn.onclick = () => {
@@ -64,6 +74,11 @@ function initProjectBehaviors() {
       });
       btn.classList.add('active');
       btn.setAttribute('aria-selected', 'true');
+
+      updateIndicator(btn);
+
+      // On mobile horizontal track, scroll smoothly into view if partially hidden
+      btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
 
       const filter = btn.getAttribute('data-filter');
       let visible = 0;
@@ -78,10 +93,29 @@ function initProjectBehaviors() {
         }
       });
 
-      if (filterCount) {
+      if (filterCountContainer) {
+        filterCountContainer.innerHTML = `Showing <span id="filterCount">${visible}</span> ${visible === 1 ? 'project' : 'projects'}`;
+      } else if (filterCount) {
         filterCount.textContent = visible;
       }
     };
+  });
+
+  // Initialize indicator position
+  const initialActive = document.querySelector('.project-tab-btn.active');
+  if (initialActive) {
+    updateIndicator(initialActive);
+    setTimeout(() => updateIndicator(initialActive), 60);
+    setTimeout(() => updateIndicator(initialActive), 250);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => updateIndicator(initialActive));
+    }
+    window.addEventListener('load', () => updateIndicator(initialActive));
+  }
+
+  window.addEventListener('resize', () => {
+    const active = document.querySelector('.project-tab-btn.active');
+    if (active) updateIndicator(active);
   });
 
   // --- Architecture Modal Dialog ---

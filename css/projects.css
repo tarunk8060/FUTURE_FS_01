@@ -167,68 +167,104 @@ body.page-projects .mobile-nav-item.active {
 }
 
 /* ==========================================================================
-   Filter Toolbar (Crystal-Clear Design)
+   Minimal Text-Tab Navigation
    ========================================================================== */
-.projects-filter-bar {
+.project-tabs-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  padding: 0.75rem 1.4rem;
-  background: rgba(17, 20, 34, 0.85);
-  border: 1px solid var(--proj-border);
-  border-radius: 9999px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  margin-bottom: 3rem;
+  margin-bottom: 3.25rem;
+  width: 100%;
   position: relative;
   z-index: 2;
 }
 
-.filter-group {
+.project-tabs-nav {
   display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 1rem;
+}
+
+.project-tabs-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.project-tabs-track {
+  position: relative;
+  display: inline-flex;
   align-items: center;
-  gap: 0.65rem;
-  flex-wrap: wrap;
+  gap: 2.5rem;
+  margin: 0 auto;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-.filter-btn {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #cbd5e1;
-  font-size: 0.88rem;
+.project-tab-btn {
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0.5rem 0.2rem;
+  font-family: inherit;
+  font-size: 0.95rem;
   font-weight: 500;
-  padding: 0.5rem 1.25rem;
-  border-radius: 9999px;
+  color: #94a3b8;
   cursor: pointer;
-  transition: all 0.22s ease;
+  white-space: nowrap;
+  transition: color 0.22s ease;
+  position: relative;
+  letter-spacing: 0.01em;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.filter-btn:hover {
-  color: #ffffff;
-  border-color: var(--proj-purple-vivid);
-  background: rgba(168, 85, 247, 0.14);
+.project-tab-btn:hover {
+  color: #f8fafc;
 }
 
-.filter-btn.active {
-  background: linear-gradient(135deg, #9333ea, #6b21a8);
-  border-color: #a855f7;
-  color: #ffffff;
-  font-weight: 700;
-  box-shadow: 0 4px 14px rgba(147, 51, 234, 0.35);
+.project-tab-btn:focus-visible {
+  outline: 2px solid #a78bfa;
+  outline-offset: 4px;
+  border-radius: 4px;
 }
 
-.filter-count {
-  font-size: 0.9rem;
+.project-tab-btn.active {
+  color: #A78BFA;
+  font-weight: 500;
+}
+
+.project-tab-indicator {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  width: 0;
+  background-color: #A78BFA;
+  box-shadow: 0 0 10px rgba(167, 139, 250, 0.6);
+  border-radius: 2px;
+  transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1), width 0.3s cubic-bezier(0.2, 0, 0, 1);
+  pointer-events: none;
+  will-change: transform, width;
+}
+
+.project-tabs-count {
+  margin-top: 1.25rem;
+  font-size: 0.88rem;
+  color: #94a3b8;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+
+.project-tabs-count #filterCount {
   color: #cbd5e1;
+  font-weight: 500;
 }
 
-.filter-count strong {
-  color: #f3e8ff;
-  font-weight: 700;
-}
 
 /* ==========================================================================
    Project Cards Showcase (High-Contrast & Clear Definition)
@@ -639,11 +675,29 @@ body.page-projects .footer-bottom {
     gap: 1.75rem;
   }
   
-  .projects-filter-bar {
-    border-radius: 20px;
-    padding: 1rem;
-    flex-direction: column;
-    align-items: flex-start;
+  .project-tabs-container {
+    margin-bottom: 2.25rem;
+  }
+
+  .project-tabs-nav {
+    justify-content: flex-start;
+    padding: 0 0.5rem;
+  }
+
+  .project-tabs-track {
+    gap: 1.6rem;
+    padding-bottom: 0.75rem;
+    margin: 0;
+  }
+
+  .project-tab-btn {
+    font-size: 0.88rem;
+    padding: 0.4rem 0.15rem;
+  }
+
+  .project-tabs-count {
+    margin-top: 1rem;
+    font-size: 0.82rem;
   }
 }
 

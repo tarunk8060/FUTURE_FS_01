@@ -167,13 +167,81 @@ body.page-projects .mobile-nav-item.active {
 }
 
 /* ==========================================================================
-   Minimal Text-Tab Navigation
+   Filter Toolbar — Desktop & Tablet (Original Pill Bar)
    ========================================================================== */
+.projects-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  padding: 0.75rem 1.4rem;
+  background: rgba(17, 20, 34, 0.85);
+  border: 1px solid var(--proj-border);
+  border-radius: 9999px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  margin-bottom: 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+  font-size: 0.88rem;
+  font-weight: 500;
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.22s ease;
+}
+
+.filter-btn:hover {
+  color: #ffffff;
+  border-color: var(--proj-purple-vivid);
+  background: rgba(168, 85, 247, 0.14);
+}
+
+.filter-btn.active {
+  background: linear-gradient(135deg, #9333ea, #6b21a8);
+  border-color: #a855f7;
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(147, 51, 234, 0.35);
+}
+
+.filter-count {
+  font-size: 0.9rem;
+  color: #cbd5e1;
+}
+
+.filter-count strong {
+  color: #f3e8ff;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   Minimal Text-Tab Navigation — Mobile Only
+   ========================================================================== */
+.mobile-project-tabs {
+  display: none !important;
+}
+
 .project-tabs-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 3.25rem;
+  margin-bottom: 2.25rem;
   width: 100%;
   position: relative;
   z-index: 2;
@@ -181,13 +249,13 @@ body.page-projects .mobile-nav-item.active {
 
 .project-tabs-nav {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
   max-width: 100%;
   overflow-x: auto;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
-  padding: 0 1rem;
+  padding: 0 0.5rem;
 }
 
 .project-tabs-nav::-webkit-scrollbar {
@@ -198,9 +266,9 @@ body.page-projects .mobile-nav-item.active {
   position: relative;
   display: inline-flex;
   align-items: center;
-  gap: 2.5rem;
-  margin: 0 auto;
-  padding-bottom: 0.85rem;
+  gap: 1.6rem;
+  margin: 0;
+  padding-bottom: 0.75rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   white-space: nowrap;
   flex-shrink: 0;
@@ -210,9 +278,9 @@ body.page-projects .mobile-nav-item.active {
   background: transparent;
   border: none;
   outline: none;
-  padding: 0.5rem 0.2rem;
+  padding: 0.4rem 0.15rem;
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   font-weight: 500;
   color: #94a3b8;
   cursor: pointer;
@@ -253,14 +321,14 @@ body.page-projects .mobile-nav-item.active {
 }
 
 .project-tabs-count {
-  margin-top: 1.25rem;
-  font-size: 0.88rem;
+  margin-top: 1rem;
+  font-size: 0.82rem;
   color: #94a3b8;
   text-align: center;
   letter-spacing: 0.01em;
 }
 
-.project-tabs-count #filterCount {
+.project-tabs-count #filterCountMobile {
   color: #cbd5e1;
   font-weight: 500;
 }
@@ -669,12 +737,20 @@ body.page-projects .footer-bottom {
   }
 }
 
-@media (max-width: 720px) {
+@media (max-width: 768px) {
   .projects-grid {
     grid-template-columns: 1fr;
     gap: 1.75rem;
   }
   
+  .desktop-filter-bar {
+    display: none !important;
+  }
+
+  .mobile-project-tabs {
+    display: flex !important;
+  }
+
   .project-tabs-container {
     margin-bottom: 2.25rem;
   }
@@ -698,6 +774,16 @@ body.page-projects .footer-bottom {
   .project-tabs-count {
     margin-top: 1rem;
     font-size: 0.82rem;
+  }
+}
+
+@media (min-width: 769px) {
+  .desktop-filter-bar {
+    display: flex !important;
+  }
+
+  .mobile-project-tabs {
+    display: none !important;
   }
 }
 

@@ -51,14 +51,15 @@ function initProjectBehaviors() {
     }
   };
 
-  // --- Minimal Text-Tab Filtering ---
-  const filterBtns = document.querySelectorAll('.project-tab-btn');
+  // --- Project Filtering (Desktop Pill Bar & Mobile Minimal Text Tabs) ---
+  const allFilterBtns = document.querySelectorAll('.filter-btn, .project-tab-btn');
   const projectCards = document.querySelectorAll('.project-card');
-  const filterCount = document.getElementById('filterCount');
-  const filterCountContainer = document.querySelector('.project-tabs-count');
+  const desktopFilterCount = document.getElementById('filterCount');
+  const mobileFilterCount = document.getElementById('filterCountMobile');
+  const mobileCountContainer = document.querySelector('.project-tabs-count');
   const tabIndicator = document.querySelector('.project-tab-indicator');
 
-  function updateIndicator(btn) {
+  function updateMobileIndicator(btn) {
     if (!tabIndicator || !btn) return;
     const width = btn.offsetWidth;
     const left = btn.offsetLeft;
@@ -66,56 +67,75 @@ function initProjectBehaviors() {
     tabIndicator.style.transform = `translateX(${left}px)`;
   }
 
-  filterBtns.forEach(btn => {
-    btn.onclick = () => {
-      filterBtns.forEach(b => {
+  function applyFilter(filterKey, triggerBtn) {
+    // 1. Sync active class across both desktop and mobile buttons
+    allFilterBtns.forEach(b => {
+      const match = b.getAttribute('data-filter') === filterKey;
+      if (match) {
+        b.classList.add('active');
+        b.setAttribute('aria-selected', 'true');
+      } else {
         b.classList.remove('active');
         b.setAttribute('aria-selected', 'false');
-      });
-      btn.classList.add('active');
-      btn.setAttribute('aria-selected', 'true');
-
-      updateIndicator(btn);
-
-      // On mobile horizontal track, scroll smoothly into view if partially hidden
-      btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
-
-      const filter = btn.getAttribute('data-filter');
-      let visible = 0;
-
-      projectCards.forEach(card => {
-        const cat = card.getAttribute('data-category');
-        if (filter === 'all' || cat === filter) {
-          card.style.display = 'flex';
-          visible++;
-        } else {
-          card.style.display = 'none';
-        }
-      });
-
-      if (filterCountContainer) {
-        filterCountContainer.innerHTML = `Showing <span id="filterCount">${visible}</span> ${visible === 1 ? 'project' : 'projects'}`;
-      } else if (filterCount) {
-        filterCount.textContent = visible;
       }
+    });
+
+    // 2. Position the mobile indicator if on mobile
+    const activeMobileTab = document.querySelector('.mobile-project-tabs .project-tab-btn.active');
+    if (activeMobileTab) {
+      updateMobileIndicator(activeMobileTab);
+      if (triggerBtn && triggerBtn.classList.contains('project-tab-btn')) {
+        triggerBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+      }
+    }
+
+    // 3. Filter project cards
+    let visible = 0;
+    projectCards.forEach(card => {
+      const cat = card.getAttribute('data-category');
+      if (filterKey === 'all' || cat === filterKey) {
+        card.style.display = 'flex';
+        visible++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // 4. Update both desktop and mobile project counts
+    if (desktopFilterCount) {
+      desktopFilterCount.textContent = visible;
+    }
+    if (mobileCountContainer) {
+      mobileCountContainer.innerHTML = `Showing <span id="filterCountMobile">${visible}</span> ${visible === 1 ? 'project' : 'projects'}`;
+    } else if (mobileFilterCount) {
+      mobileFilterCount.textContent = visible;
+    }
+  }
+
+  allFilterBtns.forEach(btn => {
+    btn.onclick = () => {
+      const filter = btn.getAttribute('data-filter') || 'all';
+      applyFilter(filter, btn);
     };
   });
 
-  // Initialize indicator position
-  const initialActive = document.querySelector('.project-tab-btn.active');
-  if (initialActive) {
-    updateIndicator(initialActive);
-    setTimeout(() => updateIndicator(initialActive), 60);
-    setTimeout(() => updateIndicator(initialActive), 250);
+  // Initialize mobile indicator position
+  const initialMobileActive = document.querySelector('.mobile-project-tabs .project-tab-btn.active');
+  if (initialMobileActive) {
+    updateMobileIndicator(initialMobileActive);
+    setTimeout(() => updateMobileIndicator(initialMobileActive), 60);
+    setTimeout(() => updateMobileIndicator(initialMobileActive), 250);
     if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => updateIndicator(initialActive));
+      document.fonts.ready.then(() => updateMobileIndicator(initialMobileActive));
     }
-    window.addEventListener('load', () => updateIndicator(initialActive));
+    window.addEventListener('load', () => updateMobileIndicator(initialMobileActive));
   }
 
   window.addEventListener('resize', () => {
-    const active = document.querySelector('.project-tab-btn.active');
-    if (active) updateIndicator(active);
+    const active = document.querySelector('.mobile-project-tabs .project-tab-btn.active');
+    if (active && window.innerWidth <= 768) {
+      updateMobileIndicator(active);
+    }
   });
 
   // --- Architecture Modal Dialog ---

@@ -113,9 +113,22 @@
     <!-- Project Gallery & Filtering -->
     <section class="projects-gallery">
       <div class="container">
-        <!-- Minimal Text-Tab Navigation -->
-        <div class="project-tabs-container">
-          <nav class="project-tabs-nav" role="tablist" aria-label="Project Categories">
+        <!-- Desktop & Tablet Filter Toolbar (Original Pill Design) -->
+        <div class="projects-filter-bar desktop-filter-bar">
+          <div class="filter-group" role="tablist" aria-label="Filter Projects Desktop">
+            <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All Projects</button>
+            <button class="filter-btn" data-filter="fullstack" role="tab" aria-selected="false">Full-Stack &amp; Web Apps</button>
+            <button class="filter-btn" data-filter="analytics" role="tab" aria-selected="false">Analytics &amp; Dashboard</button>
+            <button class="filter-btn" data-filter="marketplace" role="tab" aria-selected="false">Marketplace &amp; Launchpad</button>
+          </div>
+          <div class="filter-count" aria-live="polite">
+            Displaying <strong id="filterCount">3</strong> curated projects
+          </div>
+        </div>
+
+        <!-- Mobile Minimal Text-Tab Navigation (Mobile Only) -->
+        <div class="project-tabs-container mobile-project-tabs">
+          <nav class="project-tabs-nav" role="tablist" aria-label="Project Categories Mobile">
             <div class="project-tabs-track">
               <button class="project-tab-btn active" data-filter="all" role="tab" aria-selected="true">All Projects</button>
               <button class="project-tab-btn" data-filter="fullstack" role="tab" aria-selected="false">Full-Stack &amp; Web Apps</button>
@@ -125,7 +138,7 @@
             </div>
           </nav>
           <div class="project-tabs-count" aria-live="polite">
-            Showing <span id="filterCount">3</span> projects
+            Showing <span id="filterCountMobile">3</span> projects
           </div>
         </div>
 

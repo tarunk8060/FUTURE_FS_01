@@ -373,15 +373,9 @@ body.page-expertise .footer-bottom {
   }
 }
 
-@media (max-width: 768px) {
-  .expertise-header-section {
-    padding-top: 120px;
-  }
-}
-
 @media (max-width: 640px) {
   .expertise-header-section {
-    padding-top: 120px;
+    padding-top: 90px;
     padding-bottom: 25px;
   }
 

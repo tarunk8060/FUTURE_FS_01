@@ -53,52 +53,34 @@ function initProjectBehaviors() {
 
   // --- Filtering ---
   const filterBtns = document.querySelectorAll('.filter-btn');
-  const optionCardBtns = document.querySelectorAll('.option-card-btn');
   const projectCards = document.querySelectorAll('.project-card');
   const filterCount = document.getElementById('filterCount');
-  const mobileFilterCount = document.getElementById('mobileFilterCount');
 
-  function setProjectFilter(filter) {
-    let visible = 0;
-    projectCards.forEach(card => {
-      const cat = card.getAttribute('data-category');
-      if (filter === 'all' || cat === filter) {
-        card.style.display = 'flex';
-        visible++;
-      } else {
-        card.style.display = 'none';
-      }
-    });
-
-    if (filterCount) filterCount.textContent = visible;
-    if (mobileFilterCount) mobileFilterCount.textContent = visible;
-
-    // Sync desktop filter buttons
-    filterBtns.forEach(b => {
-      const isMatch = b.getAttribute('data-filter') === filter;
-      b.classList.toggle('active', isMatch);
-      b.setAttribute('aria-selected', isMatch ? 'true' : 'false');
-    });
-
-    // Sync mobile option cards
-    optionCardBtns.forEach(b => {
-      const isMatch = b.getAttribute('data-filter') === filter;
-      b.classList.toggle('active', isMatch);
-      b.setAttribute('aria-selected', isMatch ? 'true' : 'false');
-    });
-  }
-
-  // Desktop buttons
   filterBtns.forEach(btn => {
     btn.onclick = () => {
-      setProjectFilter(btn.getAttribute('data-filter'));
-    };
-  });
+      filterBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
 
-  // Mobile option cards
-  optionCardBtns.forEach(btn => {
-    btn.onclick = () => {
-      setProjectFilter(btn.getAttribute('data-filter'));
+      const filter = btn.getAttribute('data-filter');
+      let visible = 0;
+
+      projectCards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        if (filter === 'all' || cat === filter) {
+          card.style.display = 'flex';
+          visible++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (filterCount) {
+        filterCount.textContent = visible;
+      }
     };
   });
 

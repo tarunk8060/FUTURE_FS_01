@@ -55,34 +55,46 @@ function initProjectBehaviors() {
   const filterBtns = document.querySelectorAll('.filter-btn');
   const projectCards = document.querySelectorAll('.project-card');
   const filterCount = document.getElementById('filterCount');
+  const mobileFilterSelect = document.getElementById('mobileFilterSelect');
+  const mobileFilterCount = document.getElementById('mobileFilterCount');
+
+  function setProjectFilter(filter) {
+    let visible = 0;
+    projectCards.forEach(card => {
+      const cat = card.getAttribute('data-category');
+      if (filter === 'all' || cat === filter) {
+        card.style.display = 'flex';
+        visible++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (filterCount) filterCount.textContent = visible;
+    if (mobileFilterCount) mobileFilterCount.textContent = visible;
+
+    filterBtns.forEach(b => {
+      const isMatch = b.getAttribute('data-filter') === filter;
+      b.classList.toggle('active', isMatch);
+      b.setAttribute('aria-selected', isMatch ? 'true' : 'false');
+    });
+
+    if (mobileFilterSelect && mobileFilterSelect.value !== filter) {
+      mobileFilterSelect.value = filter;
+    }
+  }
 
   filterBtns.forEach(btn => {
     btn.onclick = () => {
-      filterBtns.forEach(b => {
-        b.classList.remove('active');
-        b.setAttribute('aria-selected', 'false');
-      });
-      btn.classList.add('active');
-      btn.setAttribute('aria-selected', 'true');
-
-      const filter = btn.getAttribute('data-filter');
-      let visible = 0;
-
-      projectCards.forEach(card => {
-        const cat = card.getAttribute('data-category');
-        if (filter === 'all' || cat === filter) {
-          card.style.display = 'flex';
-          visible++;
-        } else {
-          card.style.display = 'none';
-        }
-      });
-
-      if (filterCount) {
-        filterCount.textContent = visible;
-      }
+      setProjectFilter(btn.getAttribute('data-filter'));
     };
   });
+
+  if (mobileFilterSelect) {
+    mobileFilterSelect.onchange = (e) => {
+      setProjectFilter(e.target.value);
+    };
+  }
 
   // --- Architecture Modal Dialog ---
   const modalOverlay = document.getElementById('projectModal');

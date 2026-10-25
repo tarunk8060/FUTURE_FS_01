@@ -105,7 +105,7 @@
           “Selected projects. Thoughtful design. Practical solutions.”
         </p>
         <p class="projects-lead">
-          A focused showcase of web applications engineered with precision. Built with clean, modern standards and zero framework bloat, these projects solve real problems for founders, startup leaders, and innovators.
+          A focused showcase of web applications engineered with precision to solve real problems.
         </p>
       </div>
     </section>
@@ -113,7 +113,7 @@
     <!-- Project Gallery & Filtering -->
     <section class="projects-gallery">
       <div class="container">
-        <!-- Filter Controls -->
+        <!-- Desktop Filter Controls -->
         <div class="projects-filter-bar">
           <div class="filter-group" role="tablist" aria-label="Filter Projects">
             <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All Projects</button>
@@ -123,6 +123,31 @@
           </div>
           <div class="filter-count" aria-live="polite">
             Displaying <strong id="filterCount">3</strong> curated projects
+          </div>
+        </div>
+
+        <!-- Mobile Filter Control Element -->
+        <div class="mobile-filter-container">
+          <div class="mobile-filter-select-box">
+            <div class="mobile-filter-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+              </svg>
+            </div>
+            <select id="mobileFilterSelect" class="mobile-filter-select" aria-label="Filter Projects by Category">
+              <option value="all">All Projects (3)</option>
+              <option value="fullstack">Full-Stack &amp; Web Apps (1)</option>
+              <option value="analytics">Analytics &amp; Dashboard (1)</option>
+              <option value="marketplace">Marketplace &amp; Launchpad (1)</option>
+            </select>
+            <div class="mobile-filter-arrow" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="mobile-filter-caption" aria-live="polite">
+            <span>Displaying <strong id="mobileFilterCount">3</strong> curated projects</span>
           </div>
         </div>
 
